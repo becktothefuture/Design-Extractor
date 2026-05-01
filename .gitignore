@@ -1,0 +1,17 @@
+.DS_Store
+Thumbs.db
+
+node_modules/
+dist/
+build/
+.cache/
+.parcel-cache/
+.vite/
+
+*.log
+*.tmp
+*.temp
+
+# Keep curated extraction media in media/. Ignore only obvious raw scratch captures.
+media/**/raw/
+!media/**/README.md

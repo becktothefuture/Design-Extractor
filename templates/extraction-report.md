@@ -1,0 +1,62 @@
+---
+extract_id: {{extract-id}}
+source: {{source}}
+source_type: {{website|image|text|mixed}}
+goal: {{goal}}
+created_at: {{YYYY-MM-DD}}
+confidence: {{low|medium|high}}
+---
+
+# Extract Report: {{title}}
+
+## 1. Extract Summary
+
+{{Concise summary of what was analysed and what matters most.}}
+
+## 2. Source And Limits
+
+- Source: {{source}}
+- Source type: {{source-type}}
+- Limits: {{capture limits, access limits, uncertainty}}
+
+## 3. Captured Moments
+
+| Moment | Category | Media | Why It Matters | Confidence |
+| --- | --- | --- | --- | --- |
+| {{moment-id}} | {{category}} | ![{{alt}}](../../../media/moments/{{extract-id}}/{{file.gif}}) | {{reason}} | {{confidence}} |
+
+## 4. Category Catalogue Findings
+
+| Category | Finding | Evidence | Confidence |
+| --- | --- | --- | --- |
+| {{category}} | {{finding}} | {{evidence-ref}} | {{confidence}} |
+
+## 5. Evidence Table
+
+| Evidence Ref | Method | Observation | Confidence |
+| --- | --- | --- | --- |
+| {{ref}} | {{browser-observed|css-derived|js-derived|inferred}} | {{observation}} | {{confidence}} |
+
+## 6. Aesthetic Rationale
+
+{{Why the source feels the way it feels, tied to evidence.}}
+
+## 7. Technical Implementation Clues
+
+{{Durations, easing, layout values, DOM/CSS/JS clues, media behavior, and confidence.}}
+
+## 8. Reusable Recipes
+
+{{Implementation-ready recipes with states, timings, failure modes, and constraints.}}
+
+## 9. Knowledge Nodes
+
+- {{node-id}}: {{path}}
+
+## 10. Brain Links
+
+- {{source-node}} -> {{related-node}}: {{relationship}}
+
+## 11. Open Questions
+
+- {{question}}: {{why it matters}}

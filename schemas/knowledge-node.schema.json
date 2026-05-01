@@ -1,0 +1,146 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/design-extractor-brain/knowledge-node.schema.json",
+  "title": "Knowledge Node",
+  "type": "object",
+  "required": [
+    "id",
+    "title",
+    "type",
+    "tags",
+    "category",
+    "source",
+    "extract_id",
+    "evidence_refs",
+    "moment_refs",
+    "direct_evidence",
+    "interpretation",
+    "aesthetic_role",
+    "technical_clues",
+    "reusable_recipe",
+    "related_nodes",
+    "confidence",
+    "created_at",
+    "updated_at"
+  ],
+  "properties": {
+    "id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "title": {
+      "type": "string",
+      "minLength": 3
+    },
+    "type": {
+      "type": "string",
+      "enum": [
+        "source",
+        "finding",
+        "pattern",
+        "synthesis"
+      ]
+    },
+    "category": {
+      "type": "string",
+      "enum": [
+        "loading-entry",
+        "sound-interaction-audio",
+        "scroll-navigation",
+        "motion-choreography",
+        "visual-style",
+        "typography",
+        "layout-grid-composition",
+        "project-sequencing",
+        "hover-touch-feedback",
+        "media-handling",
+        "background-webgl-canvas-svg",
+        "content-model",
+        "performance-responsiveness",
+        "reusable-principles"
+      ]
+    },
+    "source": {
+      "type": "string"
+    },
+    "extract_id": {
+      "type": "string"
+    },
+    "tags": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "uniqueItems": true
+    },
+    "evidence_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "moment_refs": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "direct_evidence": {
+      "type": "string",
+      "minLength": 1
+    },
+    "interpretation": {
+      "type": "string"
+    },
+    "aesthetic_role": {
+      "type": "string"
+    },
+    "technical_clues": {
+      "type": "string"
+    },
+    "reusable_recipe": {
+      "type": "string"
+    },
+    "related_nodes": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "relationship"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "relationship": {
+            "type": "string",
+            "enum": [
+              "supports",
+              "contradicts",
+              "refines",
+              "duplicates",
+              "inspired-by",
+              "example-of",
+              "prerequisite-for",
+              "variant-of",
+              "evidenced-by",
+              "implemented-by"
+            ]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "confidence": {
+      "type": "string",
+      "enum": ["low", "medium", "high"]
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "updated_at": {
+      "type": "string",
+      "format": "date"
+    }
+  },
+  "additionalProperties": false
+}

@@ -1,0 +1,93 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://example.local/design-extractor-brain/extraction-report.schema.json",
+  "title": "Extraction Report",
+  "type": "object",
+  "required": [
+    "extract_id",
+    "source",
+    "source_type",
+    "goal",
+    "created_at",
+    "limits",
+    "moments",
+    "findings",
+    "recipes",
+    "knowledge_nodes",
+    "open_questions"
+  ],
+  "properties": {
+    "extract_id": {
+      "type": "string",
+      "pattern": "^[a-z0-9]+(?:-[a-z0-9]+)*$"
+    },
+    "source": {
+      "type": "string"
+    },
+    "source_type": {
+      "type": "string",
+      "enum": ["website", "image", "text", "mixed"]
+    },
+    "goal": {
+      "type": "string"
+    },
+    "created_at": {
+      "type": "string",
+      "format": "date"
+    },
+    "limits": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "moments": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "category", "media_path", "confidence"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "category": {
+            "type": "string"
+          },
+          "media_path": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "findings": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "recipes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "knowledge_nodes": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    },
+    "open_questions": {
+      "type": "array",
+      "items": {
+        "type": "string"
+      }
+    }
+  },
+  "additionalProperties": false
+}
