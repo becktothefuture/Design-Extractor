@@ -37,26 +37,32 @@ confidence: {{low|medium|high}}
 | --- | --- | --- | --- |
 | {{ref}} | {{browser-observed|css-derived|js-derived|inferred}} | {{observation}} | {{confidence}} |
 
-## 6. Aesthetic Rationale
+## 6. Interaction And Sensory Decomposition
 
-{{Why the source feels the way it feels, tied to evidence.}}
+| Interaction | Trigger | State Sequence | Feel | Evidence | Confidence |
+| --- | --- | --- | --- | --- | --- |
+| {{interaction}} | {{trigger}} | {{pre-state -> transition -> feedback -> settled state}} | {{scroll/motion/audio/interaction feel}} | {{E1/M1}} | {{confidence}} |
 
-## 7. Technical Implementation Clues
+## 7. Aesthetic Rationale
 
-{{Durations, easing, layout values, DOM/CSS/JS clues, media behavior, and confidence.}}
+{{Why the source feels the way it feels, tied to concrete evidence rather than vague praise.}}
 
-## 8. Reusable Recipes
+## 8. Technical Implementation Clues
 
-{{Implementation-ready recipes with states, timings, failure modes, and constraints.}}
+{{Durations, easing, layout values, DOM/CSS/JS clues, media behavior, and confidence. Mark estimated, inferred, not inspected, and not available details clearly.}}
 
-## 9. Knowledge Nodes
+## 9. Reusable Recipes
+
+{{Implementation-ready recipes with intent, anatomy, state model, interaction model, motion tokens, sensory notes, responsive rules, accessibility, failure modes, and constraints.}}
+
+## 10. Knowledge Nodes
 
 - {{node-id}}: {{path}}
 
-## 10. Brain Links
+## 11. Brain Links
 
 - {{source-node}} -> {{related-node}}: {{relationship}}
 
-## 11. Open Questions
+## 12. Open Questions
 
 - {{question}}: {{why it matters}}

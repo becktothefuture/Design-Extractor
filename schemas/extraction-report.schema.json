@@ -10,7 +10,9 @@
     "goal",
     "created_at",
     "limits",
+    "evidence",
     "moments",
+    "interaction_decomposition",
     "findings",
     "recipes",
     "knowledge_nodes",
@@ -41,6 +43,41 @@
         "type": "string"
       }
     },
+    "evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["id", "method", "observation", "confidence"],
+        "properties": {
+          "id": {
+            "type": "string"
+          },
+          "method": {
+            "type": "string",
+            "enum": [
+              "browser-observed",
+              "screenshot-observed",
+              "recording-observed",
+              "dom-derived",
+              "css-derived",
+              "js-derived",
+              "network-derived",
+              "text-derived",
+              "visual-estimated",
+              "inferred"
+            ]
+          },
+          "observation": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          }
+        },
+        "additionalProperties": false
+      }
+    },
     "moments": {
       "type": "array",
       "items": {
@@ -68,6 +105,29 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "interaction_decomposition": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["interaction", "trigger", "state_sequence", "confidence"],
+        "properties": {
+          "interaction": {
+            "type": "string"
+          },
+          "trigger": {
+            "type": "string"
+          },
+          "state_sequence": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "string",
+            "enum": ["low", "medium", "high"]
+          }
+        },
+        "additionalProperties": false
       }
     },
     "recipes": {

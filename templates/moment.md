@@ -4,6 +4,10 @@ source: {{source}}
 extract_id: {{extract-id}}
 category: {{category}}
 captured_media_path: {{relative/path/to/media.gif}}
+viewport: {{width x height}}
+device_class: {{desktop|tablet|mobile|unknown}}
+capture_tool: {{tool-or-unknown}}
+timing_basis: {{measured|estimated|unknown}}
 confidence: {{low|medium|high}}
 created_at: {{YYYY-MM-DD}}
 ---
@@ -23,6 +27,11 @@ created_at: {{YYYY-MM-DD}}
 ## Timing / Duration
 
 {{Measured or estimated timing. Mark estimates.}}
+
+## Evidence Boundary
+
+- What this media proves: {{specific observable claim}}
+- What this media does not prove: {{limits or unavailable details}}
 
 ## Aesthetic Effect
 

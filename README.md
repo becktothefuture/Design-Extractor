@@ -21,8 +21,25 @@ Every extract should capture both aesthetic and technical detail:
 - lightweight GIF/video moments for visual or interactive sources
 - stills when a static frame communicates the point better
 - category-specific findings
+- emotional and psychological effects tied to concrete source evidence
+- micro-interaction anatomy: trigger, state changes, feedback, timing, cancellation, and settled state
 - implementation clues such as timings, easing, DOM/CSS/JS clues, layout values, interaction states, audio/media behavior, and responsive behavior
 - reusable recipes that explain how to recreate the principle without copying protected source code or assets
+
+## Evidence Standard
+
+The brain is a durable knowledge graph, not a pile of reports. Every durable claim should trace back to stable evidence refs such as `E1`, `E2`, or `M1`.
+
+- Verified details can be stated directly.
+- Estimated details must be labeled `estimated`.
+- Inferred implementation details must be labeled `inferred`.
+- Uninspected surfaces must be recorded as `not inspected` or `not available`, never guessed.
+
+## Memory Hygiene
+
+Knowledge nodes have a lifecycle: `provisional`, `active`, `superseded`, `merged`, or `rejected`.
+
+Do not delete obsolete knowledge by default. Mark it with the correct lifecycle status, link it to the stronger replacement or contradiction, and keep the graph searchable with aliases, retrieval terms, tags, and related nodes.
 
 ## Repo Map
 

@@ -14,6 +14,9 @@ An extract is one source analysis run that captures evidence, records moments, c
 
 2. Evidence Capture
    - Capture direct observations before interpretation.
+   - Use stable evidence refs such as `E1`, `E2`, and `M1`.
+   - Record method for each evidence ref: `browser-observed`, `screenshot-observed`, `recording-observed`, `dom-derived`, `css-derived`, `js-derived`, `network-derived`, `text-derived`, `visual-estimated`, or `inferred`.
+   - Mark exact values as verified, estimated values as `estimated`, inferred implementation as `inferred`, and unavailable surfaces as `not inspected` or `not available`.
    - For websites, inspect browser behavior, screenshots/stills, DOM, CSS, JS/network clues, media, responsiveness, and interaction states where available.
    - For images, inspect composition, palette, typography, subject treatment, texture, lighting, density, and style references.
    - For text, inspect audience, tone, structure, rhythm, vocabulary, claims, sequencing, and persuasion logic.
@@ -32,30 +35,43 @@ An extract is one source analysis run that captures evidence, records moments, c
 5. Aesthetic Rationale
    - Explain why the observed behavior feels the way it feels.
    - Tie satisfaction, clarity, rhythm, weight, surprise, calm, friction, or delight to concrete evidence.
+   - Avoid vague praise. Emotional claims must cite evidence such as delay, easing, scale, contrast, sound, copy tone, spatial rhythm, or input latency.
 
-6. Technical Clue Extraction
+6. Interaction And Sensory Decomposition
+   - Break key interactions into trigger, user intent, pre-state, feedback, transition, settled state, and edge states.
+   - Capture emotional tone: calm, tension, delight, confidence, anticipation, playfulness, luxury, friction, or urgency.
+   - Describe scroll feel, motion feel, audio feel, and interaction feel with timing, rhythm, friction, affordance, and perceived responsiveness.
+
+7. Technical Clue Extraction
    - Record verified values such as durations, easing functions, spacing, type scale, layout rules, asset behavior, and event triggers.
    - Mark bundle-derived, DOM-derived, visual-estimated, and inferred details separately.
 
-7. Reusable Recipe Creation
+8. Reusable Recipe Creation
    - Convert findings into implementation-ready guidance.
    - Describe principles and build steps without copying proprietary code or assets.
    - Include interaction states, timing ranges, structure, and failure modes.
+   - Include component anatomy, state model, event order, motion tokens, responsive variants, accessibility, reduced-motion behavior, and implementation risks where relevant.
 
-8. Knowledge Node Creation
+9. Knowledge Node Creation
    - Create one source node.
    - Create one or more finding or pattern nodes.
    - Keep each node atomic: one durable idea per node.
+   - New findings start as `provisional` unless directly verified by strong source evidence.
+   - Do not delete obsolete knowledge. Mark it `superseded`, `merged`, or `rejected`, and link to the replacement or reason.
    - Use `templates/knowledge-node.md`.
 
-9. Brain Linking
+10. Brain Linking
    - Link new nodes to the source node, moments, related findings, patterns, and synthesis nodes.
    - Update `knowledge/_index.md`.
    - Mark relationship types clearly.
+   - Never silently overwrite a conflicting claim. Link conflicting nodes with `contradicts` and record whether the conflict is open, resolved, or source-specific.
+   - Before creating a node, search existing knowledge for category, tags, aliases, and related interaction terms.
 
-10. Structure Validation
+11. Structure Validation
    - Preserve the protected structure.
    - Run schema validation commands.
+   - Check that media links and node links resolve locally.
+   - Check that new categories are documented in `workflow/category-catalogue.md`.
    - Report files changed, verification, risks, assumptions, and confidence limits.
 
 ## Required Extract Artifacts
