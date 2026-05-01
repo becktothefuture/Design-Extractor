@@ -30,11 +30,9 @@ evidence_refs:
   - E4
   - E5
   - E6
+moment_refs:
   - M1
   - M2
-moment_refs:
-  - ../../../media/moments/athleats-recipe-card-hover/recipe-card-hover-in-out.webm
-  - ../../../media/moments/athleats-recipe-card-hover/home-carousel-active-scale.webm
 direct_evidence: >-
   The inspected site exposes a recipe grid at /recipes, a home recipe carousel, Webflow IX2 hover action lists named Recipe - Hover In/Out, and Splide carousel setup code.
 interpretation: >-

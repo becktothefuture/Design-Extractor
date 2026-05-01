@@ -45,11 +45,11 @@ reusable_recipe: >-
   Build cards with a separate media layer and text layer, animate `translateY` and opacity only, and never scale the ancestor that contains live text.
 related_nodes:
   - id: isolated-media-layer-recipe-hover
-    relationship: supported-by
+    relationship: supports
   - id: short-lift-overlay-reveal-card-token
-    relationship: supported-by
+    relationship: supports
   - id: touch-simplified-card-hover
-    relationship: supported-by
+    relationship: supports
   - id: hover-preview-title-list
     relationship: variant-of
 confidence: high

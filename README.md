@@ -87,12 +87,41 @@ Reusable frontend recipes should include structure, states, event triggers, CSS/
 │   ├── findings/
 │   ├── patterns/
 │   └── synthesis/
-└── media/
-    ├── moments/
-    └── stills/
+├── media/
+│   ├── moments/
+│   └── stills/
+└── site/
+    ├── tokens/
+    ├── scripts/
+    └── src/
 ```
 
 The top-level structure is protected. New extracts add content inside the existing folders rather than renaming or moving the system directories.
+
+## Online Documentation Site
+
+The public browsing layer lives in `site/`.
+
+- `knowledge/` and `media/` remain canonical.
+- `site/scripts/sync-knowledge.mjs` generates Starlight docs, browse data, and public media from those canonical folders.
+- `site/tokens/*.json` are DTCG-style design tokens transformed by Style Dictionary into `site/src/styles/tokens.css`.
+- Generated folders such as `site/dist/`, `site/src/content/docs/generated/`, `site/src/data/generated/`, and `site/public/media/` are ignored and should not be edited by hand.
+
+Build locally:
+
+```bash
+cd site
+npm install
+npm run build
+npm run preview -- --port 4321
+```
+
+Build with a GitHub Pages-style base path:
+
+```bash
+cd site
+BASE_PATH=/Design-Extractor SITE_URL=https://example.github.io npm run build
+```
 
 ## Running An Extract
 
@@ -110,6 +139,8 @@ The top-level structure is protected. New extracts add content inside the existi
 ```bash
 python3 -m json.tool schemas/knowledge-node.schema.json >/dev/null
 python3 -m json.tool schemas/extraction-report.schema.json >/dev/null
+node scripts/validate-repo.mjs
+cd site && npm run build
 find . -maxdepth 4 -type f | sort
 git status --short
 ```

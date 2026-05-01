@@ -38,7 +38,7 @@ reusable_recipe: >-
   For touch, make the card tap target stable and avoid hover-only transforms; expose essential metadata in always-visible text.
 related_nodes:
   - id: isolated-media-layer-recipe-hover
-    relationship: responsive-variant
+    relationship: variant-of
   - id: non-flickering-recipe-card-hover
     relationship: supports
 confidence: medium
