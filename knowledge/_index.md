@@ -6,11 +6,13 @@ This index tracks extracts, nodes, moments, and reusable patterns.
 
 | Extract ID | Source | Type | Date | Retrieval Summary | Nodes | Moments | Strongest Patterns | Open Questions |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| pacomepertant-portfolio | https://pacomepertant.com | website | 2026-05-01 | Sound-gated motion-design portfolio with fixed chrome, WebGL spiral project index, list hover previews, spring menu, Sanity/Mux media model, responsive mobile variants, and next-up project detail sequencing. Retrieval terms: sensory portfolio, WebGL gallery, hover preview list, sound toggle, spring menu, next project teaser. | [source](sources/pacomepertant-portfolio/source.md), [sound entry](findings/loading-entry/consent-first-sound-entry.md), [audio palette](findings/sound-interaction-audio/named-interaction-audio-palette.md), [WebGL index](findings/background-webgl-canvas-svg/webgl-spiral-project-index.md), [hover list](findings/hover-touch-feedback/hover-preview-title-list.md), [spring menu](findings/motion-choreography/spring-panel-menu.md), [project loop](findings/project-sequencing/sequential-project-detail-loop.md), [media model](findings/media-handling/sanity-mux-media-model.md), [responsive chrome](findings/performance-responsiveness/fixed-chrome-responsive-index.md), [sensory shell pattern](patterns/reusable-principles/instrumented-sensory-portfolio-shell.md) | M1 entry, M2 spiral/list switch, M3 hover preview, M4 menu, M5 sound toggle, M6 mobile spiral, M7 project open, M8 next-up scroll | Consent-first sensory entry; dual-mode canvas/list index; hover preview title list; expanding spring menu; sequential project detail loop; instrumented sensory portfolio shell. | Audible playback and mix levels not verified; WebGL shader/camera internals not inspected; keyboard/focus path not deeply tested; reduced-motion JS behavior unknown; touch equivalent for hover preview not fully explored. |
 
 ## Global Patterns
 
 | Pattern | Category | Supporting Nodes | Confidence |
 | --- | --- | --- | --- |
+| [Instrumented Sensory Portfolio Shell](patterns/reusable-principles/instrumented-sensory-portfolio-shell.md) | reusable-principles | consent-first-sound-entry, webgl-spiral-project-index, hover-preview-title-list, spring-panel-menu, sequential-project-detail-loop | medium |
 
 ## Contradictions
 
