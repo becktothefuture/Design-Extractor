@@ -1,0 +1,29 @@
+---
+import Layout from '../../layouts/SiteLayout.astro';
+import data from '../../data/generated/knowledge.json';
+
+const recipes = data.recipes.length ? data.recipes : data.patterns;
+const withBase = (href) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+
+<Layout title="Recipes | Design Extractor">
+  <h1 class="page-title">Recipes</h1>
+  <p class="page-intro">Implementation-ready guidance pulled from reusable recipes in source nodes, findings, and patterns.</p>
+
+  <section class="section">
+    <div class="list-stack">
+      {recipes.map((recipe) => (
+        <a class="list-row" href={withBase(recipe.docUrl)}>
+          <div>
+            <h3>{recipe.title}</h3>
+            <p>{recipe.recipe || recipe.excerpt}</p>
+          </div>
+          <div class="pill-row">
+            <span class="pill">{recipe.category}</span>
+            <span class="pill">{recipe.confidence}</span>
+          </div>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

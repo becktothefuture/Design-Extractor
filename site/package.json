@@ -1,0 +1,22 @@
+{
+  "name": "design-extractor-site",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "tokens:build": "style-dictionary build --config style-dictionary.config.mjs",
+    "sync:knowledge": "node scripts/sync-knowledge.mjs",
+    "predev": "npm run tokens:build && npm run sync:knowledge",
+    "dev": "astro dev --host 127.0.0.1",
+    "prebuild": "npm run tokens:build && npm run sync:knowledge",
+    "build": "astro build",
+    "preview": "astro preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.38.4",
+    "astro": "^6.2.1",
+    "gray-matter": "^4.0.3",
+    "style-dictionary": "^5.4.0"
+  },
+  "devDependencies": {}
+}

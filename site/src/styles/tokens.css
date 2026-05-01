@@ -1,0 +1,60 @@
+/**
+ * Do not edit directly, this file was auto-generated.
+ */
+
+:root {
+  --de-pill-radius: 999px;
+  --de-nav-height: 4.5rem;
+  --de-nav-background: rgba(248, 247, 243, 0.92);
+  --de-color-neutral-0: #ffffff;
+  --de-color-neutral-50: #f8f7f3;
+  --de-color-neutral-100: #efede6;
+  --de-color-neutral-200: #ddd8c8;
+  --de-color-neutral-500: #817b6a;
+  --de-color-neutral-700: #3c3a32;
+  --de-color-neutral-900: #171916;
+  --de-color-moss-200: #d7e0bd;
+  --de-color-moss-500: #789158;
+  --de-color-moss-700: #3d5536;
+  --de-color-clay-200: #e7b89a;
+  --de-color-clay-500: #b76f4c;
+  --de-color-ink-500: #1f2526;
+  --de-font-family-body: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --de-font-family-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+  --de-font-size-body-desktop: 16px;
+  --de-font-size-body-mobile: 13px;
+  --de-font-size-small: 0.875rem;
+  --de-font-size-h1: clamp(2.5rem, 6vw, 5.8rem);
+  --de-font-size-h2: clamp(1.6rem, 3vw, 2.6rem);
+  --de-line-height-body: 1.55;
+  --de-line-height-tight: 1.05;
+  --de-line-height-heading: 1.12;
+  --de-space-1: 0.25rem;
+  --de-space-2: 0.5rem;
+  --de-space-3: 0.75rem;
+  --de-space-4: 1rem;
+  --de-space-5: 1.5rem;
+  --de-space-6: 2rem;
+  --de-space-7: 3rem;
+  --de-space-8: 4rem;
+  --de-radius-card: 8px;
+  --de-radius-control: 6px;
+  --de-shadow-card: 0 18px 50px rgba(31, 37, 38, 0.08);
+  --de-layout-max-width: 1180px;
+  --de-layout-gutter: clamp(1rem, 3vw, 2rem);
+  --de-card-radius: var(--de-radius-card);
+  --de-card-shadow: var(--de-shadow-card);
+  --de-color-background: var(--de-color-neutral-50);
+  --de-color-surface: var(--de-color-neutral-0);
+  --de-color-surface-muted: var(--de-color-neutral-100);
+  --de-color-text: var(--de-color-neutral-900);
+  --de-color-text-muted: var(--de-color-neutral-500);
+  --de-color-border: var(--de-color-neutral-200);
+  --de-color-accent: var(--de-color-moss-700);
+  --de-color-accent-soft: var(--de-color-moss-200);
+  --de-color-attention: var(--de-color-clay-500);
+  --de-card-background: var(--de-color-surface);
+  --de-card-border: var(--de-color-border);
+  --de-pill-background: var(--de-color-surface-muted);
+  --de-pill-text: var(--de-color-text-muted);
+}

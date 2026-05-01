@@ -1,0 +1,37 @@
+---
+import '../styles/tokens.css';
+import '../styles/starlight-map.css';
+import '../styles/site.css';
+
+const { title = 'Design Extractor', description = 'A browsable library of evidence-backed design extractions.' } = Astro.props;
+const withBase = (href) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content={description} />
+    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <nav class="site-nav" aria-label="Primary">
+        <a class="site-mark" href={withBase('/')}>Design Extractor</a>
+        <div class="site-nav__links">
+          <a href={withBase('/extracts/')}>Extracts</a>
+          <a href={withBase('/patterns/')}>Patterns</a>
+          <a href={withBase('/categories/')}>Categories</a>
+          <a href={withBase('/moments/')}>Moments</a>
+          <a href={withBase('/recipes/')}>Recipes</a>
+          <a href={withBase('/guide/overview/')}>Docs</a>
+        </div>
+      </nav>
+      <main class="site-main">
+        <slot />
+      </main>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+---
+import Layout from '../layouts/SiteLayout.astro';
+import data from '../data/generated/knowledge.json';
+
+const latestExtracts = data.extracts.slice(0, 3);
+const latestPatterns = data.patterns.slice(0, 3);
+const withBase = (href) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+
+<Layout title="Design Extractor Library">
+  <section class="hero">
+    <div>
+      <h1>Evidence-backed design patterns.</h1>
+      <p>Browse extraction reports, reusable patterns, captured moments, and implementation recipes generated from the repository knowledge graph.</p>
+    </div>
+    <aside class="summary-panel" aria-label="Library summary">
+      <dl>
+        <div>
+          <dt>Extracts</dt>
+          <dd>{data.extracts.length}</dd>
+        </div>
+        <div>
+          <dt>Patterns</dt>
+          <dd>{data.patterns.length}</dd>
+        </div>
+        <div>
+          <dt>Findings</dt>
+          <dd>{data.findings.length}</dd>
+        </div>
+        <div>
+          <dt>Moments</dt>
+          <dd>{data.moments.length}</dd>
+        </div>
+      </dl>
+    </aside>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Latest Extracts</h2>
+        <p>Source reports stay traceable to evidence and confidence limits.</p>
+      </div>
+      <a class="button-link" href={withBase('/extracts/')}>View all</a>
+    </div>
+    <div class="card-grid">
+      {latestExtracts.map((extract) => (
+        <a class="library-card" href={withBase(extract.docUrl)}>
+          <div class="library-card__meta">
+            <span class="pill">{extract.sourceType}</span>
+            <span class="pill">{extract.date}</span>
+          </div>
+          <h3>{extract.title}</h3>
+          <p>{extract.summary}</p>
+          <span class="library-card__footer">Open report</span>
+        </a>
+      ))}
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="section-header">
+      <div>
+        <h2>Reusable Patterns</h2>
+        <p>Patterns are the public-facing layer: evidence-backed, portable guidance for future implementation.</p>
+      </div>
+      <a class="button-link" href={withBase('/patterns/')}>View all</a>
+    </div>
+    <div class="card-grid">
+      {latestPatterns.map((pattern) => (
+        <a class="library-card" href={withBase(pattern.docUrl)}>
+          <div class="library-card__meta">
+            <span class="pill">{pattern.category}</span>
+            <span class="pill">{pattern.confidence}</span>
+          </div>
+          <h3>{pattern.title}</h3>
+          <p>{pattern.excerpt}</p>
+          <span class="library-card__footer">Open pattern</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

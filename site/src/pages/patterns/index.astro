@@ -1,0 +1,26 @@
+---
+import Layout from '../../layouts/SiteLayout.astro';
+import data from '../../data/generated/knowledge.json';
+const withBase = (href) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
+---
+
+<Layout title="Patterns | Design Extractor">
+  <h1 class="page-title">Patterns</h1>
+  <p class="page-intro">Patterns are the strongest browsing unit: reusable principles distilled from reports, findings, and media proof.</p>
+
+  <section class="section">
+    <div class="card-grid card-grid--two">
+      {data.patterns.map((pattern) => (
+        <a class="library-card" href={withBase(pattern.docUrl)}>
+          <div class="library-card__meta">
+            <span class="pill">{pattern.category}</span>
+            <span class="pill">{pattern.confidence}</span>
+          </div>
+          <h3>{pattern.title}</h3>
+          <p>{pattern.excerpt}</p>
+          <span class="library-card__footer">Open pattern</span>
+        </a>
+      ))}
+    </div>
+  </section>
+</Layout>

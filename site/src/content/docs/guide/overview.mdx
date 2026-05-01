@@ -1,0 +1,31 @@
+---
+title: Documentation System
+description: How the Design Extractor public site is generated from the repository knowledge graph.
+---
+
+# Documentation System
+
+The repository remains the source of truth. `knowledge/` stores source reports, findings, patterns, and indexes. `media/` stores the captured evidence. The `site/` project generates a static public library from those folders.
+
+## Architecture
+
+```text
+knowledge/        # canonical extraction brain
+media/            # canonical evidence media
+site/             # generated documentation frontend
+```
+
+## Build Flow
+
+```text
+site/tokens/*.json
+  -> Style Dictionary
+  -> site/src/styles/tokens.css
+  -> Starlight variables + custom browse pages
+
+knowledge/ + media/
+  -> site/scripts/sync-knowledge.mjs
+  -> generated Starlight docs + browse JSON + public media
+```
+
+Patterns are the main public-facing unit. Reports and moments provide proof boundaries; findings provide atomic observations; recipes provide implementation-ready guidance.

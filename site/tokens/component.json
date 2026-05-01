@@ -1,0 +1,17 @@
+{
+  "card": {
+    "background": { "$type": "color", "$value": "{color.surface}" },
+    "border": { "$type": "color", "$value": "{color.border}" },
+    "radius": { "$type": "dimension", "$value": "{radius.card}" },
+    "shadow": { "$type": "shadow", "$value": "{shadow.card}" }
+  },
+  "pill": {
+    "background": { "$type": "color", "$value": "{color.surfaceMuted}" },
+    "text": { "$type": "color", "$value": "{color.textMuted}" },
+    "radius": { "$type": "dimension", "$value": "999px" }
+  },
+  "nav": {
+    "height": { "$type": "dimension", "$value": "4.5rem" },
+    "background": { "$type": "color", "$value": "rgba(248, 247, 243, 0.92)" }
+  }
+}

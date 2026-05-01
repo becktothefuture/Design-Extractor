@@ -1,0 +1,17 @@
+{
+  "color": {
+    "background": { "$type": "color", "$value": "{color.neutral.50}" },
+    "surface": { "$type": "color", "$value": "{color.neutral.0}" },
+    "surfaceMuted": { "$type": "color", "$value": "{color.neutral.100}" },
+    "text": { "$type": "color", "$value": "{color.neutral.900}" },
+    "textMuted": { "$type": "color", "$value": "{color.neutral.500}" },
+    "border": { "$type": "color", "$value": "{color.neutral.200}" },
+    "accent": { "$type": "color", "$value": "{color.moss.700}" },
+    "accentSoft": { "$type": "color", "$value": "{color.moss.200}" },
+    "attention": { "$type": "color", "$value": "{color.clay.500}" }
+  },
+  "layout": {
+    "maxWidth": { "$type": "dimension", "$value": "1180px" },
+    "gutter": { "$type": "string", "$value": "clamp(1rem, 3vw, 2rem)" }
+  }
+}

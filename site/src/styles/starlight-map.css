@@ -1,0 +1,31 @@
+:root {
+  --sl-font: var(--de-font-family-body);
+  --sl-font-mono: var(--de-font-family-mono);
+  --sl-color-bg: var(--de-color-background);
+  --sl-color-bg-nav: var(--de-nav-background);
+  --sl-color-bg-sidebar: var(--de-color-background);
+  --sl-color-bg-inline-code: var(--de-color-surface-muted);
+  --sl-color-text: var(--de-color-text);
+  --sl-color-text-accent: var(--de-color-accent);
+  --sl-color-text-invert: var(--de-color-neutral-0);
+  --sl-color-gray-1: var(--de-color-neutral-900);
+  --sl-color-gray-2: var(--de-color-neutral-700);
+  --sl-color-gray-3: var(--de-color-neutral-500);
+  --sl-color-gray-4: var(--de-color-neutral-200);
+  --sl-color-gray-5: var(--de-color-neutral-100);
+  --sl-color-gray-6: var(--de-color-neutral-50);
+  --sl-color-accent: var(--de-color-accent);
+  --sl-color-accent-high: var(--de-color-moss-700);
+  --sl-color-accent-low: var(--de-color-accent-soft);
+  --sl-content-width: var(--de-layout-max-width);
+  --sl-text-base: var(--de-font-size-body-desktop);
+  --sl-text-sm: var(--de-font-size-small);
+  --sl-line-height: var(--de-line-height-body);
+  --sl-border-radius: var(--de-radius-card);
+}
+
+@media (max-width: 767px) {
+  :root {
+    --sl-text-base: var(--de-font-size-body-mobile);
+  }
+}
