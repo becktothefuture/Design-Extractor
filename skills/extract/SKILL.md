@@ -15,6 +15,7 @@ An extract is one source analysis run that captures evidence, records moments, c
 2. Evidence Capture
    - Capture direct observations before interpretation.
    - Use stable evidence refs such as `E1`, `E2`, and `M1`.
+   - For every evidence item, record method, source URL/path/text reference, capture context, `captured_at` date, media path if any, and confidence.
    - Record method for each evidence ref: `browser-observed`, `screenshot-observed`, `recording-observed`, `dom-derived`, `css-derived`, `js-derived`, `network-derived`, `text-derived`, `visual-estimated`, or `inferred`.
    - Mark exact values as verified, estimated values as `estimated`, inferred implementation as `inferred`, and unavailable surfaces as `not inspected` or `not available`.
    - For websites, inspect browser behavior, screenshots/stills, DOM, CSS, JS/network clues, media, responsiveness, and interaction states where available.
@@ -27,6 +28,7 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Store still frames under `media/stills/<extract-id>/`.
    - Keep media lightweight, named by category and action.
    - Embed local relative media links in reports and relevant nodes.
+   - For each media-backed claim, state what the media proves and what it does not prove.
 
 4. Category Classification
    - Classify each finding with categories from `workflow/category-catalogue.md`.
@@ -45,6 +47,7 @@ An extract is one source analysis run that captures evidence, records moments, c
 7. Technical Clue Extraction
    - Record verified values such as durations, easing functions, spacing, type scale, layout rules, asset behavior, and event triggers.
    - Mark bundle-derived, DOM-derived, visual-estimated, and inferred details separately.
+   - Record unavailable surfaces as `not inspected` or `not available` instead of filling gaps with guesses.
 
 8. Reusable Recipe Creation
    - Convert findings into implementation-ready guidance.

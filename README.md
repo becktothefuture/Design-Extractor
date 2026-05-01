@@ -26,14 +26,32 @@ Every extract should capture both aesthetic and technical detail:
 - implementation clues such as timings, easing, DOM/CSS/JS clues, layout values, interaction states, audio/media behavior, and responsive behavior
 - reusable recipes that explain how to recreate the principle without copying protected source code or assets
 
+Supported inputs are source-agnostic:
+
+- websites: browser behavior, DOM/CSS/JS/network clues, media, interaction states, responsiveness, and accessibility surfaces
+- images: composition, palette, typography, subject treatment, texture, lighting, density, and inferred style references
+- text: audience, tone, structure, rhythm, vocabulary, claims, sequencing, and persuasion logic
+- mixed references: linked combinations of URLs, files, text notes, captures, and screenshots
+
 ## Evidence Standard
 
 The brain is a durable knowledge graph, not a pile of reports. Every durable claim should trace back to stable evidence refs such as `E1`, `E2`, or `M1`.
+
+- Capture records what was seen, where it came from, how it was captured, when it was captured, and which media file supports it.
+- Rationalise separates direct evidence from interpretation, aesthetic role, implementation inference, and open questions.
+- Link reusable ideas through source, finding, pattern, synthesis, contradiction, and recipe nodes.
+- Reuse knowledge by searching retrieval terms, aliases, categories, tags, applies-to contexts, and related nodes before creating new nodes.
 
 - Verified details can be stated directly.
 - Estimated details must be labeled `estimated`.
 - Inferred implementation details must be labeled `inferred`.
 - Uninspected surfaces must be recorded as `not inspected` or `not available`, never guessed.
+
+## Emotional And Sensory Rationale
+
+Extracts should describe human emotion, aesthetic psychology, sensory feel, and perceived quality as evidence-backed design rationale. Agents must translate feelings such as calm, confidence, tension, delight, luxury, urgency, friction, or playfulness into concrete causes: delay, easing, scale, contrast, sound, copy tone, spatial rhythm, density, input latency, or media treatment.
+
+Do not write vague praise. A useful emotional claim says what was observed, why that evidence likely creates the feeling, and what another agent should reproduce or avoid.
 
 ## Memory Hygiene
 
@@ -48,6 +66,8 @@ An extract is not complete until its strongest recipes pass the reuse readiness 
 > Could another capable agent recreate the intended behavior or feeling from this repo evidence without reopening the original source?
 
 If the answer is no, keep the relevant nodes `provisional`, record the missing evidence, and add the blocker to the extract report.
+
+Reusable frontend recipes should include structure, states, event triggers, CSS/layout primitives, animation tokens, responsive variants, accessibility requirements, reduced-motion behavior, and failure modes. Recipes are implementation guidance, not copied source code or asset reuse.
 
 ## Repo Map
 

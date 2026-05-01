@@ -4,6 +4,18 @@ The brain is a linked Markdown knowledge system supported by local media evidenc
 
 Treat the repo as a durable knowledge graph, not a pile of reports. Canonical entities are source, evidence item, moment, finding, pattern, recipe, synthesis, contradiction, and open question.
 
+## Canonical Entities
+
+- `source`: the website, image, text, or mixed reference being analysed.
+- `evidence item`: one cited observation with method, source URL/path/text reference, capture context, `captured_at` date, media path if any, and confidence.
+- `moment`: a lightweight media-backed interaction or visual state with a documented trigger, viewport, timing basis, proof boundary, and reuse notes.
+- `finding`: an atomic evidence-backed claim about a source.
+- `pattern`: a reusable abstraction supported by multiple findings or one very strong finding.
+- `recipe`: implementation-ready guidance derived from findings or patterns, with states, tokens, responsive behavior, accessibility, and failure modes.
+- `synthesis`: a node that reconciles patterns, contradictions, variants, and retrieval pathways.
+- `contradiction`: a recorded conflict between nodes, with context and open/resolved/source-specific status.
+- `open question`: a missing evidence or implementation issue that limits confidence or reuse readiness.
+
 ## Fixed Folders
 
 ```text

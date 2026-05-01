@@ -8,6 +8,7 @@ viewport: {{width x height}}
 device_class: {{desktop|tablet|mobile|unknown}}
 capture_tool: {{tool-or-unknown}}
 timing_basis: {{measured|estimated|unknown}}
+duration: {{duration-or-unknown}}
 confidence: {{low|medium|high}}
 created_at: {{YYYY-MM-DD}}
 ---

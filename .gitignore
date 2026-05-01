@@ -14,4 +14,6 @@ build/
 
 # Keep curated extraction media in media/. Ignore only obvious raw scratch captures.
 media/**/raw/
+media/**/scratch/
+media/**/*.tmp
 !media/**/README.md

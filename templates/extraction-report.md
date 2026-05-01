@@ -33,15 +33,15 @@ confidence: {{low|medium|high}}
 
 ## 5. Evidence Table
 
-| Evidence Ref | Method | Observation | Confidence |
-| --- | --- | --- | --- |
-| {{ref}} | {{browser-observed|css-derived|js-derived|inferred}} | {{observation}} | {{confidence}} |
+| Evidence Ref | Method | Source URL/Path/Text Ref | Capture Context | Captured At | Media Path | Observation | What It Proves | What It Does Not Prove | Confidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| {{ref}} | {{browser-observed|css-derived|js-derived|inferred}} | {{source-ref}} | {{viewport/device/tool/state}} | {{YYYY-MM-DD}} | {{relative path or not available}} | {{observation}} | {{proof}} | {{limit}} | {{confidence}} |
 
 ## 6. Interaction And Sensory Decomposition
 
-| Interaction | Trigger | State Sequence | Feel | Evidence | Confidence |
-| --- | --- | --- | --- | --- | --- |
-| {{interaction}} | {{trigger}} | {{pre-state -> transition -> feedback -> settled state}} | {{scroll/motion/audio/interaction feel}} | {{E1/M1}} | {{confidence}} |
+| Interaction | Trigger | User Intent | Pre-State | Feedback | Transition | Settled State | Edge States | Feel | Evidence | Confidence |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| {{interaction}} | {{trigger}} | {{intent}} | {{pre-state}} | {{feedback}} | {{timing/easing/rhythm}} | {{settled state}} | {{cancel/failure/unavailable}} | {{scroll/motion/audio/interaction feel}} | {{E1/M1}} | {{confidence}} |
 
 ## 7. Aesthetic Rationale
 

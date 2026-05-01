@@ -48,7 +48,18 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "method", "observation", "confidence"],
+        "required": [
+          "id",
+          "method",
+          "source_ref",
+          "capture_context",
+          "captured_at",
+          "media_path",
+          "observation",
+          "what_it_proves",
+          "what_it_does_not_prove",
+          "confidence"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -68,7 +79,27 @@
               "inferred"
             ]
           },
+          "source_ref": {
+            "type": "string"
+          },
+          "capture_context": {
+            "type": "string"
+          },
+          "captured_at": {
+            "type": "string",
+            "format": "date"
+          },
+          "media_path": {
+            "type": "string",
+            "description": "Relative media path, or 'not available' when no media supports this evidence item."
+          },
           "observation": {
+            "type": "string"
+          },
+          "what_it_proves": {
+            "type": "string"
+          },
+          "what_it_does_not_prove": {
             "type": "string"
           },
           "confidence": {
@@ -83,7 +114,19 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["id", "category", "media_path", "confidence"],
+        "required": [
+          "id",
+          "category",
+          "media_path",
+          "viewport",
+          "device_class",
+          "capture_tool",
+          "timing_basis",
+          "duration",
+          "what_it_proves",
+          "what_it_does_not_prove",
+          "confidence"
+        ],
         "properties": {
           "id": {
             "type": "string"
@@ -92,6 +135,29 @@
             "type": "string"
           },
           "media_path": {
+            "type": "string"
+          },
+          "viewport": {
+            "type": "string"
+          },
+          "device_class": {
+            "type": "string",
+            "enum": ["desktop", "tablet", "mobile", "unknown"]
+          },
+          "capture_tool": {
+            "type": "string"
+          },
+          "timing_basis": {
+            "type": "string",
+            "enum": ["measured", "estimated", "unknown"]
+          },
+          "duration": {
+            "type": "string"
+          },
+          "what_it_proves": {
+            "type": "string"
+          },
+          "what_it_does_not_prove": {
             "type": "string"
           },
           "confidence": {
@@ -112,7 +178,19 @@
       "type": "array",
       "items": {
         "type": "object",
-        "required": ["interaction", "trigger", "state_sequence", "confidence"],
+        "required": [
+          "interaction",
+          "trigger",
+          "user_intent",
+          "pre_state",
+          "feedback",
+          "transition",
+          "settled_state",
+          "edge_states",
+          "feel",
+          "evidence_refs",
+          "confidence"
+        ],
         "properties": {
           "interaction": {
             "type": "string"
@@ -120,8 +198,32 @@
           "trigger": {
             "type": "string"
           },
-          "state_sequence": {
+          "user_intent": {
             "type": "string"
+          },
+          "pre_state": {
+            "type": "string"
+          },
+          "feedback": {
+            "type": "string"
+          },
+          "transition": {
+            "type": "string"
+          },
+          "settled_state": {
+            "type": "string"
+          },
+          "edge_states": {
+            "type": "string"
+          },
+          "feel": {
+            "type": "string"
+          },
+          "evidence_refs": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           "confidence": {
             "type": "string",

@@ -18,6 +18,19 @@ evidence_refs:
   - {{evidence-ref}}
 moment_refs:
   - {{moment-id-or-path}}
+direct_evidence: >-
+  {{Direct evidence from the source.}}
+interpretation: >-
+  {{What the evidence means and why it matters.}}
+aesthetic_role: >-
+  {{How this detail affects feeling, rhythm, clarity, satisfaction, or behavior.}}
+technical_clues: >-
+  {{Verified values and implementation clues. Mark inference clearly.}}
+reusable_recipe: >-
+  {{How another agent can recreate the principle without copying the source.}}
+related_nodes:
+  - id: {{related-node-id}}
+    relationship: {{supports|contradicts|refines|duplicates|inspired-by|example-of|prerequisite-for|variant-of|evidenced-by|implemented-by}}
 confidence: {{low|medium|high}}
 evidence_quality: {{weak|moderate|strong}}
 confidence_rationale: {{why-this-confidence}}
@@ -30,9 +43,6 @@ superseded_by:
   - {{node-id}}
 created_at: {{YYYY-MM-DD}}
 updated_at: {{YYYY-MM-DD}}
-related_nodes:
-  - id: {{related-node-id}}
-    relationship: {{supports|contradicts|refines|duplicates|inspired-by|example-of|prerequisite-for|variant-of|evidenced-by|implemented-by}}
 ---
 
 # {{title}}

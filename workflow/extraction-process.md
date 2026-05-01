@@ -37,6 +37,18 @@ Each finding should identify how it was established:
 
 Use stable evidence refs such as `E1`, `E2`, and `M1`.
 
+Every evidence item must record:
+
+- evidence ref
+- method
+- source URL/path/text reference
+- capture context, including viewport, device, tool, account/access state, and interaction state where relevant
+- `captured_at` date
+- media path if a screenshot, GIF, video, or still supports the claim
+- observation
+- what the evidence proves and what it does not prove
+- confidence
+
 Claims about exact implementation details require verified source evidence. Estimated values must be labeled `estimated`. Inferred implementation details must be labeled `inferred`. Unavailable surfaces must be recorded as `not inspected` or `not available`, never guessed.
 
 Confidence should be assigned per claim where possible:
@@ -79,6 +91,8 @@ For interactive sources, decompose important interactions into:
 - failure or unavailable state, where observable
 
 Tie emotional effects to concrete evidence such as delay, easing, scale, contrast, sound, copy tone, spatial rhythm, or input latency.
+
+Describe scroll feel, motion feel, audio feel, and interaction feel with timing, rhythm, friction, affordance, and perceived responsiveness. Mark timing as measured, estimated, or unknown.
 
 ## Reuse Readiness Gate
 
