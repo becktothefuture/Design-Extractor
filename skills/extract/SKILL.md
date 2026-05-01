@@ -52,7 +52,13 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Include interaction states, timing ranges, structure, and failure modes.
    - Include component anatomy, state model, event order, motion tokens, responsive variants, accessibility, reduced-motion behavior, and implementation risks where relevant.
 
-9. Knowledge Node Creation
+9. Reuse Readiness Gate
+   - Ask: could another capable agent recreate the intended behavior or feeling from this repo evidence without reopening the original source?
+   - Mark each major recipe `pass`, `needs-work`, or `blocked`.
+   - If a recipe does not pass, record the missing evidence, implementation ambiguity, or open question.
+   - Keep related nodes `provisional` until the blocker is resolved.
+
+10. Knowledge Node Creation
    - Create one source node.
    - Create one or more finding or pattern nodes.
    - Keep each node atomic: one durable idea per node.
@@ -60,14 +66,14 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Do not delete obsolete knowledge. Mark it `superseded`, `merged`, or `rejected`, and link to the replacement or reason.
    - Use `templates/knowledge-node.md`.
 
-10. Brain Linking
+11. Brain Linking
    - Link new nodes to the source node, moments, related findings, patterns, and synthesis nodes.
    - Update `knowledge/_index.md`.
    - Mark relationship types clearly.
    - Never silently overwrite a conflicting claim. Link conflicting nodes with `contradicts` and record whether the conflict is open, resolved, or source-specific.
    - Before creating a node, search existing knowledge for category, tags, aliases, and related interaction terms.
 
-11. Structure Validation
+12. Structure Validation
    - Preserve the protected structure.
    - Run schema validation commands.
    - Check that media links and node links resolve locally.
@@ -96,6 +102,7 @@ Return:
 6. Aesthetic rationale
 7. Technical implementation clues
 8. Reusable recipes
-9. Knowledge nodes created
-10. Brain links added
-11. Open questions and confidence levels
+9. Reuse readiness gate
+10. Knowledge nodes created
+11. Brain links added
+12. Open questions and confidence levels

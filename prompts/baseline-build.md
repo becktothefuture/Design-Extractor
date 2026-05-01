@@ -72,9 +72,10 @@ The extract skill must define the mandatory extraction workflow:
 6. Interaction and sensory decomposition
 7. Technical clue extraction
 8. Reusable recipe creation
-9. Knowledge node creation
-10. Brain linking
-11. Structure validation
+9. Reuse readiness gate
+10. Knowledge node creation
+11. Brain linking
+12. Structure validation
 
 Evidence and claim policy:
 - Every finding must use stable evidence refs such as E1, E2, and M1.
@@ -86,6 +87,12 @@ Interaction and sensory decomposition:
 - Break key interactions into trigger, user intent, feedback, transition, settled state, and edge states.
 - Capture emotional tone: calm, tension, delight, confidence, anticipation, playfulness, luxury, friction, or urgency.
 - Tie emotional claims to evidence such as delay, easing, scale, contrast, sound, copy tone, spatial rhythm, or input latency.
+
+Reuse readiness gate:
+- Ask whether another capable agent could recreate the intended behavior or feeling from this repo evidence without reopening the original source.
+- Mark each major recipe pass, needs-work, or blocked.
+- If a recipe does not pass, record missing evidence, implementation ambiguity, or open questions.
+- Keep related nodes provisional until the blocker is resolved.
 
 The skill must be explicit that every extract must create or update:
 - an extraction report
@@ -262,9 +269,10 @@ The run-extract prompt must require this output:
 7. Aesthetic rationale
 8. Technical implementation clues
 9. Reusable recipes
-10. Knowledge nodes to save
-11. Brain links
-12. Open questions and confidence levels
+10. Reuse readiness gate
+11. Knowledge nodes to save
+12. Brain links
+13. Open questions and confidence levels
 
 The run-extract prompt must ask for:
 - emotional tone and aesthetic psychology: what the interface makes the user feel and which concrete choices produce that effect
@@ -284,6 +292,7 @@ Every reusable recipe must include:
 - Responsive rules: breakpoint behavior, input-mode differences, viewport constraints, and touch adaptations
 - Accessibility: keyboard path, focus visibility, reduced-motion behavior, audio mute/persistence, contrast, and readable type
 - Failure modes: what breaks the intended feel or usability
+- Reuse readiness: pass, needs-work, or blocked, with missing evidence or ambiguity recorded
 
 Add validation instructions:
 

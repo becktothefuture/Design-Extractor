@@ -55,14 +55,20 @@ confidence: {{low|medium|high}}
 
 {{Implementation-ready recipes with intent, anatomy, state model, interaction model, motion tokens, sensory notes, responsive rules, accessibility, failure modes, and constraints.}}
 
-## 10. Knowledge Nodes
+## 10. Reuse Readiness Gate
+
+| Recipe | Status | Can Another Agent Recreate It Without Reopening Source? | Missing Evidence / Blocker |
+| --- | --- | --- | --- |
+| {{recipe-id}} | {{pass|needs-work|blocked}} | {{yes|partial|no}} | {{missing values, states, media, or implementation evidence}} |
+
+## 11. Knowledge Nodes
 
 - {{node-id}}: {{path}}
 
-## 11. Brain Links
+## 12. Brain Links
 
 - {{source-node}} -> {{related-node}}: {{relationship}}
 
-## 12. Open Questions
+## 13. Open Questions
 
 - {{question}}: {{why it matters}}

@@ -14,10 +14,11 @@ The extraction process converts a source into linked reusable knowledge.
 8. Separate direct evidence from interpretation.
 9. Derive implementation clues.
 10. Write reusable recipes.
-11. Create atomic knowledge nodes.
-12. Link nodes into the brain.
-13. Update the index.
-14. Validate schemas and structure.
+11. Run the reuse readiness gate.
+12. Create atomic knowledge nodes.
+13. Link nodes into the brain.
+14. Update the index.
+15. Validate schemas and structure.
 
 ## Evidence Standard
 
@@ -78,3 +79,17 @@ For interactive sources, decompose important interactions into:
 - failure or unavailable state, where observable
 
 Tie emotional effects to concrete evidence such as delay, easing, scale, contrast, sound, copy tone, spatial rhythm, or input latency.
+
+## Reuse Readiness Gate
+
+Before an extract is complete, test its strongest recipes against this question:
+
+> Could another capable agent recreate the intended behavior or feeling from this repo evidence without reopening the original source?
+
+Mark each major recipe:
+
+- `pass`: enough evidence, values, states, and caveats exist to reuse it.
+- `needs-work`: reusable direction exists, but important values, states, media, or edge cases are missing.
+- `blocked`: the recipe depends on unavailable evidence or unverifiable implementation detail.
+
+If a recipe is `needs-work` or `blocked`, keep related nodes `provisional`, record missing evidence, and add the blocker to the report's open questions.

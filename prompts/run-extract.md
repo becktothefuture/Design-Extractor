@@ -60,9 +60,10 @@ Required output:
 7. Aesthetic rationale
 8. Technical implementation clues
 9. Reusable recipes
-10. Knowledge nodes created or proposed
-11. Brain links added or proposed
-12. Open questions and confidence levels
+10. Reuse readiness gate
+11. Knowledge nodes created or proposed
+12. Brain links added or proposed
+13. Open questions and confidence levels
 
 Rules:
 - Do not copy proprietary code or assets into reusable recipes.
@@ -89,6 +90,11 @@ Every reusable recipe must include:
 - Responsive rules: breakpoint behavior, input-mode differences, viewport constraints, and touch adaptations
 - Accessibility: keyboard path, focus visibility, reduced-motion behavior, audio mute/persistence, contrast, and readable type
 - Failure modes: what breaks the intended feel or usability
+
+Run the reuse readiness gate before considering the extract complete:
+- Ask whether another capable agent could recreate the intended behavior or feeling from this repo evidence without reopening the original source.
+- Mark each major recipe pass, needs-work, or blocked.
+- If it does not pass, record missing evidence or ambiguity and keep related nodes provisional.
 
 After the extract, run:
 

@@ -68,6 +68,12 @@ updated_at: {{YYYY-MM-DD}}
 
 - {{What breaks the feel or usability}}
 
+## Reuse Readiness
+
+- Status: {{pass|needs-work|blocked}}
+- Can another agent recreate this without reopening the source? {{yes|partial|no}}
+- Missing evidence or ambiguity: {{none or blocker}}
+
 ## Evidence
 
 - {{node or moment ref}}

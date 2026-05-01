@@ -15,6 +15,7 @@
     "interaction_decomposition",
     "findings",
     "recipes",
+    "reuse_readiness",
     "knowledge_nodes",
     "open_questions"
   ],
@@ -134,6 +135,30 @@
       "type": "array",
       "items": {
         "type": "string"
+      }
+    },
+    "reuse_readiness": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["recipe_id", "status", "recreate_without_source", "blocker"],
+        "properties": {
+          "recipe_id": {
+            "type": "string"
+          },
+          "status": {
+            "type": "string",
+            "enum": ["pass", "needs-work", "blocked"]
+          },
+          "recreate_without_source": {
+            "type": "string",
+            "enum": ["yes", "partial", "no"]
+          },
+          "blocker": {
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
       }
     },
     "knowledge_nodes": {

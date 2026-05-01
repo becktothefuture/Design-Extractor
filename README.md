@@ -41,6 +41,14 @@ Knowledge nodes have a lifecycle: `provisional`, `active`, `superseded`, `merged
 
 Do not delete obsolete knowledge by default. Mark it with the correct lifecycle status, link it to the stronger replacement or contradiction, and keep the graph searchable with aliases, retrieval terms, tags, and related nodes.
 
+## Reuse Readiness
+
+An extract is not complete until its strongest recipes pass the reuse readiness test:
+
+> Could another capable agent recreate the intended behavior or feeling from this repo evidence without reopening the original source?
+
+If the answer is no, keep the relevant nodes `provisional`, record the missing evidence, and add the blocker to the extract report.
+
 ## Repo Map
 
 ```text
