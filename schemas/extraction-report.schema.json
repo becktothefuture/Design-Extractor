@@ -74,6 +74,7 @@
               "css-derived",
               "js-derived",
               "network-derived",
+              "image-observed",
               "text-derived",
               "visual-estimated",
               "inferred"

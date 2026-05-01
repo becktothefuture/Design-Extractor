@@ -14,6 +14,8 @@ Use these fixed categories for extracts. Add a new category only when it creates
 - `project-sequencing`: ordering, project-to-project logic, content progression, narrative flow.
 - `hover-touch-feedback`: pointer states, hover reveals, active states, touch adaptations, cursor behavior.
 - `media-handling`: image/video treatment, lazy loading, posters, playback, cropping, aspect ratio, compression.
+- `photography-framing`: camera angle, crop, focal plane, lens feel, foreground/background separation, occlusion, negative space, and subject placement inside photographic frames.
+- `subject-staging`: human/object pose, gesture, prop handling, product-in-use staging, body-as-context, and how subjects make a designed object feel situated.
 - `background-webgl-canvas-svg`: shader, WebGL, canvas, SVG, procedural, and layered background behavior.
 - `content-model`: source data shape, CMS clues, taxonomy, metadata, repeatable content structures.
 - `performance-responsiveness`: load behavior, perceived performance, breakpoints, reduced motion, device handling.

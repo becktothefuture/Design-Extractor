@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Hand phone gesture loop</title>
+  <desc id="desc">Abstract diagram showing thumb, phone, gaze direction, and product-in-use loop.</desc>
+  <rect width="1200" height="700" fill="#f6eedc"/>
+  <path d="M874 210 C1014 238 1092 342 1102 492 C1016 568 884 606 766 548 C690 510 642 448 626 364 C674 278 760 208 874 210Z" fill="#bf7540"/>
+  <rect x="536" y="128" width="210" height="470" rx="34" fill="#111" transform="rotate(-12 641 363)"/>
+  <rect x="558" y="150" width="166" height="426" rx="26" fill="#fbfaf6" transform="rotate(-12 641 363)"/>
+  <path d="M740 400 C828 394 892 430 936 504" fill="none" stroke="#8f512f" stroke-width="48" stroke-linecap="round"/>
+  <path d="M900 84 C834 124 782 174 744 234" fill="none" stroke="#3d5536" stroke-width="8" stroke-linecap="round" stroke-dasharray="14 18"/>
+  <circle cx="742" cy="234" r="12" fill="#3d5536"/>
+  <text x="72" y="94" fill="#171916" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">gesture proves use</text>
+  <text x="72" y="140" fill="#5f5747" font-family="Inter, Arial, sans-serif" font-size="24">hand grip + tilted screen + implied gaze create an active session</text>
+</svg>

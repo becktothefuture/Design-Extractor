@@ -16,7 +16,7 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Capture direct observations before interpretation.
    - Use stable evidence refs such as `E1`, `E2`, and `M1`.
    - For every evidence item, record method, source URL/path/text reference, capture context, `captured_at` date, media path if any, and confidence.
-   - Record method for each evidence ref: `browser-observed`, `screenshot-observed`, `recording-observed`, `dom-derived`, `css-derived`, `js-derived`, `network-derived`, `text-derived`, `visual-estimated`, or `inferred`.
+   - Record method for each evidence ref: `browser-observed`, `screenshot-observed`, `recording-observed`, `dom-derived`, `css-derived`, `js-derived`, `network-derived`, `image-observed`, `text-derived`, `visual-estimated`, or `inferred`.
    - Mark exact values as verified, estimated values as `estimated`, inferred implementation as `inferred`, and unavailable surfaces as `not inspected` or `not available`.
    - For websites, inspect browser behavior, screenshots/stills, DOM, CSS, JS/network clues, media, responsiveness, and interaction states where available.
    - For images, inspect composition, palette, typography, subject treatment, texture, lighting, density, and style references.

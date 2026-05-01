@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Phone screen legibility window</title>
+  <desc id="desc">Diagram showing a high-contrast phone screen isolated from warm photographic surroundings.</desc>
+  <rect width="1200" height="700" fill="#b96f35"/>
+  <rect x="0" y="0" width="1200" height="700" fill="#171916" opacity=".32"/>
+  <rect x="460" y="82" width="280" height="560" rx="42" fill="#111" transform="rotate(-9 600 362)"/>
+  <rect x="492" y="116" width="216" height="494" rx="30" fill="#fbfaf7" transform="rotate(-9 600 362)"/>
+  <g transform="rotate(-9 600 362)">
+    <rect x="520" y="190" width="160" height="44" rx="10" fill="#e9e7df"/>
+    <rect x="520" y="260" width="74" height="92" rx="10" fill="#b7783c"/>
+    <rect x="606" y="260" width="74" height="92" rx="10" fill="#d2c52a"/>
+    <rect x="520" y="382" width="160" height="18" rx="9" fill="#232323" opacity=".72"/>
+    <rect x="520" y="422" width="160" height="18" rx="9" fill="#232323" opacity=".38"/>
+  </g>
+  <path d="M430 46 H772 V654 H430Z" fill="none" stroke="#f8f7f3" stroke-width="5" stroke-dasharray="16 14"/>
+  <text x="68" y="96" fill="#f8f7f3" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">UI remains the proof object</text>
+  <text x="68" y="144" fill="#f1dfc5" font-family="Inter, Arial, sans-serif" font-size="24">bright screen + hard edge keep the app readable</text>
+</svg>

@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Diagonal over-shoulder framing map</title>
+  <desc id="desc">Abstract diagram showing a warm widescreen frame with diagonal limb, phone, and bench axes.</desc>
+  <rect width="1200" height="700" fill="#17140f"/>
+  <rect x="-80" y="0" width="680" height="700" fill="#b8792f" opacity=".72" transform="rotate(24 250 350)"/>
+  <rect x="72" y="34" width="220" height="690" rx="110" fill="#ca8545" opacity=".96" transform="rotate(22 182 379)"/>
+  <rect x="783" y="188" width="146" height="352" rx="24" fill="#111" transform="rotate(-14 856 364)"/>
+  <rect x="799" y="204" width="114" height="320" rx="18" fill="#f3f0e8" transform="rotate(-14 856 364)"/>
+  <path d="M40 94 L1044 648" stroke="#f2d48a" stroke-width="5" opacity=".65"/>
+  <path d="M240 642 L1130 120" stroke="#d8c5a0" stroke-width="5" opacity=".45"/>
+  <circle cx="858" cy="366" r="82" fill="none" stroke="#f7f1dd" stroke-width="4"/>
+  <text x="64" y="626" fill="#f7f1dd" font-family="Inter, Arial, sans-serif" font-size="30" font-weight="700">primary diagonal body mass</text>
+  <text x="690" y="128" fill="#f7f1dd" font-family="Inter, Arial, sans-serif" font-size="28" font-weight="700">phone counter-axis</text>
+</svg>

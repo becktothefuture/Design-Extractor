@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Body as environment</title>
+  <desc id="desc">Abstract diagram showing a cropped seated body becoming the environment around the phone.</desc>
+  <rect width="1200" height="700" fill="#1d1a14"/>
+  <circle cx="230" cy="244" r="148" fill="#c1783d"/>
+  <path d="M230 318 C416 290 560 354 676 592 C475 650 260 610 92 520 C118 418 166 354 230 318Z" fill="#b86f37"/>
+  <path d="M710 124 C800 170 856 282 834 420 C820 512 770 608 706 700 H1200 V0 H786 C750 34 724 74 710 124Z" fill="#18100d"/>
+  <rect x="642" y="232" width="168" height="342" rx="28" fill="#0f0f0f" transform="rotate(-12 726 403)"/>
+  <rect x="662" y="252" width="128" height="300" rx="22" fill="#f8f7f3" transform="rotate(-12 726 403)"/>
+  <text x="76" y="78" fill="#f8f7f3" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">subject is not a cutout model</text>
+  <text x="76" y="120" fill="#d6c6a7" font-family="Inter, Arial, sans-serif" font-size="24">cropped body becomes place, warmth, scale, and privacy</text>
+</svg>

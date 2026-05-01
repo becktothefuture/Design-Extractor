@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="700" viewBox="0 0 1200 700" role="img" aria-labelledby="title desc">
+  <title id="title">Lifestyle scene echoes app content</title>
+  <desc id="desc">Diagram showing warm real environment connected to recipe cards inside the phone.</desc>
+  <rect width="1200" height="700" fill="#f7efdc"/>
+  <circle cx="230" cy="355" r="150" fill="#c8843f"/>
+  <circle cx="230" cy="355" r="88" fill="#d4d12b" opacity=".7"/>
+  <rect x="690" y="98" width="240" height="504" rx="38" fill="#121212" transform="rotate(-10 810 350)"/>
+  <rect x="720" y="130" width="180" height="440" rx="28" fill="#f8f7f3" transform="rotate(-10 810 350)"/>
+  <g transform="rotate(-10 810 350)">
+    <circle cx="770" cy="258" r="46" fill="#c8843f"/>
+    <circle cx="850" cy="258" r="46" fill="#d4d12b"/>
+    <circle cx="770" cy="376" r="46" fill="#3d5536"/>
+    <circle cx="850" cy="376" r="46" fill="#b96f35"/>
+  </g>
+  <path d="M390 348 C502 310 586 296 692 290" fill="none" stroke="#3d5536" stroke-width="8" stroke-linecap="round" stroke-dasharray="18 18"/>
+  <text x="72" y="92" fill="#171916" font-family="Inter, Arial, sans-serif" font-size="32" font-weight="700">real appetite to app appetite</text>
+  <text x="72" y="140" fill="#5f5747" font-family="Inter, Arial, sans-serif" font-size="24">the environment primes food/fitness before the recipe cards are read</text>
+</svg>
