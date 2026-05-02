@@ -58,6 +58,11 @@ body.is-loaded .site-shell {
   font-size: clamp(4rem, 12vw, 11rem);
   line-height: 0.9;
   letter-spacing: 0;
+  pointer-events: none;
+}
+
+.site-preloader[hidden] {
+  display: none !important;
 }
 
 .site-preloader span:last-child {
@@ -168,13 +173,20 @@ body.is-loaded .site-preloader {
 }
 
 .library-home h1 {
-  max-width: 12ch;
-  margin: 0 0 var(--de-space-5);
+  max-width: 11ch;
+  margin: 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(3rem, 8vw, 5.6rem);
   font-weight: 400;
   line-height: 0.95;
   letter-spacing: 0;
+}
+
+.library-home__intro {
+  max-width: 36rem;
+  margin: var(--de-space-4) 0 var(--de-space-5);
+  color: var(--de-color-text-muted);
+  font-size: 1rem;
 }
 
 .library-home__aside {

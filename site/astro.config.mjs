@@ -12,7 +12,7 @@ export default defineConfig({
   base,
   integrations: [
     starlight({
-      title: 'Design Patterns',
+      title: 'Design Extractor',
       favicon: '/favicon.png',
       social: [],
       customCss: [
@@ -28,7 +28,7 @@ export default defineConfig({
         {
           label: 'Library',
           items: [
-            { label: 'Search Patterns', link: '/' },
+            { label: 'Pattern Library', link: '/' },
             { label: 'All Patterns', link: '/patterns/' },
             { label: 'Capture Workflow', link: '/guide/overview/' }
           ]

@@ -23,7 +23,7 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
     </div>
     <div class="site-shell">
       <nav class="site-nav" aria-label="Primary">
-        <a class="site-mark" href={withBase('/')}>Design Patterns</a>
+        <a class="site-mark" href={withBase('/')}>Design Extractor</a>
         <div class="site-nav__links">
           <a href={withBase('/patterns/')}>Patterns</a>
         </div>
@@ -35,6 +35,11 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
     <script is:inline>
       const loaderPercent = document.querySelector('[data-load-percent]');
       const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const loaderFailsafe = window.setTimeout(() => {
+        document.body.classList.remove('is-preloading');
+        document.body.classList.add('is-loaded');
+        document.querySelector('.site-preloader')?.setAttribute('hidden', '');
+      }, 3500);
 
       function setPercent(value) {
         if (loaderPercent) loaderPercent.textContent = String(Math.min(100, Math.max(0, Math.round(value))));
@@ -87,6 +92,7 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
         window.setTimeout(() => {
           document.body.classList.remove('is-preloading');
           document.body.classList.add('is-loaded');
+          window.clearTimeout(loaderFailsafe);
           if (prefersReducedMotion) {
             document.querySelector('.site-preloader')?.setAttribute('hidden', '');
           } else {
