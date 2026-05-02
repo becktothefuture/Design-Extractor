@@ -10,6 +10,7 @@
     "dev": "astro dev --host 127.0.0.1",
     "prebuild": "npm run tokens:build && npm run sync:knowledge",
     "build": "astro build",
+    "check:links": "node scripts/check-links.mjs",
     "preview": "astro preview --host 127.0.0.1"
   },
   "dependencies": {

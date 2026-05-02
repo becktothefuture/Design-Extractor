@@ -36,6 +36,11 @@ jobs:
         env:
           BASE_PATH: /${{ github.event.repository.name }}
         run: npm run build
+      - name: Check links
+        working-directory: site
+        env:
+          BASE_PATH: /${{ github.event.repository.name }}
+        run: npm run check:links
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
