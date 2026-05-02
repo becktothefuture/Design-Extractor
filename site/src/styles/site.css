@@ -374,13 +374,31 @@ body:has(.library-dock) .site-main {
   display: grid;
   justify-items: center;
   gap: 0.72rem;
-  width: min(100%, 43rem);
+  width: min(100%, 54rem);
   pointer-events: auto;
 }
 
 .library-dock .tag-strip {
-  max-height: 4rem;
-  overflow: hidden;
+  flex-wrap: nowrap;
+  justify-content: flex-start;
+  width: max-content;
+  max-width: 100%;
+  max-height: none;
+  padding: 0 0.75rem 0.1rem;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scrollbar-width: none;
+  mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+  -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+}
+
+.library-dock .tag-strip::-webkit-scrollbar {
+  display: none;
+}
+
+.library-dock .tag-strip button {
+  flex: 0 0 auto;
+  white-space: nowrap;
 }
 
 .library-dock .tag-strip button.is-active {
@@ -935,24 +953,12 @@ body:has(.library-dock) .site-main {
   }
 
   .library-dock .tag-strip {
-    flex-wrap: nowrap;
-    justify-content: flex-start;
     width: 100%;
-    max-height: none;
     padding: 0 0.5rem 0.1rem;
-    overflow-x: auto;
-    scrollbar-width: none;
     gap: 0.35rem;
-    mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
-  }
-
-  .library-dock .tag-strip::-webkit-scrollbar {
-    display: none;
   }
 
   .tag-strip button {
-    flex: 0 0 auto;
     min-height: 1.35rem;
     padding: 0 0.58rem;
     font-size: 0.68rem;
