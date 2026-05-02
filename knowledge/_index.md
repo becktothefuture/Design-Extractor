@@ -2,6 +2,12 @@
 
 This index tracks extracts, nodes, moments, and reusable patterns.
 
+## Library Contract
+
+The extraction system is the evidence engine. Keep `knowledge/sources/`, `knowledge/findings/`, and `media/` detailed enough to prove what was captured.
+
+The public product is `knowledge/patterns/`: one reusable design pattern per page, searchable by keyword or tag, written first for designers and then for implementation. Internal categories stay in the repo; public discovery uses one to five tags per pattern.
+
 ## Extracts
 
 | Extract ID | Source | Type | Date | Retrieval Summary | Nodes | Moments | Strongest Patterns | Open Questions |
@@ -13,12 +19,12 @@ This index tracks extracts, nodes, moments, and reusable patterns.
 
 ## Global Patterns
 
-| Pattern | Category | Supporting Nodes | Confidence |
-| --- | --- | --- | --- |
-| [Instrumented Sensory Portfolio Shell](patterns/reusable-principles/instrumented-sensory-portfolio-shell.md) | reusable-principles | consent-first-sound-entry, webgl-spiral-project-index, hover-preview-title-list, spring-panel-menu, sequential-project-detail-loop | medium |
-| [Calm Editorial Scroll Reveal](patterns/reusable-principles/calm-editorial-scroll-reveal.md) | reusable-principles | viewport-progress-reveal-wrapper, soft-block-reveal-motion-token, spatial-stagger-editorial-scroll, responsive-grain-simplification | high |
-| [Non-Flickering Recipe Card Hover](patterns/reusable-principles/non-flickering-recipe-card-hover.md) | reusable-principles | isolated-media-layer-recipe-hover, short-lift-overlay-reveal-card-token, touch-simplified-card-hover | high |
-| [Lived-In Product Photography Frame](patterns/reusable-principles/lived-in-product-photography-frame.md) | reusable-principles | diagonal-over-shoulder-product-frame, cropped-athlete-body-as-context, golden-hour-athletic-lifestyle-grade, legible-phone-ui-in-lifestyle-scene | high |
+| Pattern | Public Tags | Source Label | Primary Media | Supporting Nodes | Confidence |
+| --- | --- | --- | --- | --- | --- |
+| [Instrumented Sensory Portfolio Shell](patterns/reusable-principles/instrumented-sensory-portfolio-shell.md) | portfolio, sensory, navigation, motion | Pacome Pertant portfolio | media/moments/pacomepertant-portfolio/spiral-to-list-switch.gif | consent-first-sound-entry, webgl-spiral-project-index, hover-preview-title-list, spring-panel-menu, sequential-project-detail-loop | medium |
+| [Calm Editorial Scroll Reveal](patterns/reusable-principles/calm-editorial-scroll-reveal.md) | scroll, editorial, motion | Terry Godier article page | media/moments/terrygodier-last-quiet-thing-scroll-reveal/paragraph-reveal-scroll.gif | viewport-progress-reveal-wrapper, soft-block-reveal-motion-token, spatial-stagger-editorial-scroll, responsive-grain-simplification | high |
+| [Non-Flickering Recipe Card Hover](patterns/reusable-principles/non-flickering-recipe-card-hover.md) | hover, cards, motion | Athleats recipe grid | media/moments/athleats-recipe-card-hover/recipe-card-hover-in-out.gif | isolated-media-layer-recipe-hover, short-lift-overlay-reveal-card-token, touch-simplified-card-hover | high |
+| [Lived-In Product Photography Frame](patterns/reusable-principles/lived-in-product-photography-frame.md) | photography, product, lifestyle | Athleats iPhone lifestyle image | media/stills/athleats-iphone-photography-style/source-reference.jpg | diagonal-over-shoulder-product-frame, cropped-athlete-body-as-context, golden-hour-athletic-lifestyle-grade, legible-phone-ui-in-lifestyle-scene | high |
 
 ## Contradictions
 
@@ -30,5 +36,6 @@ This index tracks extracts, nodes, moments, and reusable patterns.
 - Add every extract to this index.
 - Link each source to its findings, patterns, moments, and recipes.
 - Use retrieval-friendly summaries, aliases, and terms future agents would search for.
+- Keep the public site pattern-first. Do not reintroduce generated public pages for every source, finding, moment, category, or recipe unless the user explicitly asks for an evidence browser.
 - Merge duplicate ideas and split overloaded nodes during each extraction pass.
 - Do not delete obsolete knowledge. Mark it superseded, merged, or rejected in the relevant node.

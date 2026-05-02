@@ -85,6 +85,23 @@
     "source": {
       "type": "string"
     },
+    "source_url": {
+      "type": "string"
+    },
+    "source_label": {
+      "type": "string"
+    },
+    "capture_status": {
+      "type": "string",
+      "enum": ["verified", "captured", "partial", "needs-recapture"]
+    },
+    "primary_media": {
+      "type": "string",
+      "pattern": "^media/.+\\.(gif|webm|png|jpe?g|mp4|mov)$"
+    },
+    "summary": {
+      "type": "string"
+    },
     "extract_id": {
       "type": "string"
     },

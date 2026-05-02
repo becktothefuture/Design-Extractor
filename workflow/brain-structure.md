@@ -4,6 +4,8 @@ The brain is a linked Markdown knowledge system supported by local media evidenc
 
 Treat the repo as a durable knowledge graph, not a pile of reports. Canonical entities are source, evidence item, moment, finding, pattern, recipe, synthesis, contradiction, and open question.
 
+The public product is the design pattern library. The evidence graph feeds that library, but it is not the primary browsing experience.
+
 ## Canonical Entities
 
 - `source`: the website, image, text, or mixed reference being analysed.
@@ -30,6 +32,19 @@ media/
   moments/
   stills/
 ```
+
+## Public Product Layer
+
+Use this split:
+
+- `knowledge/patterns/`: public library entries. These are the pages people should browse and reuse.
+- `knowledge/sources/`: extraction reports and source records. These are audit evidence.
+- `knowledge/findings/`: atomic claims that support patterns. These are internal proof and retrieval material.
+- `media/`: captured proof: screenshots, stills, GIFs, WebM, and video.
+
+A public pattern should be the one clear reusable idea from an extract. It should show the strongest captured media at the top, explain the pattern in plain language, then provide technical recreation notes.
+
+Do not expose the extraction machinery as the main public UX. Reports, findings, categories, and proof tables can remain linked from the repo, but the website should make patterns the primary unit.
 
 ## Storage Rules
 
@@ -89,6 +104,7 @@ Rules:
 - Use terms future agents would search for: visual descriptors, interaction names, technical clues, device context, and failure modes.
 - Before creating a node, search existing knowledge for category, tags, aliases, and related interaction terms.
 - Update `knowledge/_index.md` with retrieval-friendly summaries, not just file paths.
+- For public patterns, use one to five human-searchable tags. Categories remain internal and should not become the public navigation model.
 
 ## Index Rules
 

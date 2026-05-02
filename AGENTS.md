@@ -6,6 +6,22 @@ Every agent and sub-agent must read this file before doing any work in this repo
 
 Every extraction must use the repo-local `extract` skill at `skills/extract/SKILL.md`.
 
+## Product Model
+
+The extraction system is the evidence engine. Keep it rigorous, detailed, and structured.
+
+The public product is the design pattern library one layer above that evidence engine:
+
+- `knowledge/patterns/` is the primary library surface.
+- `knowledge/sources/`, `knowledge/findings/`, and `media/` are the proof trail behind each pattern.
+- Public pages should present patterns, not the extraction machinery.
+- The site flow should be simple: search by keyword or tag, open a pattern, understand what was captured, then use the technical section to recreate it.
+- Do not surface internal categories as public navigation. Categories are for repo organization and evidence classification only.
+- Public search uses one to five tags per pattern. Tags should be human-searchable terms such as `hover`, `cards`, `motion`, `scroll`, `editorial`, `photography`, `product`, `portfolio`, or `navigation`.
+- Public pattern media must be real captured evidence: screenshots, JPG/PNG crops, GIFs, WebM, or video. Do not use SVG diagrams or generated placeholder illustrations as public pattern media.
+- Keep public copy designer-friendly first. Put implementation detail below the simple explanation.
+- Keep source attribution clear with `source_label`, `source_url` where available, and `capture_status`.
+
 ## Work Style
 
 - Be pragmatic and specific.
@@ -47,6 +63,23 @@ Do not rename or move these top-level directories unless the user explicitly ask
 - `media/`
 
 New extracts must add content inside the correct protected folders.
+
+## Public Pattern Requirements
+
+Every extract that contributes reusable design value must create or update one public pattern node in `knowledge/patterns/`, unless the work explicitly only strengthens an existing pattern.
+
+Pattern frontmatter must include:
+
+- `type: pattern`
+- `status`
+- `source_label`
+- `source_url` when available
+- `capture_status`
+- `primary_media`
+- `summary`
+- `tags` with one to five entries
+
+Run `node scripts/validate-pattern-library.mjs` before publishing site changes.
 
 ## Output Format
 

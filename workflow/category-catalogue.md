@@ -1,6 +1,8 @@
 # Category Catalogue
 
-Use these fixed categories for extracts. Add a new category only when it creates real retrieval value and document it here first.
+Use these fixed categories for internal extraction evidence. Add a new category only when it creates real retrieval value and document it here first.
+
+Categories are not the public browsing model. Public pattern discovery is driven by search and one to five human-readable tags on each pattern.
 
 ## Categories
 
@@ -27,3 +29,27 @@ Use these fixed categories for extracts. Add a new category only when it creates
 - Add secondary categories as tags.
 - Do not use vague categories such as `misc`, `general`, or `nice`.
 - If a finding spans categories, keep the node focused and link related nodes.
+
+## Public Retrieval Tags
+
+Public tags belong on pattern nodes. They should be short words a designer or builder would actually search for.
+
+Good examples:
+
+- `hover`
+- `cards`
+- `motion`
+- `scroll`
+- `editorial`
+- `photography`
+- `product`
+- `portfolio`
+- `navigation`
+
+Rules:
+
+- Use one to five tags per public pattern.
+- Prefer concrete behavior, surface, or medium terms.
+- Do not use repo-only labels such as `reusable-principles`.
+- Do not use `pattern` as a tag.
+- Do not surface internal categories as site navigation.

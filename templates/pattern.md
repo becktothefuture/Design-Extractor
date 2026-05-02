@@ -41,6 +41,8 @@ updated_at: 2026-05-02
 
 # Human Readable Pattern Name
 
+Use one to five public tags. Use real captured media for `primary_media`: JPG, PNG, GIF, WebM, or video. Do not use SVG diagrams or generated placeholder illustrations as public pattern media.
+
 ## Direct Evidence
 
 What was captured.

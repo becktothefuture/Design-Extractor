@@ -1,6 +1,14 @@
 # Extraction Process
 
-The extraction process converts a source into linked reusable knowledge.
+The extraction process converts a source into linked reusable knowledge, then promotes the useful design idea into the public pattern library.
+
+The mental model is:
+
+```text
+source -> evidence -> findings -> pattern -> public page
+```
+
+`knowledge/sources/`, `knowledge/findings/`, and `media/` are the evidence engine. `knowledge/patterns/` is the product layer people browse.
 
 ## Process
 
@@ -14,11 +22,12 @@ The extraction process converts a source into linked reusable knowledge.
 8. Separate direct evidence from interpretation.
 9. Derive implementation clues.
 10. Write reusable recipes.
-11. Run the reuse readiness gate.
-12. Create atomic knowledge nodes.
-13. Link nodes into the brain.
-14. Update the index.
-15. Validate schemas and structure.
+11. Promote the strongest reusable idea into one public pattern page.
+12. Run the reuse readiness gate.
+13. Create atomic knowledge nodes.
+14. Link nodes into the brain.
+15. Update the index.
+16. Validate schemas, pattern requirements, and site structure.
 
 ## Evidence Standard
 
@@ -70,6 +79,7 @@ Moment files should be:
 - linked from relevant nodes
 - documented with viewport, device class, trigger, duration, capture tool if known, and whether timing is measured or estimated
 - treated as evidence only, not reusable asset material
+- based on real captured media for public pattern previews; do not use SVG diagrams or generated placeholder illustrations as public pattern media
 
 Example:
 
@@ -107,3 +117,37 @@ Mark each major recipe:
 - `blocked`: the recipe depends on unavailable evidence or unverifiable implementation detail.
 
 If a recipe is `needs-work` or `blocked`, keep related nodes `provisional`, record missing evidence, and add the blocker to the report's open questions.
+
+## Public Pattern Standard
+
+Every extract with reusable value should create or update one primary public pattern in `knowledge/patterns/`.
+
+Public pattern pages should answer, in this order:
+
+- What did we capture?
+- When would I use it?
+- Why does it work?
+- How do I recreate it?
+- What evidence supports it?
+
+Use simple designer-facing language first. Put exact implementation details, timing, accessibility notes, and risks below the explanation.
+
+Public pattern frontmatter must include:
+
+- `type: pattern`
+- `status`
+- `source_label`
+- `source_url` when available
+- `capture_status`
+- `primary_media`
+- `summary`
+- `tags` with one to five entries
+
+Public tags are retrieval handles, not the internal category model. Use concrete terms someone would search for, such as `hover`, `cards`, `motion`, `scroll`, `editorial`, `photography`, `product`, `portfolio`, or `navigation`.
+
+Run:
+
+```bash
+node scripts/validate-pattern-library.mjs
+cd site && npm run build && npm run check:links
+```

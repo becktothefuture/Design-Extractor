@@ -29,6 +29,7 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Keep media lightweight, named by category and action.
    - Embed local relative media links in reports and relevant nodes.
    - For each media-backed claim, state what the media proves and what it does not prove.
+   - Public pattern media must be real captured evidence: screenshot crops, JPG/PNG stills, GIFs, WebM, or video. Do not use SVG diagrams or generated placeholder illustrations as the public pattern media.
 
 4. Category Classification
    - Classify each finding with categories from `workflow/category-catalogue.md`.
@@ -55,13 +56,23 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Include interaction states, timing ranges, structure, and failure modes.
    - Include component anatomy, state model, event order, motion tokens, responsive variants, accessibility, reduced-motion behavior, and implementation risks where relevant.
 
-9. Reuse Readiness Gate
+9. Public Pattern Promotion
+   - Treat extraction reports, source nodes, finding nodes, and media as the evidence engine.
+   - Treat `knowledge/patterns/` as the public design library product.
+   - Create or update exactly one primary public pattern for the reusable design idea, unless this extract only strengthens an existing pattern.
+   - Write the pattern for a designer first: what was captured, when to use it, why it works, and how to recreate it.
+   - Put technical implementation detail below the simple explanation.
+   - Add `source_label`, `source_url` when available, `capture_status`, `primary_media`, `summary`, and one to five public tags.
+   - Use human-searchable tags. Do not expose internal category names as public-facing tags unless the term is also natural to search.
+   - Do not publish raw extraction reports, source nodes, finding nodes, categories, or system mechanics as the primary public experience.
+
+10. Reuse Readiness Gate
    - Ask: could another capable agent recreate the intended behavior or feeling from this repo evidence without reopening the original source?
    - Mark each major recipe `pass`, `needs-work`, or `blocked`.
    - If a recipe does not pass, record the missing evidence, implementation ambiguity, or open question.
    - Keep related nodes `provisional` until the blocker is resolved.
 
-10. Knowledge Node Creation
+11. Knowledge Node Creation
    - Create one source node.
    - Create one or more finding or pattern nodes.
    - Keep each node atomic: one durable idea per node.
@@ -69,16 +80,17 @@ An extract is one source analysis run that captures evidence, records moments, c
    - Do not delete obsolete knowledge. Mark it `superseded`, `merged`, or `rejected`, and link to the replacement or reason.
    - Use `templates/knowledge-node.md`.
 
-11. Brain Linking
+12. Brain Linking
    - Link new nodes to the source node, moments, related findings, patterns, and synthesis nodes.
    - Update `knowledge/_index.md`.
    - Mark relationship types clearly.
    - Never silently overwrite a conflicting claim. Link conflicting nodes with `contradicts` and record whether the conflict is open, resolved, or source-specific.
    - Before creating a node, search existing knowledge for category, tags, aliases, and related interaction terms.
 
-12. Structure Validation
+13. Structure Validation
    - Preserve the protected structure.
    - Run schema validation commands.
+   - Run `node scripts/validate-pattern-library.mjs` for any public pattern or site change.
    - Check that media links and node links resolve locally.
    - Check that new categories are documented in `workflow/category-catalogue.md`.
    - Report files changed, verification, risks, assumptions, and confidence limits.
@@ -90,6 +102,7 @@ Every extract must create or update:
 - an extraction report under `knowledge/sources/<extract-id>/extraction-report.md`
 - one source node under `knowledge/sources/<extract-id>/source.md`
 - one or more finding/pattern nodes under `knowledge/findings/` or `knowledge/patterns/`
+- one public pattern node under `knowledge/patterns/` or a clearly documented update to an existing public pattern
 - lightweight moment captures when the source is interactive or visual
 - an index entry in `knowledge/_index.md`
 
@@ -104,8 +117,9 @@ Return:
 5. Evidence table
 6. Aesthetic rationale
 7. Technical implementation clues
-8. Reusable recipes
-9. Reuse readiness gate
-10. Knowledge nodes created
-11. Brain links added
-12. Open questions and confidence levels
+8. Public pattern created or updated
+9. Reusable recipes
+10. Reuse readiness gate
+11. Knowledge nodes created
+12. Brain links added
+13. Open questions and confidence levels

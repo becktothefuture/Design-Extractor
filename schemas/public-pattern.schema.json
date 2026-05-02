@@ -5,6 +5,8 @@
   "required": [
     "id",
     "title",
+    "type",
+    "status",
     "source_label",
     "capture_status",
     "primary_media",
@@ -14,6 +16,14 @@
   "properties": {
     "id": { "type": "string" },
     "title": { "type": "string" },
+    "type": {
+      "type": "string",
+      "enum": ["pattern"]
+    },
+    "status": {
+      "type": "string",
+      "enum": ["provisional", "active", "superseded", "merged", "rejected"]
+    },
     "source_url": { "type": "string" },
     "source_label": { "type": "string" },
     "capture_status": {
@@ -22,7 +32,7 @@
     },
     "primary_media": {
       "type": "string",
-      "pattern": "\\.(gif|webm|png|jpe?g)$"
+      "pattern": "^media/.+\\.(gif|webm|png|jpe?g)$"
     },
     "summary": { "type": "string" },
     "tags": {
@@ -32,5 +42,6 @@
       "items": { "type": "string" },
       "uniqueItems": true
     }
-  }
+  },
+  "additionalProperties": true
 }

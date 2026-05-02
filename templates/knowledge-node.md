@@ -14,6 +14,13 @@ applies_to:
   - {{context}}
 tags:
   - {{tag}}
+# Pattern-only public fields. Required when type is pattern.
+source_url: {{public-source-url-when-available}}
+source_label: {{human-readable-public-source-label}}
+capture_status: {{verified|captured|partial|needs-recapture}}
+primary_media: {{media/moments-or-stills/path.gif}}
+summary: >-
+  {{One sentence explaining the reusable public design idea.}}
 evidence_refs:
   - {{evidence-ref}}
 moment_refs:
