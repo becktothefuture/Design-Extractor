@@ -3,89 +3,148 @@ import Layout from '../layouts/SiteLayout.astro';
 import data from '../data/generated/knowledge.json';
 import { withBase } from '../lib/paths.js';
 
-const latestExtracts = data.extracts.slice(0, 3);
-const latestPatterns = data.patterns.slice(0, 3);
-const primarySections = [
-  { title: 'Extracts', count: data.extracts.length, href: '/extracts/', description: 'Evidence reports with sources, limits, and captured observations.' },
-  { title: 'Patterns', count: data.patterns.length, href: '/patterns/', description: 'Reusable design principles distilled from the reports.' },
-  { title: 'Moments', count: data.moments.length, href: '/moments/', description: 'Recorded proof boundaries for motion, interaction, and media.' },
-  { title: 'Recipes', count: data.recipes.length || data.patterns.length, href: '/recipes/', description: 'Implementation-ready guidance for future product work.' },
+const sections = [
+  { title: 'Patterns', count: data.patterns.length, href: '/patterns/', note: 'Reusable moves you can put into a brief or build ticket.' },
+  { title: 'Extracts', count: data.extracts.length, href: '/extracts/', note: 'Source-backed reports with evidence, limits, and implementation notes.' },
+  { title: 'Moments', count: data.moments.length, href: '/moments/', note: 'GIF and video proof for motion, hover, scroll, and media behavior.' },
+  { title: 'Recipes', count: data.recipes.length || data.patterns.length, href: '/recipes/', note: 'Build-ready guidance pulled from the pattern library.' },
 ];
+
+const latestExtracts = data.extracts.slice(0, 4);
+const searchablePatterns = data.patterns.map((item) => ({
+  ...item,
+  type: 'Pattern',
+  href: item.docUrl,
+  text: `${item.title} ${item.category} ${item.excerpt} ${item.confidence}`
+}));
+const searchableExtracts = data.extracts.map((item) => ({
+  ...item,
+  type: 'Extract',
+  href: item.docUrl,
+  text: `${item.title} ${item.sourceType} ${item.summary} ${item.goal} ${item.confidence}`
+}));
 ---
 
 <Layout title="Design Extractor Library">
-  <section class="docs-hero">
-    <div>
-      <p class="eyebrow">Design knowledge base</p>
-      <h1>Documentation for evidence-backed design extractions.</h1>
-      <p>Browse source reports, reusable patterns, captured moments, and implementation recipes generated from the repository knowledge graph.</p>
-    </div>
-    <aside class="summary-panel docs-panel" aria-label="Library summary">
-      <h2>Library Status</h2>
-      <dl>
-        <div><dt>Extracts</dt><dd>{data.extracts.length}</dd></div>
-        <div><dt>Patterns</dt><dd>{data.patterns.length}</dd></div>
-        <div><dt>Findings</dt><dd>{data.findings.length}</dd></div>
-        <div><dt>Moments</dt><dd>{data.moments.length}</dd></div>
-      </dl>
+  <div class="home-layout">
+    <main class="home-content">
+      <section class="home-intro" aria-labelledby="home-title">
+        <h1 id="home-title">Design Extractor</h1>
+        <p>Reusable design patterns captured from real websites, images, and interactions.</p>
+      </section>
+
+      <section class="home-link-grid" aria-label="Primary library sections">
+        {sections.map((section) => (
+          <a class="home-link" href={withBase(section.href)}>
+            <strong>{section.title}</strong>
+            <span>{section.count}</span>
+            <p>{section.note}</p>
+          </a>
+        ))}
+      </section>
+
+      <p class="home-empty" data-search-empty hidden>No matching items.</p>
+
+      <section class="home-section" aria-labelledby="patterns-title" data-search-section>
+        <div class="home-section__head">
+          <h2 id="patterns-title">Patterns</h2>
+          <a href={withBase('/patterns/')}>All patterns</a>
+        </div>
+        <div class="home-list">
+          {searchablePatterns.map((item) => (
+            <a class="home-row" href={withBase(item.href)} data-search-item data-search-text={item.text}>
+              <span class="home-row__type">{item.type}</span>
+              <strong>{item.title}</strong>
+              <p>{item.excerpt}</p>
+              <span class="home-row__meta">{item.category} · {item.confidence}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+
+      <section class="home-section" aria-labelledby="extracts-title" data-search-section>
+        <div class="home-section__head">
+          <h2 id="extracts-title">Extracts</h2>
+          <a href={withBase('/extracts/')}>All extracts</a>
+        </div>
+        <div class="home-list">
+          {searchableExtracts.map((item) => (
+            <a class="home-row" href={withBase(item.href)} data-search-item data-search-text={item.text}>
+              <span class="home-row__type">{item.type}</span>
+              <strong>{item.title}</strong>
+              <p>{item.summary}</p>
+              <span class="home-row__meta">{item.sourceType} · {item.confidence}</span>
+            </a>
+          ))}
+        </div>
+      </section>
+    </main>
+
+    <aside class="home-sidebar" aria-label="Library controls">
+      <label class="home-search">
+        <span>Search library</span>
+        <input id="home-search" type="search" placeholder="Hover, scroll, photography..." autocomplete="off" />
+      </label>
+
+      <nav class="home-side-block" aria-label="Browse">
+        <h2>Browse</h2>
+        {sections.map((section) => (
+          <a href={withBase(section.href)}>
+            <span>{section.title}</span>
+            <strong>{section.count}</strong>
+          </a>
+        ))}
+        <a href={withBase('/generated/')}>
+          <span>Generated docs</span>
+          <strong>{data.nodes.length}</strong>
+        </a>
+      </nav>
+
+      <section class="home-side-block" aria-labelledby="latest-title">
+        <h2 id="latest-title">Latest Captures</h2>
+        {latestExtracts.map((extract) => (
+          <a href={withBase(extract.docUrl)}>
+            <span>{extract.title}</span>
+            <small>{extract.date || 'Undated'}</small>
+          </a>
+        ))}
+      </section>
+
+      <section class="home-side-block home-stats" aria-label="Library counts">
+        <h2>Status</h2>
+        <dl>
+          <div><dt>Findings</dt><dd>{data.findings.length}</dd></div>
+          <div><dt>Moments</dt><dd>{data.moments.length}</dd></div>
+          <div><dt>Categories</dt><dd>{data.categories.length}</dd></div>
+        </dl>
+      </section>
     </aside>
-  </section>
+  </div>
 
-  <section class="section section--compact" aria-label="Browse documentation sections">
-    <div class="docs-index-grid">
-      {primarySections.map((section) => (
-        <a class="docs-index-card" href={withBase(section.href)}>
-          <span class="docs-index-card__count">{section.count}</span>
-          <h2>{section.title}</h2>
-          <p>{section.description}</p>
-        </a>
-      ))}
-    </div>
-  </section>
+  <script is:inline>
+    const searchInput = document.querySelector('#home-search');
+    const rows = Array.from(document.querySelectorAll('[data-search-item]'));
+    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
+    const empty = document.querySelector('[data-search-empty]');
 
-  <section class="section">
-    <div class="section-header">
-      <div>
-        <h2>Latest Extracts</h2>
-        <p>Source reports stay traceable to evidence and confidence limits.</p>
-      </div>
-      <a class="button-link" href={withBase('/extracts/')}>View all</a>
-    </div>
-    <div class="card-grid">
-      {latestExtracts.map((extract) => (
-        <a class="library-card" href={withBase(extract.docUrl)}>
-          <div class="library-card__meta">
-            <span class="pill">{extract.sourceType}</span>
-            <span class="pill">{extract.date}</span>
-          </div>
-          <h3>{extract.title}</h3>
-          <p>{extract.summary}</p>
-          <span class="library-card__footer">Open report</span>
-        </a>
-      ))}
-    </div>
-  </section>
+    function applySearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
 
-  <section class="section">
-    <div class="section-header">
-      <div>
-        <h2>Reusable Patterns</h2>
-        <p>Patterns are the public-facing layer: evidence-backed, portable guidance for future implementation.</p>
-      </div>
-      <a class="button-link" href={withBase('/patterns/')}>View all</a>
-    </div>
-    <div class="card-grid">
-      {latestPatterns.map((pattern) => (
-        <a class="library-card" href={withBase(pattern.docUrl)}>
-          <div class="library-card__meta">
-            <span class="pill">{pattern.category}</span>
-            <span class="pill">{pattern.confidence}</span>
-          </div>
-          <h3>{pattern.title}</h3>
-          <p>{pattern.excerpt}</p>
-          <span class="library-card__footer">Open pattern</span>
-        </a>
-      ))}
-    </div>
-  </section>
+      rows.forEach((row) => {
+        const match = !query || row.dataset.searchText.toLowerCase().includes(query);
+        row.classList.toggle('is-hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      sections.forEach((section) => {
+        const sectionHasMatch = Array.from(section.querySelectorAll('[data-search-item]')).some((row) => !row.classList.contains('is-hidden'));
+        section.classList.toggle('is-hidden', !sectionHasMatch);
+      });
+
+      empty.hidden = visibleCount > 0;
+    }
+
+    searchInput?.addEventListener('input', applySearch);
+  </script>
 </Layout>
