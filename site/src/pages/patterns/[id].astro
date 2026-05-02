@@ -29,17 +29,17 @@ const recipeSteps = (pattern.recipeSteps || []).length
       {mediaUrl && mediaType === 'image' && <img src={mediaUrl} alt={`${pattern.title} captured media`} loading="eager" />}
       {!mediaUrl && <div class="pattern-media__empty">No captured media available.</div>}
       <figcaption>
-        <span>Source</span>
+        <span>Captured from</span>
         {pattern.sourceUrl ? <a href={pattern.sourceUrl}>{pattern.sourceLabel}</a> : <strong>{pattern.sourceLabel}</strong>}
       </figcaption>
     </figure>
 
     <header class="pattern-intro">
       <h1>{pattern.title}</h1>
-      <p>{pattern.summary || pattern.excerpt}</p>
       <div class="pattern-tags" aria-label="Pattern tags">
         {(pattern.tags || []).map((tag) => <span>{tag}</span>)}
       </div>
+      <p>{pattern.summary || pattern.excerpt}</p>
     </header>
 
     <section class="pattern-section" aria-labelledby="what-title">
@@ -60,25 +60,53 @@ const recipeSteps = (pattern.recipeSteps || []).length
       <h2 id="build-title">How to implement</h2>
       <div class="pattern-copy">
         {recipeSteps.length ? (
-          <ol>
+          <ol class="pattern-recipe">
             {recipeSteps.map((item) => <li>{item}</li>)}
           </ol>
         ) : (
           <p>Implementation notes have not been written for this pattern yet.</p>
         )}
         {pattern.llmPrompt && (
-          <div class="pattern-action">
-            <h3>Image prompt</h3>
+          <div class="pattern-action" data-copy-block>
+            <div class="pattern-action__head">
+              <h3>Image prompt</h3>
+              <button type="button" data-copy-button>Copy</button>
+            </div>
             <pre><code>{pattern.llmPrompt}</code></pre>
           </div>
         )}
         {pattern.codeRecipe && (
-          <div class="pattern-action">
-            <h3>Code recipe</h3>
+          <div class="pattern-action" data-copy-block>
+            <div class="pattern-action__head">
+              <h3>Code recipe</h3>
+              <button type="button" data-copy-button>Copy</button>
+            </div>
             <pre><code>{pattern.codeRecipe}</code></pre>
           </div>
         )}
       </div>
     </section>
   </article>
+
+  <script is:inline>
+    document.querySelectorAll('[data-copy-block]').forEach((block) => {
+      const button = block.querySelector('[data-copy-button]');
+      const code = block.querySelector('code');
+      button?.addEventListener('click', async () => {
+        if (!code?.textContent) return;
+        try {
+          await navigator.clipboard.writeText(code.textContent);
+          button.textContent = 'Copied';
+          window.setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 1400);
+        } catch {
+          button.textContent = 'Copy failed';
+          window.setTimeout(() => {
+            button.textContent = 'Copy';
+          }, 1400);
+        }
+      });
+    });
+  </script>
 </Layout>
