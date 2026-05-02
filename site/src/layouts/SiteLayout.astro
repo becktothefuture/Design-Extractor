@@ -2,9 +2,9 @@
 import '../styles/tokens.css';
 import '../styles/starlight-map.css';
 import '../styles/site.css';
+import { withBase } from '../lib/paths.js';
 
 const { title = 'Design Extractor', description = 'A browsable library of evidence-backed design extractions.' } = Astro.props;
-const withBase = (href) => `${import.meta.env.BASE_URL}${href.replace(/^\//, '')}`;
 ---
 
 <!doctype html>

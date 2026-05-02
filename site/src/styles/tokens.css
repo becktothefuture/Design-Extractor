@@ -5,13 +5,13 @@
 :root {
   --de-pill-radius: 999px;
   --de-nav-height: 4.5rem;
-  --de-nav-background: rgba(248, 247, 243, 0.92);
+  --de-nav-background: rgba(247, 248, 246, 0.94);
   --de-color-neutral-0: #ffffff;
-  --de-color-neutral-50: #f8f7f3;
-  --de-color-neutral-100: #efede6;
-  --de-color-neutral-200: #ddd8c8;
-  --de-color-neutral-500: #817b6a;
-  --de-color-neutral-700: #3c3a32;
+  --de-color-neutral-50: #f7f8f6;
+  --de-color-neutral-100: #eef1ed;
+  --de-color-neutral-200: #d9dfd7;
+  --de-color-neutral-500: #66716a;
+  --de-color-neutral-700: #343b35;
   --de-color-neutral-900: #171916;
   --de-color-moss-200: #d7e0bd;
   --de-color-moss-500: #789158;
@@ -24,8 +24,8 @@
   --de-font-size-body-desktop: 16px;
   --de-font-size-body-mobile: 13px;
   --de-font-size-small: 0.875rem;
-  --de-font-size-h1: clamp(2.5rem, 6vw, 5.8rem);
-  --de-font-size-h2: clamp(1.6rem, 3vw, 2.6rem);
+  --de-font-size-h1: clamp(2rem, 4vw, 3.75rem);
+  --de-font-size-h2: clamp(1.35rem, 2vw, 2rem);
   --de-line-height-body: 1.55;
   --de-line-height-tight: 1.05;
   --de-line-height-heading: 1.12;
@@ -39,7 +39,7 @@
   --de-space-8: 4rem;
   --de-radius-card: 8px;
   --de-radius-control: 6px;
-  --de-shadow-card: 0 18px 50px rgba(31, 37, 38, 0.08);
+  --de-shadow-card: 0 1px 2px rgba(31, 37, 38, 0.05);
   --de-layout-max-width: 1180px;
   --de-layout-gutter: clamp(1rem, 3vw, 2rem);
   --de-card-radius: var(--de-radius-card);
