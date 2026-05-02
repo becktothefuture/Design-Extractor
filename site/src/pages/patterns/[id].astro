@@ -1,0 +1,85 @@
+---
+import Layout from '../../layouts/SiteLayout.astro';
+import data from '../../data/generated/knowledge.json';
+import { withBase } from '../../lib/paths.js';
+
+export function getStaticPaths() {
+  return data.patterns.map((pattern) => ({
+    params: { id: pattern.id },
+    props: { pattern }
+  }));
+}
+
+const { pattern } = Astro.props;
+const mediaUrl = pattern.primaryMediaUrl ? withBase(pattern.primaryMediaUrl) : '';
+const mediaType = mediaUrl.endsWith('.webm') || mediaUrl.endsWith('.mp4') ? 'video' : 'image';
+const implementationItems = [
+  pattern.recipe,
+  pattern.technicalClues,
+  pattern.confidenceRationale ? `Capture confidence: ${pattern.confidence}. ${pattern.confidenceRationale}` : ''
+].filter(Boolean);
+---
+
+<Layout title={`${pattern.title} | Design Patterns`}>
+  <article class="pattern-detail">
+    <a class="pattern-back" href={withBase('/')}>Back to patterns</a>
+
+    <header class="pattern-hero">
+      <div class="pattern-hero__copy">
+        <h1>{pattern.title}</h1>
+        <p>{pattern.summary || pattern.excerpt}</p>
+        <div class="pattern-tags" aria-label="Pattern tags">
+          {(pattern.tags || []).map((tag) => <span>{tag}</span>)}
+        </div>
+      </div>
+
+      <figure class="pattern-media">
+        {mediaUrl && mediaType === 'video' && <video controls preload="metadata" src={mediaUrl} aria-label={`${pattern.title} captured media`}></video>}
+        {mediaUrl && mediaType === 'image' && <img src={mediaUrl} alt={`${pattern.title} captured media`} loading="eager" />}
+        {!mediaUrl && <div class="pattern-media__empty">No captured media available.</div>}
+        <figcaption>
+          <span>Source</span>
+          {pattern.sourceUrl ? <a href={pattern.sourceUrl}>{pattern.sourceLabel}</a> : <strong>{pattern.sourceLabel}</strong>}
+        </figcaption>
+      </figure>
+    </header>
+
+    <section class="pattern-section" aria-labelledby="use-title">
+      <h2 id="use-title">When to use it</h2>
+      <div class="pattern-copy">
+        {pattern.appliesTo?.length ? (
+          <ul>
+            {pattern.appliesTo.map((item) => <li>{item}</li>)}
+          </ul>
+        ) : (
+          <p>{pattern.aestheticRole || pattern.interpretation}</p>
+        )}
+      </div>
+    </section>
+
+    <section class="pattern-section" aria-labelledby="works-title">
+      <h2 id="works-title">Why it works</h2>
+      <div class="pattern-copy">
+        <p>{pattern.aestheticRole || pattern.interpretation || pattern.directEvidence}</p>
+      </div>
+    </section>
+
+    <section class="pattern-section" aria-labelledby="build-title">
+      <h2 id="build-title">How to recreate it</h2>
+      <div class="pattern-copy">
+        <ul>
+          {implementationItems.map((item) => <li>{item}</li>)}
+        </ul>
+      </div>
+    </section>
+
+    <section class="pattern-section pattern-section--meta" aria-labelledby="capture-title">
+      <h2 id="capture-title">Capture status</h2>
+      <dl>
+        <div><dt>Status</dt><dd>{pattern.captureStatus}</dd></div>
+        <div><dt>Confidence</dt><dd>{pattern.confidence}</dd></div>
+        <div><dt>Source</dt><dd>{pattern.sourceUrl ? <a href={pattern.sourceUrl}>{pattern.sourceLabel}</a> : pattern.sourceLabel}</dd></div>
+      </dl>
+    </section>
+  </article>
+</Layout>

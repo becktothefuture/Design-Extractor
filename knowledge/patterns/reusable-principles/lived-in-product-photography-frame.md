@@ -4,7 +4,11 @@ title: Lived-In Product Photography Frame
 type: pattern
 status: active
 category: reusable-principles
-source: /Users/alexanderbeck/Desktop/69f4e8ec027c0f3a9feabb15_athleats-iphone-mockup-lg.jpg
+source: Athleats supplied iPhone mockup image
+source_label: Athleats iPhone mockup image
+capture_status: verified
+primary_media: media/stills/athleats-iphone-photography-style/source-reference.jpg
+summary: Show the product inside a believable routine while keeping the product screen readable.
 extract_id: athleats-iphone-photography-style
 aliases:
   - product inside routine photography
@@ -21,11 +25,9 @@ applies_to:
   - food and fitness brands
   - lifestyle product systems
 tags:
-  - pattern
   - photography
   - product
   - lifestyle
-  - reusable-principles
 evidence_refs:
   - E2
   - E3

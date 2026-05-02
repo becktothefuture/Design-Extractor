@@ -5,6 +5,11 @@ type: pattern
 status: active
 category: reusable-principles
 source: https://www.weareathleats.com
+source_url: https://www.weareathleats.com/recipes
+source_label: Athleats recipe grid
+capture_status: verified
+primary_media: media/moments/athleats-recipe-card-hover/recipe-card-hover-in-out.gif
+summary: Keep recipe-card text steady by animating only the image and overlay layer.
 extract_id: athleats-recipe-card-hover
 aliases:
   - stable text card hover
@@ -21,11 +26,9 @@ applies_to:
   - article cards
   - image-first browse surfaces
 tags:
-  - pattern
   - hover
+  - cards
   - motion
-  - performance
-  - reusable-principles
 evidence_refs:
   - E1
   - E2

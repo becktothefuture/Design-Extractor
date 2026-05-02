@@ -55,9 +55,9 @@ updated_at: 2026-05-01
 
 # Diagonal Over-Shoulder Product Frame
 
-![Diagonal framing map](../../../media/stills/athleats-iphone-photography-style/framing-diagonal-map.svg)
+![Diagonal framing map](../../../media/stills/athleats-iphone-photography-style/framing-diagonal-map.jpg)
 
-![Negative space frame](../../../media/stills/athleats-iphone-photography-style/framing-negative-space.svg)
+![Negative space frame](../../../media/stills/athleats-iphone-photography-style/framing-negative-space.jpg)
 
 ## Direct Evidence
 

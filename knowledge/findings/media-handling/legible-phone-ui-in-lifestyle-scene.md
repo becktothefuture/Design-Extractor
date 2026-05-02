@@ -54,9 +54,9 @@ updated_at: 2026-05-01
 
 # Legible Phone UI In Lifestyle Scene
 
-![Screen legibility](../../../media/stills/athleats-iphone-photography-style/media-screen-legibility.svg)
+![Screen legibility](../../../media/stills/athleats-iphone-photography-style/media-screen-legibility.jpg)
 
-![Lifestyle UI echo](../../../media/stills/athleats-iphone-photography-style/media-lifestyle-ui-echo.svg)
+![Lifestyle UI echo](../../../media/stills/athleats-iphone-photography-style/media-lifestyle-ui-echo.jpg)
 
 ## Direct Evidence
 

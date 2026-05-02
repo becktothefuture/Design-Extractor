@@ -12,6 +12,6 @@
   },
   "nav": {
     "height": { "$type": "dimension", "$value": "4.5rem" },
-    "background": { "$type": "color", "$value": "rgba(247, 248, 246, 0.94)" }
+    "background": { "$type": "color", "$value": "rgba(245, 245, 245, 0.94)" }
   }
 }

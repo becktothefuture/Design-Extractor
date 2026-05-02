@@ -86,6 +86,31 @@ function formatDate(value) {
   return String(value).split('T')[0];
 }
 
+function cleanTags(tags) {
+  return [...new Set((Array.isArray(tags) ? tags : []).map((tag) => String(tag).trim()).filter(Boolean))]
+    .filter((tag) => !['pattern', 'reusable-principles'].includes(tag))
+    .slice(0, 5);
+}
+
+function sourceLabelFromSource(source = '') {
+  const value = String(source);
+  if (!value) return 'Source not listed';
+  if (/^https?:\/\//.test(value)) {
+    try {
+      return new URL(value).hostname.replace(/^www\./, '');
+    } catch {
+      return value;
+    }
+  }
+  if (value.startsWith('/Users/')) return 'Supplied source image';
+  return value;
+}
+
+function publicMediaUrl(mediaPath = '') {
+  if (!mediaPath) return '';
+  return `/${mediaPath.replace(/^\/+/, '')}`;
+}
+
 function normalizeBody(content) {
   return content
     .replace(/!\[([^\]]*)\]\((?:\.\.\/)+media\/([^)]+\.webm)\)/g, (_match, alt, mediaPath) => {
@@ -671,16 +696,27 @@ function nodeFromFile(filePath, parsed) {
   const category = parsed.data.category ?? path.basename(path.dirname(filePath));
   const title = parsed.data.title ?? titleFromSlug(id);
   const docUrl = `/generated/nodes/${id}/`;
+  const publicUrl = type === 'pattern' || relativePath.includes('/patterns/') ? `/patterns/${id}/` : docUrl;
+  const source = parsed.data.source ?? '';
+  const sourceUrl = parsed.data.source_url ?? (/^https?:\/\//.test(source) ? source : '');
+  const sourceLabel = parsed.data.source_label ?? sourceLabelFromSource(source);
+  const summary = parsed.data.summary ?? parsed.data.interpretation ?? parsed.data.direct_evidence ?? firstMeaningfulParagraph(parsed.content);
 
   return {
     id,
     title,
     type,
     category,
-    source: parsed.data.source ?? '',
+    source,
+    sourceUrl,
+    sourceLabel,
+    captureStatus: parsed.data.capture_status ?? 'captured',
+    primaryMedia: parsed.data.primary_media ?? '',
+    primaryMediaUrl: publicMediaUrl(parsed.data.primary_media ?? ''),
+    summary,
     extractId: parsed.data.extract_id ?? '',
     confidence: parsed.data.confidence ?? 'not-specified',
-    tags: parsed.data.tags ?? [],
+    tags: cleanTags(parsed.data.tags ?? []),
     aliases: parsed.data.aliases ?? [],
     retrievalTerms: parsed.data.retrieval_terms ?? [],
     appliesTo: parsed.data.applies_to ?? [],
@@ -692,9 +728,10 @@ function nodeFromFile(filePath, parsed) {
     technicalClues: parsed.data.technical_clues ?? '',
     confidenceRationale: parsed.data.confidence_rationale ?? '',
     recipe: parsed.data.reusable_recipe ?? '',
-    excerpt: parsed.data.interpretation ?? parsed.data.direct_evidence ?? firstMeaningfulParagraph(parsed.content),
+    excerpt: summary,
     repoPath: relativePath,
-    docUrl
+    docUrl,
+    publicUrl
   };
 }
 
@@ -729,7 +766,7 @@ async function build() {
 
   const knowledgeFiles = await listMarkdown(knowledgeRoot);
   const momentFiles = await listMarkdown(path.join(mediaRoot, 'moments'));
-  const stillFiles = (await listFiles(path.join(mediaRoot, 'stills'))).filter((filePath) => /\.(png|jpe?g|svg|gif)$/i.test(filePath));
+  const stillFiles = (await listFiles(path.join(mediaRoot, 'stills'))).filter((filePath) => /\.(png|jpe?g|gif)$/i.test(filePath));
   const stills = stillFiles.map((filePath) => {
     const relativePath = path.relative(mediaRoot, filePath);
     const parts = relativePath.split(path.sep);
@@ -774,27 +811,11 @@ async function build() {
     if (isReport) {
       const extract = extractFromReport(filePath, parsed);
       extracts.push(extract);
-      await writeMarkdown(
-        path.join(generatedDocsRoot, 'extracts', `${extract.id}.md`),
-        {
-          title: `Extract: ${extract.title}`,
-          description: extract.goal || extract.summary
-        },
-        formatExtractionReport(parsed.content, extract, moments, stills)
-      );
       continue;
     }
 
     const node = nodeFromFile(filePath, parsed);
     nodes.push(node);
-    await writeMarkdown(
-      path.join(generatedDocsRoot, 'nodes', `${node.id}.md`),
-      {
-        title: node.title,
-        description: node.excerpt
-      },
-      formatNodePage(node, moments, stills)
-    );
   }
 
   const patterns = nodes.filter((node) => node.type === 'pattern' || node.repoPath.includes('/patterns/'));
@@ -817,26 +838,6 @@ async function build() {
     recipes,
     categories
   };
-
-  await writeMarkdown(
-    path.join(generatedDocsRoot, 'index.md'),
-    {
-      title: 'Generated Library',
-      description: 'Generated Starlight pages from the Design Extractor knowledge graph.'
-    },
-    `# Generated Library
-
-Start with one of the reports below when you want to understand what was captured. Use patterns when you want something immediately reusable in a new design.
-
-## Extracts
-
-${index.extracts.map((extract) => `- [${extract.title}](${extract.docUrl})`).join('\n')}
-
-## Patterns
-
-${patterns.map((pattern) => `- [${pattern.title}](${pattern.docUrl})`).join('\n')}
-`
-  );
 
   await fs.mkdir(generatedDataRoot, { recursive: true });
   await fs.writeFile(path.join(generatedDataRoot, 'knowledge.json'), `${JSON.stringify(index, null, 2)}\n`, 'utf8');

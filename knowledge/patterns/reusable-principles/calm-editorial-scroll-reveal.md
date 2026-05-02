@@ -5,6 +5,11 @@ type: pattern
 status: active
 category: reusable-principles
 source: https://www.terrygodier.com/the-last-quiet-thing
+source_url: https://www.terrygodier.com/the-last-quiet-thing
+source_label: Terry Godier article page
+capture_status: verified
+primary_media: media/moments/terrygodier-last-quiet-thing-scroll-reveal/paragraph-reveal-scroll.gif
+summary: Reveal longform content with small, calm scroll movement that supports reading pace.
 extract_id: terrygodier-last-quiet-thing-scroll-reveal
 aliases:
   - calm scroll reveal
@@ -20,11 +25,9 @@ applies_to:
   - narrative microsites
   - editorial landing pages
 tags:
-  - pattern
-  - scroll-reveal
+  - scroll
   - editorial
   - motion
-  - reusable-principles
 evidence_refs:
   - E1
   - E2

@@ -1,37 +1,27 @@
 ---
-title: Documentation System
-description: How the Design Extractor public site is generated from the repository knowledge graph.
+title: Capture Workflow
+description: How new finds become reusable design patterns.
 ---
 
-# Documentation System
+# Capture Workflow
 
-The repository remains the source of truth. `knowledge/` stores source reports, findings, patterns, and indexes. `media/` stores the captured evidence. The `site/` project generates a static public library from those folders.
+This library is for collecting useful design ideas from real websites, images, and interactions.
 
-## Architecture
-
-```text
-knowledge/        # canonical extraction brain
-media/            # canonical evidence media
-site/             # generated documentation frontend
-```
-
-## Build Flow
+The intended prompt is simple:
 
 ```text
-site/tokens/*.json
-  -> Style Dictionary
-  -> site/src/styles/tokens.css
-  -> Starlight variables + custom browse pages
-
-knowledge/ + media/
-  -> site/scripts/sync-knowledge.mjs
-  -> generated Starlight docs + browse JSON + public media
+Look at this scroll module on this website and add it to my design patterns.
 ```
 
-Patterns are the main public-facing unit. Reports and moments provide proof boundaries; findings provide atomic observations; recipes provide implementation-ready guidance.
+The capture workflow then:
 
-## How To Read The Library
+1. opens the source in a browser
+2. records screenshots or GIFs of the important behavior
+3. writes a reusable pattern page
+4. tags it with one to five searchable tags
+5. checks that the media and links work
+6. publishes the updated library
 
-Start with **Patterns** when you want reusable guidance. Open the linked extract report when you need the evidence, limits, captured media, or confidence notes behind that guidance.
+Public pattern pages use real captured screenshots, GIFs, or video. They do not use generated diagrams as substitutes for evidence.
 
-Use **Moments** for recorded proof and **Recipes** when translating an observed behavior into implementation constraints. Categories are a secondary index for finding related material across separate extractions.
+The internal extraction notes stay in the repository so future agents can audit or extend a capture, but the public library is intentionally simpler: search, open a pattern, reuse the idea.

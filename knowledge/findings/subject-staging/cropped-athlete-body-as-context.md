@@ -54,9 +54,9 @@ updated_at: 2026-05-01
 
 # Cropped Athlete Body As Context
 
-![Body as environment](../../../media/stills/athleats-iphone-photography-style/subject-body-as-environment.svg)
+![Body as environment](../../../media/stills/athleats-iphone-photography-style/subject-body-as-environment.jpg)
 
-![Hand phone gesture](../../../media/stills/athleats-iphone-photography-style/subject-hand-phone-gesture.svg)
+![Hand phone gesture](../../../media/stills/athleats-iphone-photography-style/subject-hand-phone-gesture.jpg)
 
 ## Direct Evidence
 

@@ -1,25 +1,25 @@
 {
   "color": {
     "neutral": {
-      "0": { "$type": "color", "$value": "#ffffff" },
-      "50": { "$type": "color", "$value": "#f7f8f6" },
-      "100": { "$type": "color", "$value": "#eef1ed" },
-      "200": { "$type": "color", "$value": "#d9dfd7" },
-      "500": { "$type": "color", "$value": "#66716a" },
-      "700": { "$type": "color", "$value": "#343b35" },
-      "900": { "$type": "color", "$value": "#171916" }
+      "0": { "$type": "color", "$value": "#fafafa" },
+      "50": { "$type": "color", "$value": "#f5f5f5" },
+      "100": { "$type": "color", "$value": "#f0efed" },
+      "200": { "$type": "color", "$value": "#e7e5e4" },
+      "500": { "$type": "color", "$value": "#777169" },
+      "700": { "$type": "color", "$value": "#292524" },
+      "900": { "$type": "color", "$value": "#0c0a09" }
     },
     "moss": {
-      "200": { "$type": "color", "$value": "#d7e0bd" },
-      "500": { "$type": "color", "$value": "#789158" },
-      "700": { "$type": "color", "$value": "#3d5536" }
+      "200": { "$type": "color", "$value": "#e7e5e4" },
+      "500": { "$type": "color", "$value": "#777169" },
+      "700": { "$type": "color", "$value": "#292524" }
     },
     "clay": {
-      "200": { "$type": "color", "$value": "#e7b89a" },
-      "500": { "$type": "color", "$value": "#b76f4c" }
+      "200": { "$type": "color", "$value": "#e7e5e4" },
+      "500": { "$type": "color", "$value": "#292524" }
     },
     "ink": {
-      "500": { "$type": "color", "$value": "#1f2526" }
+      "500": { "$type": "color", "$value": "#0c0a09" }
     }
   },
   "font": {
@@ -34,8 +34,8 @@
       "mobile": { "$type": "dimension", "$value": "13px" }
     },
     "small": { "$type": "dimension", "$value": "0.875rem" },
-    "h1": { "$type": "string", "$value": "clamp(2rem, 4vw, 3.75rem)" },
-    "h2": { "$type": "string", "$value": "clamp(1.35rem, 2vw, 2rem)" }
+    "h1": { "$type": "string", "$value": "3.5rem" },
+    "h2": { "$type": "string", "$value": "1.75rem" }
   },
   "lineHeight": {
     "body": { "$type": "number", "$value": 1.55 },

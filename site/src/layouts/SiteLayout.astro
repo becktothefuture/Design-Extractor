@@ -4,7 +4,7 @@ import '../styles/starlight-map.css';
 import '../styles/site.css';
 import { withBase } from '../lib/paths.js';
 
-const { title = 'Design Extractor', description = 'A browsable library of evidence-backed design extractions.' } = Astro.props;
+const { title = 'Design Patterns Library', description = 'A searchable library of reusable design patterns captured from real websites and images.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -13,20 +13,16 @@ const { title = 'Design Extractor', description = 'A browsable library of eviden
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <link rel="icon" href={withBase('/favicon.svg')} type="image/svg+xml" />
+    <link rel="icon" href={withBase('/favicon.png')} type="image/png" />
     <title>{title}</title>
   </head>
   <body>
     <div class="site-shell">
       <nav class="site-nav" aria-label="Primary">
-        <a class="site-mark" href={withBase('/')}>Design Extractor</a>
+        <a class="site-mark" href={withBase('/')}>Design Patterns</a>
         <div class="site-nav__links">
-          <a href={withBase('/extracts/')}>Extracts</a>
           <a href={withBase('/patterns/')}>Patterns</a>
-          <a href={withBase('/categories/')}>Categories</a>
-          <a href={withBase('/moments/')}>Moments</a>
-          <a href={withBase('/recipes/')}>Recipes</a>
-          <a href={withBase('/guide/overview/')}>Docs</a>
+          <a href={withBase('/guide/overview/')}>Workflow</a>
         </div>
       </nav>
       <main class="site-main">

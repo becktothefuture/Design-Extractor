@@ -5,6 +5,11 @@ type: pattern
 status: active
 category: reusable-principles
 source: https://pacomepertant.com
+source_url: https://pacomepertant.com
+source_label: Pacome Pertant portfolio
+capture_status: verified
+primary_media: media/moments/pacomepertant-portfolio/spiral-to-list-switch.gif
+summary: Frame an expressive portfolio with stable controls and a readable fallback view.
 extract_id: pacomepertant-portfolio
 aliases:
   - sensory portfolio shell
@@ -19,11 +24,10 @@ applies_to:
   - creative portfolio websites
   - interactive gallery shells
 tags:
-  - pattern
   - portfolio
-  - sensory-design
-  - fixed-chrome
-  - reusable-principles
+  - sensory
+  - navigation
+  - motion
 evidence_refs:
   - E1
   - E3

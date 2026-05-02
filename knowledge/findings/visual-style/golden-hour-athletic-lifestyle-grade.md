@@ -55,9 +55,9 @@ updated_at: 2026-05-01
 
 # Golden Hour Athletic Lifestyle Grade
 
-![Warm grade palette](../../../media/stills/athleats-iphone-photography-style/visual-warm-grade-palette.svg)
+![Warm grade palette](../../../media/stills/athleats-iphone-photography-style/visual-warm-grade-palette.jpg)
 
-![Light shadow bands](../../../media/stills/athleats-iphone-photography-style/visual-light-shadow-bands.svg)
+![Light shadow bands](../../../media/stills/athleats-iphone-photography-style/visual-light-shadow-bands.jpg)
 
 ## Direct Evidence
 

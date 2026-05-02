@@ -3,129 +3,65 @@ import Layout from '../layouts/SiteLayout.astro';
 import data from '../data/generated/knowledge.json';
 import { withBase } from '../lib/paths.js';
 
-const sections = [
-  { title: 'Patterns', count: data.patterns.length, href: '/patterns/', note: 'Reusable moves you can put into a brief or build ticket.' },
-  { title: 'Extracts', count: data.extracts.length, href: '/extracts/', note: 'Source-backed reports with evidence, limits, and implementation notes.' },
-  { title: 'Moments', count: data.moments.length, href: '/moments/', note: 'GIF and video proof for motion, hover, scroll, and media behavior.' },
-  { title: 'Recipes', count: data.recipes.length || data.patterns.length, href: '/recipes/', note: 'Build-ready guidance pulled from the pattern library.' },
-];
-
-const latestExtracts = data.extracts.slice(0, 4);
-const searchablePatterns = data.patterns.map((item) => ({
-  ...item,
-  type: 'Pattern',
-  href: item.docUrl,
-  text: `${item.title} ${item.category} ${item.excerpt} ${item.confidence}`
-}));
-const searchableExtracts = data.extracts.map((item) => ({
-  ...item,
-  type: 'Extract',
-  href: item.docUrl,
-  text: `${item.title} ${item.sourceType} ${item.summary} ${item.goal} ${item.confidence}`
+const patterns = data.patterns.map((pattern) => ({
+  ...pattern,
+  href: pattern.publicUrl || `/patterns/${pattern.id}/`,
+  searchText: [
+    pattern.title,
+    pattern.summary,
+    pattern.excerpt,
+    pattern.sourceLabel,
+    ...(pattern.tags || []),
+    ...(pattern.appliesTo || []),
+    pattern.recipe,
+    pattern.technicalClues
+  ].filter(Boolean).join(' ')
 }));
 ---
 
-<Layout title="Design Extractor Library">
-  <div class="home-layout">
-    <main class="home-content">
-      <section class="home-intro" aria-labelledby="home-title">
-        <h1 id="home-title">Design Extractor</h1>
-        <p>Reusable design patterns captured from real websites, images, and interactions.</p>
-      </section>
+<Layout title="Design Patterns Library">
+  <section class="library-search" aria-labelledby="library-title">
+    <div class="library-search__copy">
+      <h1 id="library-title">Design patterns captured from the web.</h1>
+      <p>Search by keyword or tag. Open a pattern to see the captured moment, source, plain-language use case, and implementation notes.</p>
+    </div>
+    <label class="pattern-search">
+      <span>Search patterns</span>
+      <input id="pattern-search" type="search" placeholder="scroll, hover, cards, photography..." autocomplete="off" />
+    </label>
+  </section>
 
-      <section class="home-link-grid" aria-label="Primary library sections">
-        {sections.map((section) => (
-          <a class="home-link" href={withBase(section.href)}>
-            <strong>{section.title}</strong>
-            <span>{section.count}</span>
-            <p>{section.note}</p>
-          </a>
-        ))}
-      </section>
+  <section class="pattern-results" aria-labelledby="results-title">
+    <div class="pattern-results__head">
+      <h2 id="results-title">Captured patterns</h2>
+      <span data-result-count>{patterns.length} patterns</span>
+    </div>
 
-      <p class="home-empty" data-search-empty hidden>No matching items.</p>
+    <p class="pattern-empty" data-search-empty hidden>No matching patterns.</p>
 
-      <section class="home-section" aria-labelledby="patterns-title" data-search-section>
-        <div class="home-section__head">
-          <h2 id="patterns-title">Patterns</h2>
-          <a href={withBase('/patterns/')}>All patterns</a>
-        </div>
-        <div class="home-list">
-          {searchablePatterns.map((item) => (
-            <a class="home-row" href={withBase(item.href)} data-search-item data-search-text={item.text}>
-              <span class="home-row__type">{item.type}</span>
-              <strong>{item.title}</strong>
-              <p>{item.excerpt}</p>
-              <span class="home-row__meta">{item.category} · {item.confidence}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-
-      <section class="home-section" aria-labelledby="extracts-title" data-search-section>
-        <div class="home-section__head">
-          <h2 id="extracts-title">Extracts</h2>
-          <a href={withBase('/extracts/')}>All extracts</a>
-        </div>
-        <div class="home-list">
-          {searchableExtracts.map((item) => (
-            <a class="home-row" href={withBase(item.href)} data-search-item data-search-text={item.text}>
-              <span class="home-row__type">{item.type}</span>
-              <strong>{item.title}</strong>
-              <p>{item.summary}</p>
-              <span class="home-row__meta">{item.sourceType} · {item.confidence}</span>
-            </a>
-          ))}
-        </div>
-      </section>
-    </main>
-
-    <aside class="home-sidebar" aria-label="Library controls">
-      <label class="home-search">
-        <span>Search library</span>
-        <input id="home-search" type="search" placeholder="Hover, scroll, photography..." autocomplete="off" />
-      </label>
-
-      <nav class="home-side-block" aria-label="Browse">
-        <h2>Browse</h2>
-        {sections.map((section) => (
-          <a href={withBase(section.href)}>
-            <span>{section.title}</span>
-            <strong>{section.count}</strong>
-          </a>
-        ))}
-        <a href={withBase('/generated/')}>
-          <span>Generated docs</span>
-          <strong>{data.nodes.length}</strong>
+    <div class="pattern-list">
+      {patterns.map((pattern) => (
+        <a class="pattern-row" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
+          <div class="pattern-row__main">
+            <h3>{pattern.title}</h3>
+            <p>{pattern.summary || pattern.excerpt}</p>
+          </div>
+          <div class="pattern-row__meta">
+            <span>{pattern.sourceLabel}</span>
+            <ul aria-label={`Tags for ${pattern.title}`}>
+              {(pattern.tags || []).map((tag) => <li>{tag}</li>)}
+            </ul>
+          </div>
         </a>
-      </nav>
-
-      <section class="home-side-block" aria-labelledby="latest-title">
-        <h2 id="latest-title">Latest Captures</h2>
-        {latestExtracts.map((extract) => (
-          <a href={withBase(extract.docUrl)}>
-            <span>{extract.title}</span>
-            <small>{extract.date || 'Undated'}</small>
-          </a>
-        ))}
-      </section>
-
-      <section class="home-side-block home-stats" aria-label="Library counts">
-        <h2>Status</h2>
-        <dl>
-          <div><dt>Findings</dt><dd>{data.findings.length}</dd></div>
-          <div><dt>Moments</dt><dd>{data.moments.length}</dd></div>
-          <div><dt>Categories</dt><dd>{data.categories.length}</dd></div>
-        </dl>
-      </section>
-    </aside>
-  </div>
+      ))}
+    </div>
+  </section>
 
   <script is:inline>
-    const searchInput = document.querySelector('#home-search');
+    const searchInput = document.querySelector('#pattern-search');
     const rows = Array.from(document.querySelectorAll('[data-search-item]'));
-    const sections = Array.from(document.querySelectorAll('[data-search-section]'));
     const empty = document.querySelector('[data-search-empty]');
+    const count = document.querySelector('[data-result-count]');
 
     function applySearch() {
       const query = searchInput.value.trim().toLowerCase();
@@ -137,12 +73,8 @@ const searchableExtracts = data.extracts.map((item) => ({
         if (match) visibleCount += 1;
       });
 
-      sections.forEach((section) => {
-        const sectionHasMatch = Array.from(section.querySelectorAll('[data-search-item]')).some((row) => !row.classList.contains('is-hidden'));
-        section.classList.toggle('is-hidden', !sectionHasMatch);
-      });
-
       empty.hidden = visibleCount > 0;
+      count.textContent = `${visibleCount} ${visibleCount === 1 ? 'pattern' : 'patterns'}`;
     }
 
     searchInput?.addEventListener('input', applySearch);

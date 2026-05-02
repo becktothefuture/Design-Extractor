@@ -2,25 +2,81 @@
 import Layout from '../../layouts/SiteLayout.astro';
 import data from '../../data/generated/knowledge.json';
 import { withBase } from '../../lib/paths.js';
+
+const patterns = data.patterns.map((pattern) => ({
+  ...pattern,
+  href: pattern.publicUrl || `/patterns/${pattern.id}/`,
+  searchText: [
+    pattern.title,
+    pattern.summary,
+    pattern.excerpt,
+    pattern.sourceLabel,
+    ...(pattern.tags || []),
+    ...(pattern.appliesTo || []),
+    pattern.recipe,
+    pattern.technicalClues
+  ].filter(Boolean).join(' ')
+}));
 ---
 
 <Layout title="Patterns | Design Extractor">
-  <h1 class="page-title">Patterns</h1>
-  <p class="page-intro">Patterns are the strongest browsing unit: reusable principles distilled from reports, findings, and media proof.</p>
+  <section class="library-search library-search--compact" aria-labelledby="patterns-title">
+    <div class="library-search__copy">
+      <h1 id="patterns-title">All patterns</h1>
+      <p>Search the reusable captures by tag, source, behavior, or implementation detail.</p>
+    </div>
+    <label class="pattern-search">
+      <span>Search patterns</span>
+      <input id="pattern-search" type="search" placeholder="hover, scroll, portfolio..." autocomplete="off" />
+    </label>
+  </section>
 
-  <section class="section">
-    <div class="card-grid card-grid--two">
-      {data.patterns.map((pattern) => (
-        <a class="library-card" href={withBase(pattern.docUrl)}>
-          <div class="library-card__meta">
-            <span class="pill">{pattern.category}</span>
-            <span class="pill">{pattern.confidence}</span>
+  <section class="pattern-results" aria-labelledby="results-title">
+    <div class="pattern-results__head">
+      <h2 id="results-title">Captured patterns</h2>
+      <span data-result-count>{patterns.length} patterns</span>
+    </div>
+
+    <p class="pattern-empty" data-search-empty hidden>No matching patterns.</p>
+
+    <div class="pattern-list">
+      {patterns.map((pattern) => (
+        <a class="pattern-row" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
+          <div class="pattern-row__main">
+            <h3>{pattern.title}</h3>
+            <p>{pattern.summary || pattern.excerpt}</p>
           </div>
-          <h3>{pattern.title}</h3>
-          <p>{pattern.excerpt}</p>
-          <span class="library-card__footer">Open pattern</span>
+          <div class="pattern-row__meta">
+            <span>{pattern.sourceLabel}</span>
+            <ul aria-label={`Tags for ${pattern.title}`}>
+              {(pattern.tags || []).map((tag) => <li>{tag}</li>)}
+            </ul>
+          </div>
         </a>
       ))}
     </div>
   </section>
+
+  <script is:inline>
+    const searchInput = document.querySelector('#pattern-search');
+    const rows = Array.from(document.querySelectorAll('[data-search-item]'));
+    const empty = document.querySelector('[data-search-empty]');
+    const count = document.querySelector('[data-result-count]');
+
+    function applySearch() {
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      rows.forEach((row) => {
+        const match = !query || row.dataset.searchText.toLowerCase().includes(query);
+        row.classList.toggle('is-hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      empty.hidden = visibleCount > 0;
+      count.textContent = `${visibleCount} ${visibleCount === 1 ? 'pattern' : 'patterns'}`;
+    }
+
+    searchInput?.addEventListener('input', applySearch);
+  </script>
 </Layout>

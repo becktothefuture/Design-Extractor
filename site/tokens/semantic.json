@@ -6,12 +6,12 @@
     "text": { "$type": "color", "$value": "{color.neutral.900}" },
     "textMuted": { "$type": "color", "$value": "{color.neutral.500}" },
     "border": { "$type": "color", "$value": "{color.neutral.200}" },
-    "accent": { "$type": "color", "$value": "{color.moss.700}" },
-    "accentSoft": { "$type": "color", "$value": "{color.moss.200}" },
-    "attention": { "$type": "color", "$value": "{color.clay.500}" }
+    "accent": { "$type": "color", "$value": "{color.text}" },
+    "accentSoft": { "$type": "color", "$value": "{color.border}" },
+    "attention": { "$type": "color", "$value": "{color.text}" }
   },
   "layout": {
     "maxWidth": { "$type": "dimension", "$value": "1180px" },
-    "gutter": { "$type": "string", "$value": "clamp(1rem, 3vw, 2rem)" }
+    "gutter": { "$type": "dimension", "$value": "2rem" }
   }
 }
