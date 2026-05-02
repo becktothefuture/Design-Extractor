@@ -39,6 +39,17 @@ a {
   display: none !important;
 }
 
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 /* Loader
    The overlay never receives pointer events. If the preload script fails, the
    timeout in SiteLayout removes it so links remain usable. */
@@ -49,13 +60,11 @@ a {
 
 body.is-preloading .site-shell {
   opacity: 0;
-  transform: translateY(10px);
 }
 
 body.is-loaded .site-shell {
   opacity: 1;
-  transform: translateY(0);
-  transition: opacity 360ms ease, transform 420ms ease;
+  transition: opacity 360ms ease;
 }
 
 .site-preloader {
@@ -66,7 +75,8 @@ body.is-loaded .site-shell {
   place-items: center;
   background: var(--de-color-background);
   color: var(--de-color-text);
-  font-family: Georgia, "Times New Roman", serif;
+  font-family: var(--de-font-family-body);
+  font-weight: 650;
   font-size: clamp(4rem, 12vw, 11rem);
   line-height: 0.9;
   letter-spacing: 0;
@@ -98,7 +108,7 @@ body.is-loaded .site-preloader {
   gap: var(--de-space-4);
   min-height: var(--de-nav-height);
   padding: var(--de-space-3) var(--de-layout-gutter);
-  border-bottom: 1px solid var(--de-color-border);
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
   background: var(--de-nav-background);
   backdrop-filter: blur(16px);
 }
@@ -108,7 +118,8 @@ body.is-loaded .site-preloader {
   align-items: center;
   gap: var(--de-space-2);
   color: var(--de-color-text);
-  font-weight: 750;
+  font-size: 0.92rem;
+  font-weight: 650;
   text-decoration: none;
   white-space: nowrap;
 }
@@ -117,8 +128,8 @@ body.is-loaded .site-preloader {
   content: "";
   width: 0.55rem;
   height: 1.15rem;
-  border-left: 2px solid var(--de-color-text);
-  border-right: 2px solid var(--de-color-text);
+  border-left: 2px solid currentColor;
+  border-right: 2px solid currentColor;
 }
 
 .site-nav__links {
@@ -134,37 +145,40 @@ body.is-loaded .site-preloader {
   min-height: 2rem;
   padding: 0 var(--de-space-3);
   border: 1px solid transparent;
-  border-radius: var(--de-radius-control);
+  border-radius: 999px;
   color: var(--de-color-text-muted);
   font-size: 0.78rem;
-  font-weight: 650;
-  letter-spacing: 0.02em;
+  font-weight: 590;
+  letter-spacing: 0;
   line-height: 1;
   text-decoration: none;
   white-space: nowrap;
 }
 
 .site-nav__links a:hover {
-  border-color: var(--de-color-border);
-  background: var(--de-color-surface);
+  border-color: transparent;
+  background: rgba(29, 29, 31, 0.06);
   color: var(--de-color-text);
 }
 
 .site-main {
   width: min(100%, 1116px);
   margin: 0 auto;
-  padding: var(--de-space-5) var(--de-layout-gutter) var(--de-space-8);
+  padding: var(--de-space-7) var(--de-layout-gutter) var(--de-space-8);
+}
+
+body:has(.library-dock) .site-main {
+  padding-bottom: clamp(12rem, 19vh, 15rem);
 }
 
 /* Search controls and tags */
 
 .pattern-search {
   display: grid;
-  gap: var(--de-space-2);
 }
 
-.pattern-search--hero {
-  max-width: 45rem;
+.pattern-search--dock {
+  width: min(100%, 25.5rem);
 }
 
 .pattern-search span,
@@ -183,19 +197,37 @@ body.is-loaded .site-preloader {
 
 .pattern-search input {
   width: 100%;
-  min-height: 3.25rem;
-  padding: 0 var(--de-space-4);
-  border: 1px solid var(--de-color-border);
-  border-radius: 0;
-  background: var(--de-color-surface);
+  min-height: 3rem;
+  padding: 0 1.25rem;
+  border: 1px solid rgba(255, 255, 255, 0.64);
+  border-radius: 999px;
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(246, 246, 248, 0.62)),
+    rgba(255, 255, 255, 0.62);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.84),
+    0 16px 40px rgba(29, 29, 31, 0.11);
   color: var(--de-color-text);
   font: inherit;
+  font-size: 0.95rem;
+  text-align: center;
+  backdrop-filter: blur(20px) saturate(1.55);
+  -webkit-backdrop-filter: blur(20px) saturate(1.55);
+  transition:
+    border-color 180ms ease,
+    background 180ms ease,
+    box-shadow 180ms ease,
+    transform 180ms ease;
 }
 
 .pattern-search input:focus {
-  border-color: var(--de-color-text-muted);
-  outline: 1px solid var(--de-color-text-muted);
-  outline-offset: -1px;
+  border-color: rgba(29, 29, 31, 0.18);
+  outline: 0;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.9),
+    0 18px 44px rgba(29, 29, 31, 0.14),
+    0 0 0 4px rgba(29, 29, 31, 0.05);
+  transform: translateY(-1px);
 }
 
 .pattern-search input::placeholder {
@@ -219,15 +251,15 @@ body.is-loaded .site-preloader {
 }
 
 .tag-strip {
-  max-width: 48rem;
-  margin-top: var(--de-space-3);
+  justify-content: center;
+  max-width: min(100%, 48rem);
 }
 
 .tag-strip button,
 .preview-card li,
 .pattern-row__meta li,
 .pattern-tags span {
-  border: 1px solid var(--de-color-border);
+  border: 1px solid rgba(29, 29, 31, 0.08);
   border-radius: 999px;
   color: var(--de-color-text-muted);
   line-height: 1.15;
@@ -237,18 +269,32 @@ body.is-loaded .site-preloader {
   display: inline-flex;
   align-items: center;
   gap: var(--de-space-2);
-  min-height: 1.65rem;
-  padding: 0 var(--de-space-2);
-  background: transparent;
+  min-height: 1.46rem;
+  padding: 0 0.7rem;
+  background: rgba(235, 235, 238, 0.76);
   font: inherit;
   font-size: 0.72rem;
+  font-weight: 520;
   cursor: pointer;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.58);
+  backdrop-filter: blur(12px) saturate(1.35);
+  -webkit-backdrop-filter: blur(12px) saturate(1.35);
+  transition:
+    background 160ms ease,
+    color 160ms ease,
+    transform 160ms ease,
+    box-shadow 160ms ease;
 }
 
 .tag-strip button:hover,
 .tag-strip button:focus-visible {
-  border-color: var(--de-color-text-muted);
+  border-color: rgba(29, 29, 31, 0.1);
+  background: rgba(255, 255, 255, 0.86);
   color: var(--de-color-text);
+  transform: translateY(-1px);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.76),
+    0 8px 22px rgba(29, 29, 31, 0.09);
 }
 
 .tag-strip small {
@@ -268,6 +314,82 @@ body.is-loaded .site-preloader {
   font-size: 0.78rem;
 }
 
+/* Floating search dock
+   The bottom fade follows the Skiper progressive-blur idea: one broad masked
+   gradient blur, one stronger low strip, and the interactive glass controls. */
+
+.library-dock {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 30;
+  display: grid;
+  justify-items: center;
+  padding:
+    0 var(--de-layout-gutter)
+    max(1.05rem, calc(env(safe-area-inset-bottom) + 0.85rem));
+  pointer-events: none;
+}
+
+.library-dock::before,
+.library-dock::after {
+  content: "";
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  pointer-events: none;
+}
+
+.library-dock::before {
+  height: min(34vh, 18rem);
+  background: linear-gradient(
+    to top,
+    rgba(255, 255, 255, 0.8) 0%,
+    rgba(255, 255, 255, 0.72) 34%,
+    rgba(255, 255, 255, 0.36) 68%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  backdrop-filter: blur(8px) saturate(1.2);
+  -webkit-backdrop-filter: blur(8px) saturate(1.2);
+  mask-image: linear-gradient(to top, black 46%, rgba(0, 0, 0, 0.56) 72%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 46%, rgba(0, 0, 0, 0.56) 72%, transparent 100%);
+}
+
+.library-dock::after {
+  height: 6.5rem;
+  background: linear-gradient(to top, rgba(255, 255, 255, 0.78), rgba(255, 255, 255, 0));
+  backdrop-filter: blur(20px) saturate(1.45);
+  -webkit-backdrop-filter: blur(20px) saturate(1.45);
+  mask-image: linear-gradient(to top, black 0%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to top, black 0%, transparent 100%);
+}
+
+.library-dock__panel {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  justify-items: center;
+  gap: 0.72rem;
+  width: min(100%, 43rem);
+  pointer-events: auto;
+}
+
+.library-dock .tag-strip {
+  max-height: 4rem;
+  overflow: hidden;
+}
+
+.library-dock .tag-strip button.is-active {
+  border-color: rgba(29, 29, 31, 0.14);
+  background: rgba(29, 29, 31, 0.72);
+  color: rgba(255, 255, 255, 0.94);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.2),
+    0 10px 28px rgba(29, 29, 31, 0.13);
+}
+
 /* Home */
 
 .library-home {
@@ -275,8 +397,9 @@ body.is-loaded .site-preloader {
   grid-template-columns: minmax(0, 1fr) minmax(13rem, 17rem);
   gap: var(--de-space-6);
   align-items: end;
-  padding: var(--de-space-5) 0;
-  border-bottom: 1px solid var(--de-color-border);
+  min-height: clamp(21rem, 44vh, 34rem);
+  padding: var(--de-space-7) 0 var(--de-space-6);
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .library-home__search {
@@ -287,31 +410,32 @@ body.is-loaded .site-preloader {
   margin: 0 0 var(--de-space-3);
   color: var(--de-color-text-muted);
   font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.04em;
+  font-weight: 600;
+  letter-spacing: 0.02em;
   text-transform: uppercase;
 }
 
 .library-home h1 {
-  max-width: 11ch;
+  max-width: 12ch;
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(3rem, 8vw, 5.6rem);
-  font-weight: 400;
-  line-height: 0.95;
-  letter-spacing: 0;
+  font-family: var(--de-font-family-body);
+  font-size: clamp(3.25rem, 8.8vw, 6.4rem);
+  font-weight: 680;
+  line-height: 0.92;
+  letter-spacing: -0.045em;
 }
 
 .library-home__intro {
-  max-width: 36rem;
+  max-width: 34rem;
   margin: var(--de-space-4) 0 var(--de-space-5);
   color: var(--de-color-text-muted);
-  font-size: 1rem;
+  font-size: 1.08rem;
+  line-height: 1.42;
 }
 
 .library-home__aside {
   display: grid;
-  border-top: 1px solid var(--de-color-border);
+  border-top: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .library-home__aside div {
@@ -319,7 +443,7 @@ body.is-loaded .site-preloader {
   justify-content: space-between;
   gap: var(--de-space-4);
   padding: var(--de-space-3) 0;
-  border-bottom: 1px solid var(--de-color-border);
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .library-home__aside span,
@@ -335,7 +459,7 @@ body.is-loaded .site-preloader {
 .library-home__aside strong {
   max-width: 12rem;
   color: var(--de-color-text);
-  font-weight: 650;
+  font-weight: 600;
   text-align: right;
 }
 
@@ -354,7 +478,7 @@ body.is-loaded .site-preloader {
 .pattern-row,
 .pattern-section,
 .pattern-back {
-  border-bottom: 1px solid var(--de-color-border);
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .pattern-results__head {
@@ -368,13 +492,13 @@ body.is-loaded .site-preloader {
 .pattern-results__head h2 {
   margin: 0;
   font-size: 1rem;
-  font-weight: 600;
+  font-weight: 650;
 }
 
 .preview-grid {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
-  border-top: 1px solid var(--de-color-border);
+  border-top: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .preview-card {
@@ -383,14 +507,17 @@ body.is-loaded .site-preloader {
   gap: var(--de-space-4);
   min-height: 11rem;
   padding: var(--de-space-4) 0;
-  border-bottom: 1px solid var(--de-color-border);
+  border-bottom: 1px solid rgba(29, 29, 31, 0.08);
   color: var(--de-color-text);
   text-decoration: none;
+  transition:
+    color 180ms ease,
+    transform 180ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .preview-card:nth-child(odd) {
   padding-right: var(--de-space-4);
-  border-right: 1px solid var(--de-color-border);
+  border-right: 1px solid rgba(29, 29, 31, 0.08);
 }
 
 .preview-card:nth-child(even) {
@@ -411,9 +538,15 @@ body.is-loaded .site-preloader {
   aspect-ratio: 16 / 8;
   object-fit: cover;
   object-position: top center;
-  border: 1px solid var(--de-color-border);
+  border: 1px solid rgba(29, 29, 31, 0.08);
+  border-radius: 18px;
   background: var(--de-color-surface);
   filter: grayscale(1) contrast(0.92);
+  box-shadow: 0 1px 2px rgba(29, 29, 31, 0.04);
+  transition:
+    filter 220ms ease,
+    box-shadow 220ms ease,
+    transform 220ms cubic-bezier(0.2, 0.8, 0.2, 1);
 }
 
 .preview-card:hover img,
@@ -421,6 +554,8 @@ body.is-loaded .site-preloader {
 .preview-card:focus-visible img,
 .preview-card:focus-visible video {
   filter: grayscale(0.25) contrast(1);
+  box-shadow: 0 18px 44px rgba(29, 29, 31, 0.12);
+  transform: translateY(-2px);
 }
 
 .preview-card__body {
@@ -437,7 +572,7 @@ body.is-loaded .site-preloader {
   gap: var(--de-space-2);
   color: var(--de-color-text-muted);
   font-size: 0.72rem;
-  font-weight: 650;
+  font-weight: 590;
 }
 
 .preview-card h3,
@@ -445,14 +580,14 @@ body.is-loaded .site-preloader {
 .pattern-hero h1,
 .library-search__copy h1 {
   margin: 0;
-  font-family: Georgia, "Times New Roman", serif;
-  font-weight: 400;
-  letter-spacing: 0;
+  font-family: var(--de-font-family-body);
+  font-weight: 650;
+  letter-spacing: -0.025em;
 }
 
 .preview-card h3 {
   font-size: 1.45rem;
-  line-height: 1.08;
+  line-height: 1.05;
 }
 
 .preview-card p {
@@ -470,8 +605,7 @@ body.is-loaded .site-preloader {
 .pattern-back:hover,
 .pattern-media figcaption a:hover,
 .pattern-section a:hover {
-  text-decoration: underline;
-  text-underline-offset: 0.18em;
+  text-decoration: none;
 }
 
 /* Pattern list */
@@ -708,6 +842,7 @@ body.is-loaded .site-preloader {
 
   .library-home {
     align-items: stretch;
+    min-height: 0;
   }
 
   .library-home__aside strong {
@@ -750,7 +885,8 @@ body.is-loaded .site-preloader {
   .library-home h1,
   .library-search__copy h1,
   .pattern-hero h1 {
-    font-size: clamp(2.5rem, 14vw, 4rem);
+    font-size: clamp(2.75rem, 14vw, 4.3rem);
+    letter-spacing: -0.045em;
   }
 
   .library-home__intro,
@@ -767,6 +903,57 @@ body.is-loaded .site-preloader {
   .preview-card img,
   .preview-card video {
     aspect-ratio: 16 / 9;
+  }
+
+  body:has(.library-dock) .site-main {
+    padding-bottom: 13rem;
+  }
+
+  .library-dock {
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+    padding-bottom: max(1.35rem, calc(env(safe-area-inset-bottom) + 1rem));
+  }
+
+  .library-dock::before {
+    height: 15rem;
+  }
+
+  .library-dock__panel {
+    gap: 0.62rem;
+  }
+
+  .pattern-search--dock {
+    width: min(100%, 21rem);
+  }
+
+  .pattern-search input {
+    min-height: 2.7rem;
+    font-size: 0.92rem;
+  }
+
+  .library-dock .tag-strip {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+    width: 100%;
+    max-height: none;
+    padding: 0 0.5rem 0.1rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+    gap: 0.35rem;
+    mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 1rem, black calc(100% - 1rem), transparent);
+  }
+
+  .library-dock .tag-strip::-webkit-scrollbar {
+    display: none;
+  }
+
+  .tag-strip button {
+    flex: 0 0 auto;
+    min-height: 1.35rem;
+    padding: 0 0.58rem;
+    font-size: 0.68rem;
   }
 
   .pattern-results__head,

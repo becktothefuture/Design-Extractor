@@ -56,18 +56,6 @@ function isAnimatedImage(pattern) {
       <p class="library-home__label">Design Extractor</p>
       <h1 id="library-title">Beck's Pattern Library</h1>
       <p class="library-home__intro">A private index of web details, interaction ideas, and visual moves worth reusing.</p>
-      <label class="pattern-search pattern-search--hero">
-        <span>Find by tag or idea</span>
-        <input id="pattern-search" type="search" placeholder="hover, scroll, photography, cards..." autocomplete="off" autofocus />
-      </label>
-      <div class="tag-strip" aria-label="Searchable tags">
-        {tags.map(([tag, amount]) => (
-          <button type="button" data-tag={tag} aria-label={`Filter by ${tag}`}>
-            <span>{tag}</span>
-            <small>{amount}</small>
-          </button>
-        ))}
-      </div>
     </div>
 
     <aside class="library-home__aside" aria-label="Library status">
@@ -85,6 +73,23 @@ function isAnimatedImage(pattern) {
       </div>
     </aside>
   </section>
+
+  <div class="library-dock" aria-label="Pattern search controls">
+    <div class="library-dock__panel">
+      <label class="pattern-search pattern-search--dock">
+        <span class="sr-only">Search patterns</span>
+        <input id="pattern-search" type="search" placeholder="Search patterns" autocomplete="off" />
+      </label>
+      <div class="tag-strip" aria-label="Searchable tags">
+        {tags.map(([tag, amount]) => (
+          <button type="button" data-tag={tag} aria-label={`Filter by ${tag}`}>
+            <span>{tag}</span>
+            <small>{amount}</small>
+          </button>
+        ))}
+      </div>
+    </div>
+  </div>
 
   <section class="latest-patterns" aria-labelledby="latest-title">
     <div class="pattern-results__head">
@@ -142,6 +147,10 @@ function isAnimatedImage(pattern) {
         const match = !query || row.dataset.searchText.toLowerCase().includes(query);
         row.classList.toggle('is-hidden', !match);
         if (match) visibleCount += 1;
+      });
+
+      tagButtons.forEach((button) => {
+        button.classList.toggle('is-active', query && button.dataset.tag?.toLowerCase() === query);
       });
 
       empty.hidden = visibleCount > 0;
