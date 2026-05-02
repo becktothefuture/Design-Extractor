@@ -89,15 +89,8 @@ function isAnimatedImage(pattern) {
             )}
           </figure>
           <div class="preview-card__body">
-            <div class="preview-card__meta">
-              <span>{pattern.sourceLabel}</span>
-              {pattern.date && <span>{pattern.date}</span>}
-            </div>
             <h3>{pattern.title}</h3>
             <p>{pattern.summary || pattern.excerpt}</p>
-            <ul aria-label={`Tags for ${pattern.title}`}>
-              {(pattern.tags || []).map((tag) => <li>{tag}</li>)}
-            </ul>
           </div>
         </a>
       ))}

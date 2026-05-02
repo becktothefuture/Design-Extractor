@@ -47,12 +47,6 @@ const patterns = data.patterns.map((pattern) => ({
             <h3>{pattern.title}</h3>
             <p>{pattern.summary || pattern.excerpt}</p>
           </div>
-          <div class="pattern-row__meta">
-            <span>{pattern.sourceLabel}</span>
-            <ul aria-label={`Tags for ${pattern.title}`}>
-              {(pattern.tags || []).map((tag) => <li>{tag}</li>)}
-            </ul>
-          </div>
         </a>
       ))}
     </div>
