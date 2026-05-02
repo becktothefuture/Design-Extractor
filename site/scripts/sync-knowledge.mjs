@@ -43,7 +43,7 @@ function firstMeaningfulParagraph(content) {
   const paragraph = content
     .split(/\n{2,}/)
     .map((part) => part.trim())
-    .find((part) => part && !part.startsWith('#') && !part.startsWith('|') && !part.startsWith('```'));
+    .find((part) => part && !part.startsWith('#') && !part.startsWith('|') && !part.startsWith('![') && !part.startsWith('```'));
   return paragraph?.replace(/\s+/g, ' ').slice(0, 240) ?? '';
 }
 
@@ -63,6 +63,157 @@ function normalizeBody(content) {
     });
 }
 
+function stripTopHeading(content) {
+  return content.replace(/^\s*#\s+.+\n+/, '').trim();
+}
+
+function splitSections(content) {
+  return stripTopHeading(content)
+    .split(/\n(?=##\s+)/)
+    .map((section) => section.trim())
+    .filter(Boolean)
+    .map((section) => {
+      const match = section.match(/^##\s+(.+?)\n+([\s\S]*)$/);
+      return match ? { title: match[1].trim(), body: match[2].trim() } : { title: '', body: section };
+    });
+}
+
+function escapeHtml(value) {
+  return String(value ?? '')
+    .replaceAll('&', '&amp;')
+    .replaceAll('<', '&lt;')
+    .replaceAll('>', '&gt;')
+    .replaceAll('"', '&quot;');
+}
+
+function formatInline(value) {
+  return escapeHtml(value)
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/\*\*([^*]+)\*\*/g, '<strong>$1</strong>');
+}
+
+function splitTableRow(line) {
+  return line
+    .trim()
+    .replace(/^\|/, '')
+    .replace(/\|$/, '')
+    .split('|')
+    .map((cell) => cell.trim());
+}
+
+function parseMarkdownTable(body) {
+  const lines = body.split('\n').filter((line) => line.trim().startsWith('|'));
+  if (lines.length < 3) return null;
+  const headers = splitTableRow(lines[0]);
+  const rows = lines.slice(2).map((line) => {
+    const cells = splitTableRow(line);
+    return Object.fromEntries(headers.map((header, index) => [header, cells[index] ?? '']));
+  });
+  return { headers, rows };
+}
+
+function mediaSrcFromMoment(moment) {
+  if (!moment.publicMediaPath) return '';
+  return `../../../media/${moment.publicMediaPath.replace(/^\/media\//, '')}`;
+}
+
+function renderMomentCards(extractId, moments) {
+  const extractMoments = moments
+    .filter((moment) => moment.extractId === extractId)
+    .sort((a, b) => String(a.id).localeCompare(String(b.id), undefined, { numeric: true }));
+  if (!extractMoments.length) {
+    return '<p class="de-empty-note">No captured moments are available for this extract.</p>';
+  }
+
+  return `<div class="de-moment-grid">
+${extractMoments
+  .map((moment) => {
+    const src = mediaSrcFromMoment(moment);
+    const media = src.endsWith('.webm')
+      ? `<video controls preload="metadata" src="${src}" aria-label="${escapeHtml(moment.title)}"></video>`
+      : `<img src="${src}" alt="${escapeHtml(moment.title)}" loading="lazy" />`;
+    return `<article class="de-moment-card">
+  ${media}
+  <div class="de-moment-card__body">
+    <div class="de-meta-row">
+      <code>${escapeHtml(moment.id)}</code>
+      <span>${escapeHtml(moment.category || 'uncategorized')}</span>
+      <span>${escapeHtml(moment.confidence || 'not-specified')}</span>
+    </div>
+    <h3>${escapeHtml(moment.title)}</h3>
+    <p>${formatInline(moment.excerpt || 'Recorded proof boundary for this extract.')}</p>
+  </div>
+</article>`;
+  })
+  .join('\n')}
+</div>`;
+}
+
+function renderFindingCards(body) {
+  const table = parseMarkdownTable(body);
+  if (!table) return body;
+
+  return `<div class="de-finding-grid">
+${table.rows
+  .map((row) => `<article class="de-finding-card">
+  <div class="de-meta-row">
+    <span>${formatInline(row.Category)}</span>
+    <span>${formatInline(row.Confidence)}</span>
+  </div>
+  <h3>${formatInline(row.Finding)}</h3>
+  <p><strong>Evidence:</strong> ${formatInline(row.Evidence)}</p>
+</article>`)
+  .join('\n')}
+</div>`;
+}
+
+function renderEvidenceCards(body) {
+  const table = parseMarkdownTable(body);
+  if (!table) return body;
+
+  return `<div class="de-evidence-list">
+${table.rows
+  .map((row, index) => {
+    const open = index < 3 ? ' open' : '';
+    return `<details class="de-evidence-card"${open}>
+  <summary>
+    <code>${formatInline(row['Evidence Ref'])}</code>
+    <span>${formatInline(row.Method)}</span>
+    <strong>${formatInline(row.Confidence)}</strong>
+  </summary>
+  <div class="de-evidence-card__body">
+    <p>${formatInline(row.Observation)}</p>
+    <dl>
+      <div><dt>Source</dt><dd>${formatInline(row['Source URL/Path/Text Ref'])}</dd></div>
+      <div><dt>Capture</dt><dd>${formatInline(row['Capture Context'])}</dd></div>
+      <div><dt>Proves</dt><dd>${formatInline(row['What It Proves'])}</dd></div>
+      <div><dt>Does Not Prove</dt><dd>${formatInline(row['What It Does Not Prove'])}</dd></div>
+      <div><dt>Media</dt><dd>${formatInline(row['Media Path'])}</dd></div>
+    </dl>
+  </div>
+</details>`;
+  })
+  .join('\n')}
+</div>`;
+}
+
+function renderSecondarySection(title, body) {
+  return `## ${title}\n\n${normalizeBody(body)}`;
+}
+
+function formatExtractionReport(content, extract, moments) {
+  return splitSections(content)
+    .map(({ title, body }) => {
+      if (!title) return normalizeBody(body);
+      if (/Captured Moments/i.test(title)) return `## ${title}\n\n${renderMomentCards(extract.id, moments)}`;
+      if (/Category Catalogue Findings/i.test(title)) return `## ${title}\n\n${renderFindingCards(body)}`;
+      if (/Evidence Table/i.test(title)) return `## ${title}\n\n${renderEvidenceCards(body)}`;
+      if (/Knowledge Nodes|Brain Links|Open Questions/i.test(title)) return renderSecondarySection(title, body);
+      return `## ${title}\n\n${normalizeBody(body)}`;
+    })
+    .join('\n\n');
+}
+
 function frontmatterString(fields) {
   const rows = ['---'];
   for (const [key, value] of Object.entries(fields)) {
@@ -75,7 +226,7 @@ function frontmatterString(fields) {
 
 async function writeMarkdown(filePath, fields, body) {
   await fs.mkdir(path.dirname(filePath), { recursive: true });
-  await fs.writeFile(filePath, `${frontmatterString(fields)}${normalizeBody(body).trim()}\n`, 'utf8');
+  await fs.writeFile(filePath, `${frontmatterString(fields)}${body.trim()}\n`, 'utf8');
 }
 
 function nodeFromFile(filePath, parsed) {
@@ -138,38 +289,8 @@ async function build() {
   const momentFiles = await listMarkdown(path.join(mediaRoot, 'moments'));
   const nodes = [];
   const extracts = [];
-
-  for (const filePath of knowledgeFiles) {
-    if (filePath.endsWith('_index.md')) continue;
-    const parsed = matter(await fs.readFile(filePath, 'utf8'));
-    const isReport = path.basename(filePath) === 'extraction-report.md';
-    if (isReport) {
-      const extract = extractFromReport(filePath, parsed);
-      extracts.push(extract);
-      await writeMarkdown(
-        path.join(generatedDocsRoot, 'extracts', `${extract.id}.md`),
-        {
-          title: `Extract: ${extract.title}`,
-          description: extract.goal || extract.summary
-        },
-        parsed.content
-      );
-      continue;
-    }
-
-    const node = nodeFromFile(filePath, parsed);
-    nodes.push(node);
-    await writeMarkdown(
-      path.join(generatedDocsRoot, 'nodes', `${node.id}.md`),
-      {
-        title: node.title,
-        description: node.excerpt
-      },
-      parsed.content
-    );
-  }
-
   const moments = [];
+
   for (const filePath of momentFiles) {
     const parsed = matter(await fs.readFile(filePath, 'utf8'));
     const dir = path.dirname(filePath);
@@ -186,6 +307,36 @@ async function build() {
       repoPath: path.relative(repoRoot, filePath),
       excerpt: firstMeaningfulParagraph(parsed.content)
     });
+  }
+
+  for (const filePath of knowledgeFiles) {
+    if (filePath.endsWith('_index.md')) continue;
+    const parsed = matter(await fs.readFile(filePath, 'utf8'));
+    const isReport = path.basename(filePath) === 'extraction-report.md';
+    if (isReport) {
+      const extract = extractFromReport(filePath, parsed);
+      extracts.push(extract);
+      await writeMarkdown(
+        path.join(generatedDocsRoot, 'extracts', `${extract.id}.md`),
+        {
+          title: `Extract: ${extract.title}`,
+          description: extract.goal || extract.summary
+        },
+        formatExtractionReport(parsed.content, extract, moments)
+      );
+      continue;
+    }
+
+    const node = nodeFromFile(filePath, parsed);
+    nodes.push(node);
+    await writeMarkdown(
+      path.join(generatedDocsRoot, 'nodes', `${node.id}.md`),
+      {
+        title: node.title,
+        description: node.excerpt
+      },
+      normalizeBody(parsed.content)
+    );
   }
 
   const patterns = nodes.filter((node) => node.type === 'pattern' || node.repoPath.includes('/patterns/'));
