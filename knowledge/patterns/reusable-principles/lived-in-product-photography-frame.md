@@ -10,6 +10,19 @@ capture_status: verified
 primary_media: media/stills/athleats-iphone-photography-style/source-reference.jpg
 preview_poster: media/stills/athleats-iphone-photography-style/source-reference.jpg
 summary: Show the product inside a believable routine while keeping the product screen readable.
+public_description: >-
+  A product shot that looks like it was found inside a real athletic routine. The phone is readable, but the body, hand, shadows, and warm light make the app feel used rather than staged.
+public_why: >-
+  It balances aspiration and proof. The lifestyle context creates desire, while the clear phone screen still explains what the product does.
+recipe_steps:
+  - Start from a real use moment: resting, planning food, training, commuting, or checking progress.
+  - Use the body as the frame, not as a full portrait. Cropped legs, hands, shoulder, or hair can create intimacy.
+  - Place the phone off-center but keep the screen sharp and readable.
+  - Use diagonal lines from limbs, furniture, or shadows to move the eye toward the product.
+  - Keep warm directional light and natural texture; avoid sterile studio lighting.
+  - Crop responsively so the product remains legible before preserving the full scene.
+llm_prompt: >-
+  Wide cinematic lifestyle photograph, over-the-shoulder point of view, a young athletic person seated in warm late-afternoon sunlight, cropped legs and hand framing an iPhone, the phone off-center but sharp and readable, screen showing a clean nutrition or recipe app interface, diagonal shadows crossing the scene, shallow depth of field, natural skin texture, candid documentary feel, premium mobile product marketing, 35mm lens, warm golden grade, realistic reflections on glass, no studio backdrop, no floating mockup, no exaggerated pose.
 extract_id: athleats-iphone-photography-style
 aliases:
   - product inside routine photography

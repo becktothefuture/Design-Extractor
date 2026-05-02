@@ -92,6 +92,12 @@ function cleanTags(tags) {
     .slice(0, 5);
 }
 
+function cleanList(items) {
+  return (Array.isArray(items) ? items : [])
+    .map((item) => String(item).replace(/\s+/g, ' ').trim())
+    .filter(Boolean);
+}
+
 function sourceLabelFromSource(source = '') {
   const value = String(source);
   if (!value) return 'Source not listed';
@@ -739,6 +745,11 @@ function nodeFromFile(filePath, parsed) {
     interpretation: parsed.data.interpretation ?? '',
     aestheticRole: parsed.data.aesthetic_role ?? '',
     technicalClues: parsed.data.technical_clues ?? '',
+    publicDescription: parsed.data.public_description ?? '',
+    publicWhy: parsed.data.public_why ?? '',
+    recipeSteps: cleanList(parsed.data.recipe_steps ?? []),
+    llmPrompt: parsed.data.llm_prompt ?? parsed.data.image_prompt ?? '',
+    codeRecipe: parsed.data.code_recipe ?? '',
     confidenceRationale: parsed.data.confidence_rationale ?? '',
     recipe: parsed.data.reusable_recipe ?? '',
     excerpt: summary,

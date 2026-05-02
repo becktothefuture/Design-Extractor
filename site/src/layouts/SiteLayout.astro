@@ -3,8 +3,9 @@ import '../styles/tokens.css';
 import '../styles/starlight-map.css';
 import '../styles/site.css';
 import { withBase } from '../lib/paths.js';
+import SearchDock from '../components/SearchDock.astro';
 
-const { title = 'Design Patterns Library', description = 'A searchable library of reusable design patterns captured from real websites and images.' } = Astro.props;
+const { title = 'Pattern Library', description = 'A searchable library of reusable design patterns captured from real websites and images.' } = Astro.props;
 ---
 
 <!doctype html>
@@ -22,15 +23,11 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
       <span data-load-percent>0</span><span>%</span>
     </div>
     <div class="site-shell">
-      <nav class="site-nav" aria-label="Primary">
-        <a class="site-mark" href={withBase('/')}>Design Extractor</a>
-        <div class="site-nav__links">
-          <a href={withBase('/patterns/')}>Patterns</a>
-        </div>
-      </nav>
       <main class="site-main">
         <slot />
       </main>
+
+      <SearchDock />
     </div>
     <script is:inline>
       // Keep the first view clean while the first preview asset loads, but never
@@ -102,6 +99,7 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
           }
         }, prefersReducedMotion ? 0 : 180);
       });
+
     </script>
   </body>
 </html>

@@ -15,7 +15,7 @@ export default defineConfig({
   base,
   integrations: [
     starlight({
-      title: 'Design Extractor',
+      title: 'Pattern Library',
       favicon: '/favicon.png',
       social: [],
       // Order matters: generated tokens first, Starlight mapping second,
@@ -28,14 +28,15 @@ export default defineConfig({
       components: {
         // The library is intentionally single-theme and monochrome.
         ThemeProvider: './src/components/LightThemeProvider.astro',
-        ThemeSelect: './src/components/EmptyThemeSelect.astro'
+        ThemeSelect: './src/components/EmptyThemeSelect.astro',
+        Footer: './src/components/SearchDock.astro'
       },
       sidebar: [
         {
           label: 'Library',
           items: [
             { label: 'Pattern Library', link: '/' },
-            { label: 'All Patterns', link: '/patterns/' },
+            { label: 'All Captures', link: '/patterns/' },
             { label: 'Capture Workflow', link: '/guide/overview/' }
           ]
         }

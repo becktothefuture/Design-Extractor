@@ -11,6 +11,56 @@ capture_status: verified
 primary_media: media/moments/terrygodier-last-quiet-thing-scroll-reveal/paragraph-reveal-scroll.gif
 preview_poster: media/stills/terrygodier-last-quiet-thing-scroll-reveal/first-paragraphs-revealed-desktop.png
 summary: Reveal longform content with small, calm scroll movement that supports reading pace.
+public_description: >-
+  Text, images, and sections softly appear as they enter the viewport. The movement is small: content rises and fades into its final position, then behaves like normal static page content.
+public_why: >-
+  It turns scrolling into pacing. The reader feels the page respond to their movement, but the reveal is quiet enough that the article still feels calm, literary, and readable.
+recipe_steps:
+  - Wrap each text or media block in one reusable reveal container.
+  - Start blocks slightly lower and quieter, for example 16px down at very low opacity.
+  - Reveal when the block is entering the lower half of the viewport, not only after it is centered.
+  - Use one shared ease-out curve and keep the distance small so the page feels composed.
+  - Stagger grouped children by roughly 80ms to 120ms, but let single paragraphs reveal immediately.
+  - For reduced motion, render all content visible with no travel.
+code_recipe: |
+  .reveal {
+    opacity: 0.001;
+    transform: translateY(16px);
+    transition:
+      opacity 680ms cubic-bezier(0.22, 1, 0.36, 1),
+      transform 680ms cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+
+  .reveal.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal {
+      opacity: 1;
+      transform: none;
+      transition: none;
+    }
+  }
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('is-visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, {
+    rootMargin: '0px 0px -12% 0px',
+    threshold: 0.14
+  });
+
+  document.querySelectorAll('.reveal').forEach((item, index) => {
+    item.style.setProperty('--reveal-delay', `${Math.min(index * 90, 240)}ms`);
+    observer.observe(item);
+  });
 extract_id: terrygodier-last-quiet-thing-scroll-reveal
 aliases:
   - calm scroll reveal

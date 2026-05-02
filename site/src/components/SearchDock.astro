@@ -1,0 +1,132 @@
+---
+import data from '../data/generated/knowledge.json';
+import { withBase } from '../lib/paths.js';
+
+const tagCounts = new Map();
+data.patterns.forEach((pattern) => {
+  (pattern.tags || []).forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+
+const tags = [...tagCounts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 12);
+---
+
+<form class="library-dock" data-search-dock data-search-home={withBase('/')} action={withBase('/')} method="get" aria-label="Pattern search controls">
+  <div class="library-dock__panel">
+    <label class="pattern-search pattern-search--dock">
+      <span class="sr-only">Search patterns</span>
+      <input id="pattern-search" name="q" type="search" placeholder="Find captured ideas" autocomplete="off" />
+    </label>
+    <div class="tag-strip" aria-label="Searchable tags">
+      {tags.map(([tag, amount]) => (
+        <button type="button" data-tag={tag} aria-label={`Filter by ${tag}`}>
+          <span>{tag}</span>
+          <small>{amount}</small>
+        </button>
+      ))}
+    </div>
+  </div>
+</form>
+
+<script is:inline>
+  (() => {
+    const searchDock = document.querySelector('[data-search-dock]');
+    if (!searchDock || window.__patternDockReady) return;
+    window.__patternDockReady = true;
+
+    const searchInput = document.querySelector('#pattern-search');
+    const searchableItems = Array.from(document.querySelectorAll('[data-search-item]'));
+    const emptyState = document.querySelector('[data-search-empty]');
+    const resultCount = document.querySelector('[data-result-count]');
+    const tagButtons = Array.from(document.querySelectorAll('[data-tag]'));
+    const searchHome = searchDock.dataset.searchHome || '/';
+    const queryParams = new URLSearchParams(window.location.search);
+    const initialQuery = queryParams.get('q');
+    let activeTag = tagButtons.some((button) => button.dataset.tag?.toLowerCase() === initialQuery?.toLowerCase())
+      ? initialQuery.toLowerCase()
+      : '';
+
+    if (initialQuery && searchInput) searchInput.value = initialQuery;
+
+    function navigateToSearch(query) {
+      const url = new URL(searchHome, window.location.origin);
+      if (query) url.searchParams.set('q', query);
+      window.location.href = url.toString();
+    }
+
+    function updateActiveTag(query) {
+      tagButtons.forEach((button) => {
+        button.classList.toggle('is-active', query && button.dataset.tag?.toLowerCase() === query);
+      });
+    }
+
+    function matchesActiveTag(item) {
+      return (item.dataset.searchTags || '')
+        .split(',')
+        .map((tag) => tag.trim().toLowerCase())
+        .includes(activeTag);
+    }
+
+    function applySearch({ updateUrl = true } = {}) {
+      if (!searchInput) return;
+      const query = searchInput.value.trim().toLowerCase();
+      let visibleCount = 0;
+
+      searchableItems.forEach((item) => {
+        const match = !query || (activeTag ? matchesActiveTag(item) : item.dataset.searchText.toLowerCase().includes(query));
+        item.classList.toggle('is-hidden', !match);
+        if (match) visibleCount += 1;
+      });
+
+      updateActiveTag(activeTag || query);
+
+      if (emptyState) emptyState.hidden = visibleCount > 0;
+      if (resultCount) resultCount.textContent = `${visibleCount} ${visibleCount === 1 ? 'pattern' : 'patterns'}`;
+
+      if (updateUrl && searchableItems.length) {
+        const url = new URL(window.location.href);
+        if (query) url.searchParams.set('q', query);
+        else url.searchParams.delete('q');
+        window.history.replaceState({}, '', url);
+      }
+    }
+
+    searchDock.addEventListener('submit', (event) => {
+      if (!searchInput) return;
+      const query = searchInput.value.trim();
+      if (searchableItems.length) {
+        event.preventDefault();
+        activeTag = '';
+        applySearch();
+      } else if (query) {
+        event.preventDefault();
+        navigateToSearch(query);
+      }
+    });
+
+    searchInput?.addEventListener('input', () => {
+      activeTag = '';
+      if (searchableItems.length) applySearch();
+      else updateActiveTag(searchInput.value.trim().toLowerCase());
+    });
+
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        const tag = button.dataset.tag || '';
+        activeTag = tag.toLowerCase();
+        if (searchInput) searchInput.value = tag;
+        if (searchableItems.length) {
+          searchInput?.focus();
+          applySearch();
+        } else {
+          navigateToSearch(tag);
+        }
+      });
+    });
+
+    applySearch({ updateUrl: false });
+  })();
+</script>

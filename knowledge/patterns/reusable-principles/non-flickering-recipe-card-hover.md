@@ -12,6 +12,63 @@ primary_media: media/moments/athleats-recipe-card-hover/recipe-card-hover-in-out
 preview_media: media/moments/athleats-recipe-card-hover/home-carousel-active-scale.gif
 preview_poster: media/stills/athleats-recipe-card-hover/home-carousel-desktop.png
 summary: Keep recipe-card text steady by animating only the image and overlay layer.
+public_description: >-
+  A card hover where the image reacts, lifts, and reveals small controls while the title and metadata stay fixed in place.
+public_why: >-
+  It gives the pointer a premium response without making the label shimmer, jump, or rewrap. The user keeps a stable reading anchor while the visual layer does the expressive work.
+recipe_steps:
+  - Build the card as a stable outer shell with separate media and text layers.
+  - Put images, badges, and utility overlays inside the media layer.
+  - Keep title, description, price, and metadata outside any transformed parent.
+  - On hover or focus, move only the media layer by a few pixels and fade overlays in.
+  - Avoid changing card dimensions, text wrapping, line height, or text opacity during hover.
+  - On touch, make the overlay static or remove it because hover is not reliable.
+code_recipe: |
+  .card {
+    display: grid;
+    gap: 0.75rem;
+    text-decoration: none;
+  }
+
+  .card__media {
+    position: relative;
+    overflow: hidden;
+    border-radius: 12px;
+    transform: translateY(0);
+    transition: transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card__media img {
+    display: block;
+    width: 100%;
+    aspect-ratio: 4 / 5;
+    object-fit: cover;
+  }
+
+  .card__overlay {
+    position: absolute;
+    inset: auto 0 0;
+    opacity: 0;
+    transform: translateY(6px);
+    transition:
+      opacity 180ms ease,
+      transform 220ms cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .card:hover .card__media,
+  .card:focus-visible .card__media {
+    transform: translateY(-4px);
+  }
+
+  .card:hover .card__overlay,
+  .card:focus-visible .card__overlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .card__body {
+    /* No transform here. This is what prevents text flicker. */
+  }
 extract_id: athleats-recipe-card-hover
 aliases:
   - stable text card hover

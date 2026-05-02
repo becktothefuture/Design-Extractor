@@ -11,6 +11,33 @@ capture_status: verified
 primary_media: media/moments/pacomepertant-portfolio/spiral-to-list-switch.gif
 preview_poster: media/stills/pacomepertant-portfolio/list-hover-active-desktop.png
 summary: Frame an expressive portfolio with stable controls and a readable fallback view.
+public_description: >-
+  A portfolio shell where the center can feel expressive, spatial, and sensory, while the navigation controls stay fixed and easy to understand.
+public_why: >-
+  It lets the site feel memorable without becoming a puzzle. The visitor can enjoy the motion layer, but always has a visible way to browse, switch view, mute audio, or open work.
+recipe_steps:
+  - Treat the expressive canvas or motion layer as atmosphere, not the only navigation.
+  - Keep core controls fixed: index/list switch, menu, sound state, and direct project links.
+  - Provide a plain list or grid fallback for people who want to scan quickly.
+  - Make hover and focus reveal project previews, but keep titles and links readable.
+  - Ask before enabling audio and always expose mute state.
+  - Add reduced-motion and no-WebGL fallbacks that still show the work.
+code_recipe: |
+  <main class="portfolio-shell">
+    <nav class="portfolio-shell__chrome" aria-label="Portfolio controls">
+      <a href="#projects">Projects</a>
+      <button type="button" aria-pressed="false">Sound</button>
+      <button type="button" aria-pressed="false">List</button>
+    </nav>
+
+    <section class="portfolio-shell__stage" aria-label="Expressive project index">
+      <!-- Canvas or motion layer goes here. Keep it enhancement-only. -->
+    </section>
+
+    <section id="projects" class="portfolio-shell__list">
+      <!-- Plain project links stay available even if the stage fails. -->
+    </section>
+  </main>
 extract_id: pacomepertant-portfolio
 aliases:
   - sensory portfolio shell

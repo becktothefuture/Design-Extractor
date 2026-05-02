@@ -13,22 +13,23 @@ const patterns = data.patterns.map((pattern) => ({
     pattern.sourceLabel,
     ...(pattern.tags || []),
     ...(pattern.appliesTo || []),
+    pattern.publicDescription,
+    pattern.publicWhy,
     pattern.recipe,
-    pattern.technicalClues
+    ...(pattern.recipeSteps || []),
+    pattern.technicalClues,
+    pattern.llmPrompt,
+    pattern.codeRecipe
   ].filter(Boolean).join(' ')
 }));
 ---
 
-<Layout title="Patterns | Design Extractor">
-  <section class="library-search library-search--compact" aria-labelledby="patterns-title">
+<Layout title="Pattern Library">
+  <section class="library-search library-search--intro library-search--compact" aria-labelledby="patterns-title">
     <div class="library-search__copy">
-      <h1 id="patterns-title">All patterns</h1>
-      <p>Search the reusable captures by tag, source, behavior, or implementation detail.</p>
+      <h1 id="patterns-title">All captured ideas</h1>
+      <p>Search from the floating dock below, then open a pattern to reuse the idea.</p>
     </div>
-    <label class="pattern-search">
-      <span>Search patterns</span>
-      <input id="pattern-search" type="search" placeholder="hover, scroll, portfolio..." autocomplete="off" />
-    </label>
   </section>
 
   <section class="pattern-results" aria-labelledby="results-title">
@@ -41,7 +42,7 @@ const patterns = data.patterns.map((pattern) => ({
 
     <div class="pattern-list">
       {patterns.map((pattern) => (
-        <a class="pattern-row" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
+        <a class="pattern-row" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText} data-search-tags={(pattern.tags || []).join(',')}>
           <div class="pattern-row__main">
             <h3>{pattern.title}</h3>
             <p>{pattern.summary || pattern.excerpt}</p>
@@ -56,27 +57,4 @@ const patterns = data.patterns.map((pattern) => ({
       ))}
     </div>
   </section>
-
-  <script is:inline>
-    const searchInput = document.querySelector('#pattern-search');
-    const rows = Array.from(document.querySelectorAll('[data-search-item]'));
-    const empty = document.querySelector('[data-search-empty]');
-    const count = document.querySelector('[data-result-count]');
-
-    function applySearch() {
-      const query = searchInput.value.trim().toLowerCase();
-      let visibleCount = 0;
-
-      rows.forEach((row) => {
-        const match = !query || row.dataset.searchText.toLowerCase().includes(query);
-        row.classList.toggle('is-hidden', !match);
-        if (match) visibleCount += 1;
-      });
-
-      empty.hidden = visibleCount > 0;
-      count.textContent = `${visibleCount} ${visibleCount === 1 ? 'pattern' : 'patterns'}`;
-    }
-
-    searchInput?.addEventListener('input', applySearch);
-  </script>
 </Layout>
