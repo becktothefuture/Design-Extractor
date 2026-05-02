@@ -34,6 +34,10 @@
       "type": "string",
       "pattern": "^media/.+\\.(gif|webm|png|jpe?g)$"
     },
+    "preview_media": {
+      "type": "string",
+      "pattern": "^media/.+\\.(gif|webm|png|jpe?g|mp4|mov)$"
+    },
     "summary": { "type": "string" },
     "tags": {
       "type": "array",

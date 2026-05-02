@@ -6,6 +6,7 @@ import { withBase } from '../lib/paths.js';
 const patterns = data.patterns.map((pattern) => ({
   ...pattern,
   href: pattern.publicUrl || `/patterns/${pattern.id}/`,
+  date: pattern.updatedAt || pattern.createdAt || '',
   searchText: [
     pattern.title,
     pattern.summary,
@@ -16,38 +17,89 @@ const patterns = data.patterns.map((pattern) => ({
     pattern.recipe,
     pattern.technicalClues
   ].filter(Boolean).join(' ')
-}));
+})).sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(a.title).localeCompare(String(b.title)));
+
+const listedPatterns = patterns;
+const latestPatterns = patterns.slice(0, 4);
+const tagCounts = new Map();
+patterns.forEach((pattern) => {
+  (pattern.tags || []).forEach((tag) => {
+    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
+  });
+});
+const tags = [...tagCounts.entries()]
+  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
+  .slice(0, 12);
+
+function mediaUrl(pattern) {
+  return withBase(pattern.previewMediaUrl || pattern.primaryMediaUrl || `/${pattern.previewMedia || pattern.primaryMedia || ''}`);
+}
+
+function isVideo(pattern) {
+  return /\.(webm|mp4|mov)$/i.test(pattern.previewMedia || pattern.previewMediaUrl || pattern.primaryMedia || pattern.primaryMediaUrl || '');
+}
 ---
 
 <Layout title="Design Patterns Library">
-  <section class="library-search" aria-labelledby="library-title">
-    <div class="library-search__copy">
-      <h1 id="library-title">Design patterns captured from the web.</h1>
-      <p>Search by keyword or tag. Open a pattern to see the captured moment, source, plain-language use case, and implementation notes.</p>
+  <section class="library-home" aria-labelledby="library-title">
+    <div class="library-home__search">
+      <p class="library-home__label">Design pattern library</p>
+      <h1 id="library-title">Search what you want to reuse.</h1>
+      <label class="pattern-search pattern-search--hero">
+        <span>Keyword or tag</span>
+        <input id="pattern-search" type="search" placeholder="hover, scroll, photography, cards..." autocomplete="off" autofocus />
+      </label>
+      <div class="tag-strip" aria-label="Searchable tags">
+        {tags.map(([tag, amount]) => (
+          <button type="button" data-tag={tag} aria-label={`Filter by ${tag}`}>
+            <span>{tag}</span>
+            <small>{amount}</small>
+          </button>
+        ))}
+      </div>
     </div>
-    <label class="pattern-search">
-      <span>Search patterns</span>
-      <input id="pattern-search" type="search" placeholder="scroll, hover, cards, photography..." autocomplete="off" />
-    </label>
+
+    <aside class="library-home__aside" aria-label="Library status">
+      <div>
+        <span>Latest capture</span>
+        <strong>{latestPatterns[0]?.title}</strong>
+      </div>
+      <div>
+        <span>Patterns</span>
+        <strong>{patterns.length}</strong>
+      </div>
+      <div>
+        <span>Tags</span>
+        <strong>{tags.length}</strong>
+      </div>
+    </aside>
   </section>
 
-  <section class="pattern-results" aria-labelledby="results-title">
+  <section class="latest-patterns" aria-labelledby="latest-title">
     <div class="pattern-results__head">
-      <h2 id="results-title">Captured patterns</h2>
-      <span data-result-count>{patterns.length} patterns</span>
+      <h2 id="latest-title">Latest patterns recorded</h2>
+      <span data-result-count aria-live="polite">{patterns.length} patterns</span>
     </div>
 
     <p class="pattern-empty" data-search-empty hidden>No matching patterns.</p>
 
-    <div class="pattern-list">
-      {patterns.map((pattern) => (
-        <a class="pattern-row" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
-          <div class="pattern-row__main">
+    <div class="preview-grid">
+      {listedPatterns.map((pattern) => (
+        <a class="preview-card" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
+          <figure>
+            {isVideo(pattern) ? (
+              <video src={mediaUrl(pattern)} autoplay muted loop playsinline preload="metadata" data-preload-media></video>
+            ) : (
+              <img src={mediaUrl(pattern)} alt={`${pattern.title} preview`} loading="eager" decoding="async" data-preload-media />
+            )}
+          </figure>
+          <div class="preview-card__body">
+            <div class="preview-card__meta">
+              <span>{pattern.sourceLabel}</span>
+              {pattern.date && <span>{pattern.date}</span>}
+            </div>
             <h3>{pattern.title}</h3>
             <p>{pattern.summary || pattern.excerpt}</p>
-          </div>
-          <div class="pattern-row__meta">
-            <span>{pattern.sourceLabel}</span>
             <ul aria-label={`Tags for ${pattern.title}`}>
               {(pattern.tags || []).map((tag) => <li>{tag}</li>)}
             </ul>
@@ -63,7 +115,13 @@ const patterns = data.patterns.map((pattern) => ({
     const empty = document.querySelector('[data-search-empty]');
     const count = document.querySelector('[data-result-count]');
 
-    function applySearch() {
+    const tagButtons = Array.from(document.querySelectorAll('[data-tag]'));
+    const queryParams = new URLSearchParams(window.location.search);
+    const initialQuery = queryParams.get('q');
+
+    if (initialQuery && searchInput) searchInput.value = initialQuery;
+
+    function applySearch({ updateUrl = true } = {}) {
       const query = searchInput.value.trim().toLowerCase();
       let visibleCount = 0;
 
@@ -75,8 +133,23 @@ const patterns = data.patterns.map((pattern) => ({
 
       empty.hidden = visibleCount > 0;
       count.textContent = `${visibleCount} ${visibleCount === 1 ? 'pattern' : 'patterns'}`;
+
+      if (updateUrl) {
+        const url = new URL(window.location.href);
+        if (query) url.searchParams.set('q', query);
+        else url.searchParams.delete('q');
+        window.history.replaceState({}, '', url);
+      }
     }
 
     searchInput?.addEventListener('input', applySearch);
+    tagButtons.forEach((button) => {
+      button.addEventListener('click', () => {
+        searchInput.value = button.dataset.tag || '';
+        searchInput.focus();
+        applySearch();
+      });
+    });
+    applySearch({ updateUrl: false });
   </script>
 </Layout>

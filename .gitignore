@@ -8,6 +8,7 @@ build/
 .parcel-cache/
 .vite/
 .playwright-cli/
+output/
 
 site/.astro/
 site/dist/

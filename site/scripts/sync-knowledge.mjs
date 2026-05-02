@@ -111,6 +111,10 @@ function publicMediaUrl(mediaPath = '') {
   return `/${mediaPath.replace(/^\/+/, '')}`;
 }
 
+function previewMediaPath(mediaPath = '') {
+  return mediaPath;
+}
+
 function normalizeBody(content) {
   return content
     .replace(/!\[([^\]]*)\]\((?:\.\.\/)+media\/([^)]+\.webm)\)/g, (_match, alt, mediaPath) => {
@@ -701,6 +705,8 @@ function nodeFromFile(filePath, parsed) {
   const sourceUrl = parsed.data.source_url ?? (/^https?:\/\//.test(source) ? source : '');
   const sourceLabel = parsed.data.source_label ?? sourceLabelFromSource(source);
   const summary = parsed.data.summary ?? parsed.data.interpretation ?? parsed.data.direct_evidence ?? firstMeaningfulParagraph(parsed.content);
+  const primaryMedia = parsed.data.primary_media ?? '';
+  const previewMedia = parsed.data.preview_media ?? previewMediaPath(primaryMedia);
 
   return {
     id,
@@ -711,10 +717,14 @@ function nodeFromFile(filePath, parsed) {
     sourceUrl,
     sourceLabel,
     captureStatus: parsed.data.capture_status ?? 'captured',
-    primaryMedia: parsed.data.primary_media ?? '',
-    primaryMediaUrl: publicMediaUrl(parsed.data.primary_media ?? ''),
+    primaryMedia,
+    primaryMediaUrl: publicMediaUrl(primaryMedia),
+    previewMedia,
+    previewMediaUrl: publicMediaUrl(previewMedia),
     summary,
     extractId: parsed.data.extract_id ?? '',
+    createdAt: formatDate(parsed.data.created_at),
+    updatedAt: formatDate(parsed.data.updated_at),
     confidence: parsed.data.confidence ?? 'not-specified',
     tags: cleanTags(parsed.data.tags ?? []),
     aliases: parsed.data.aliases ?? [],

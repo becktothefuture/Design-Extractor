@@ -79,15 +79,26 @@ for (const filePath of listMarkdown(patternsRoot)) {
   }
 
   const primaryMedia = String(data.primary_media ?? '');
+  const previewMedia = String(data.preview_media ?? '');
   if (primaryMedia && !primaryMedia.startsWith('media/')) {
     errors.push(`${file} primary_media must live under media/: ${primaryMedia}`);
   }
+  if (previewMedia && !previewMedia.startsWith('media/')) {
+    errors.push(`${file} preview_media must live under media/: ${previewMedia}`);
+  }
   if (/\.svg(?:$|\?)/i.test(primaryMedia)) errors.push(`${file} uses SVG public media: ${primaryMedia}`);
+  if (/\.svg(?:$|\?)/i.test(previewMedia)) errors.push(`${file} uses SVG preview media: ${previewMedia}`);
   if (primaryMedia && !/\.(gif|webm|png|jpe?g)$/i.test(primaryMedia)) {
     errors.push(`${file} primary_media must be gif, webm, png, jpg, or jpeg: ${primaryMedia}`);
   }
+  if (previewMedia && !/\.(gif|webm|png|jpe?g|mp4|mov)$/i.test(previewMedia)) {
+    errors.push(`${file} preview_media must be gif, webm, png, jpg, jpeg, mp4, or mov: ${previewMedia}`);
+  }
   if (primaryMedia && !fs.existsSync(path.join(repoRoot, primaryMedia))) {
     errors.push(`${file} primary_media does not exist: ${primaryMedia}`);
+  }
+  if (previewMedia && !fs.existsSync(path.join(repoRoot, previewMedia))) {
+    errors.push(`${file} preview_media does not exist: ${previewMedia}`);
   }
 
   if (/\.svg(?:\)|\]|"|'|\s|$)/i.test(`${rawFrontmatter}\n${body}`)) {

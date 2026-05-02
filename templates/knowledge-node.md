@@ -19,6 +19,7 @@ source_url: {{public-source-url-when-available}}
 source_label: {{human-readable-public-source-label}}
 capture_status: {{verified|captured|partial|needs-recapture}}
 primary_media: {{media/moments-or-stills/path.gif}}
+preview_media: {{optional-homepage-preview-media}}
 summary: >-
   {{One sentence explaining the reusable public design idea.}}
 evidence_refs:

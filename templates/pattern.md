@@ -9,6 +9,7 @@ source_url: https://example.com
 source_label: Example source label
 capture_status: verified
 primary_media: media/moments/example/example.gif
+preview_media: media/moments/example/example.webm
 summary: One sentence explaining the reusable design idea.
 extract_id: example-extract-id
 tags:
