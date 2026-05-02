@@ -7,6 +7,7 @@ export default {
       buildPath: 'src/styles/',
       files: [
         {
+          // Generated file. Edit tokens/*.json, then run `npm run tokens`.
           destination: 'tokens.css',
           format: 'css/variables',
           options: {

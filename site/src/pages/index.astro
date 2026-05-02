@@ -7,6 +7,8 @@ const patterns = data.patterns.map((pattern) => ({
   ...pattern,
   href: pattern.publicUrl || `/patterns/${pattern.id}/`,
   date: pattern.updatedAt || pattern.createdAt || '',
+  // Search is intentionally broad: designers can type a feeling, source, tag,
+  // or implementation clue and still land on the relevant pattern.
   searchText: [
     pattern.title,
     pattern.summary,
