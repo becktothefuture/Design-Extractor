@@ -27,16 +27,6 @@ const patterns = data.patterns.map((pattern) => ({
 })).sort((a, b) => String(b.date).localeCompare(String(a.date)) || String(a.title).localeCompare(String(b.title)));
 
 const listedPatterns = patterns;
-const latestPatterns = patterns.slice(0, 4);
-const tagCounts = new Map();
-patterns.forEach((pattern) => {
-  (pattern.tags || []).forEach((tag) => {
-    tagCounts.set(tag, (tagCounts.get(tag) || 0) + 1);
-  });
-});
-const tags = [...tagCounts.entries()]
-  .sort((a, b) => b[1] - a[1] || a[0].localeCompare(b[0]))
-  .slice(0, 12);
 
 function mediaUrl(pattern) {
   return withBase(pattern.previewMediaUrl || pattern.primaryMediaUrl || `/${pattern.previewMedia || pattern.primaryMedia || ''}`);
@@ -60,11 +50,6 @@ function isAnimatedImage(pattern) {
     <div class="library-home__search">
       <h1 id="library-title">Beck's Pattern Library</h1>
       <p class="library-home__intro">Captured web details, interaction ideas, and visual moves worth reusing.</p>
-      <div class="library-home__meta" aria-label="Library summary">
-        <span>{patterns.length} patterns</span>
-        <span>{tags.length} tags</span>
-        {latestPatterns[0]?.title && <span>Latest: {latestPatterns[0].title}</span>}
-      </div>
     </div>
   </section>
 
