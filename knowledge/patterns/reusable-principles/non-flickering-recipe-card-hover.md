@@ -10,6 +10,7 @@ source_label: Athleats recipe grid
 capture_status: verified
 primary_media: media/moments/athleats-recipe-card-hover/recipe-card-hover-in-out.gif
 preview_media: media/moments/athleats-recipe-card-hover/home-carousel-active-scale.gif
+preview_poster: media/stills/athleats-recipe-card-hover/home-carousel-desktop.png
 summary: Keep recipe-card text steady by animating only the image and overlay layer.
 extract_id: athleats-recipe-card-hover
 aliases:

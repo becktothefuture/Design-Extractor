@@ -707,6 +707,7 @@ function nodeFromFile(filePath, parsed) {
   const summary = parsed.data.summary ?? parsed.data.interpretation ?? parsed.data.direct_evidence ?? firstMeaningfulParagraph(parsed.content);
   const primaryMedia = parsed.data.primary_media ?? '';
   const previewMedia = parsed.data.preview_media ?? previewMediaPath(primaryMedia);
+  const previewPoster = parsed.data.preview_poster ?? (/\.gif$/i.test(previewMedia) ? '' : previewMedia);
 
   return {
     id,
@@ -721,6 +722,8 @@ function nodeFromFile(filePath, parsed) {
     primaryMediaUrl: publicMediaUrl(primaryMedia),
     previewMedia,
     previewMediaUrl: publicMediaUrl(previewMedia),
+    previewPoster,
+    previewPosterUrl: publicMediaUrl(previewPoster),
     summary,
     extractId: parsed.data.extract_id ?? '',
     createdAt: formatDate(parsed.data.created_at),

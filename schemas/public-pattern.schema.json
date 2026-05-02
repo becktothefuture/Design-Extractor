@@ -38,6 +38,10 @@
       "type": "string",
       "pattern": "^media/.+\\.(gif|webm|png|jpe?g|mp4|mov)$"
     },
+    "preview_poster": {
+      "type": "string",
+      "pattern": "^media/.+\\.(png|jpe?g)$"
+    },
     "summary": { "type": "string" },
     "tags": {
       "type": "array",

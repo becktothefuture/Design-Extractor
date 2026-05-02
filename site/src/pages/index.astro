@@ -35,8 +35,16 @@ function mediaUrl(pattern) {
   return withBase(pattern.previewMediaUrl || pattern.primaryMediaUrl || `/${pattern.previewMedia || pattern.primaryMedia || ''}`);
 }
 
+function posterUrl(pattern) {
+  return withBase(pattern.previewPosterUrl || pattern.previewMediaUrl || pattern.primaryMediaUrl || `/${pattern.previewPoster || pattern.previewMedia || pattern.primaryMedia || ''}`);
+}
+
 function isVideo(pattern) {
   return /\.(webm|mp4|mov)$/i.test(pattern.previewMedia || pattern.previewMediaUrl || pattern.primaryMedia || pattern.primaryMediaUrl || '');
+}
+
+function isAnimatedImage(pattern) {
+  return /\.(gif)$/i.test(pattern.previewMedia || pattern.previewMediaUrl || pattern.primaryMedia || pattern.primaryMediaUrl || '');
 }
 ---
 
@@ -84,13 +92,15 @@ function isVideo(pattern) {
     <p class="pattern-empty" data-search-empty hidden>No matching patterns.</p>
 
     <div class="preview-grid">
-      {listedPatterns.map((pattern) => (
+      {listedPatterns.map((pattern, index) => (
         <a class="preview-card" href={withBase(pattern.href)} data-search-item data-search-text={pattern.searchText}>
           <figure>
             {isVideo(pattern) ? (
-              <video src={mediaUrl(pattern)} autoplay muted loop playsinline preload="metadata" data-preload-media></video>
+              <video src={mediaUrl(pattern)} autoplay muted loop playsinline preload="metadata" poster={posterUrl(pattern)} data-preload-media={index === 0 ? 'true' : undefined}></video>
+            ) : isAnimatedImage(pattern) ? (
+              <img src={posterUrl(pattern)} data-animated-src={mediaUrl(pattern)} data-static-src={posterUrl(pattern)} alt={`${pattern.title} preview`} loading="eager" decoding="async" data-preload-media={index === 0 ? 'true' : undefined} />
             ) : (
-              <img src={mediaUrl(pattern)} alt={`${pattern.title} preview`} loading="eager" decoding="async" data-preload-media />
+              <img src={posterUrl(pattern)} alt={`${pattern.title} preview`} loading="eager" decoding="async" data-preload-media={index === 0 ? 'true' : undefined} />
             )}
           </figure>
           <div class="preview-card__body">

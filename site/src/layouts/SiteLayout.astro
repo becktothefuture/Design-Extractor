@@ -63,6 +63,17 @@ const { title = 'Design Patterns Library', description = 'A searchable library o
       }
 
       window.addEventListener('DOMContentLoaded', async () => {
+        document.querySelectorAll('[data-animated-src]').forEach((media) => {
+          if (prefersReducedMotion) return;
+          media.setAttribute('src', media.dataset.animatedSrc);
+        });
+        if (prefersReducedMotion) {
+          document.querySelectorAll('video[autoplay]').forEach((video) => {
+            video.pause();
+            video.removeAttribute('autoplay');
+          });
+        }
+
         const media = Array.from(document.querySelectorAll('[data-preload-media]'));
         let completed = 0;
         setPercent(media.length ? 8 : 100);

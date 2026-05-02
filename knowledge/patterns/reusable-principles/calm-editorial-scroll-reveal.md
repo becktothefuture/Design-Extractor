@@ -9,6 +9,7 @@ source_url: https://www.terrygodier.com/the-last-quiet-thing
 source_label: Terry Godier article page
 capture_status: verified
 primary_media: media/moments/terrygodier-last-quiet-thing-scroll-reveal/paragraph-reveal-scroll.gif
+preview_poster: media/stills/terrygodier-last-quiet-thing-scroll-reveal/first-paragraphs-revealed-desktop.png
 summary: Reveal longform content with small, calm scroll movement that supports reading pace.
 extract_id: terrygodier-last-quiet-thing-scroll-reveal
 aliases:

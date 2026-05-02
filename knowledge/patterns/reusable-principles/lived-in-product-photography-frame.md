@@ -8,6 +8,7 @@ source: Athleats supplied iPhone mockup image
 source_label: Athleats iPhone mockup image
 capture_status: verified
 primary_media: media/stills/athleats-iphone-photography-style/source-reference.jpg
+preview_poster: media/stills/athleats-iphone-photography-style/source-reference.jpg
 summary: Show the product inside a believable routine while keeping the product screen readable.
 extract_id: athleats-iphone-photography-style
 aliases:

@@ -10,6 +10,7 @@ source_label: Example source label
 capture_status: verified
 primary_media: media/moments/example/example.gif
 preview_media: media/moments/example/example.webm
+preview_poster: media/stills/example/example-poster.png
 summary: One sentence explaining the reusable design idea.
 extract_id: example-extract-id
 tags:
@@ -42,7 +43,7 @@ updated_at: 2026-05-02
 
 # Human Readable Pattern Name
 
-Use one to five public tags. Use real captured media for `primary_media`: JPG, PNG, GIF, WebM, or video. Do not use SVG diagrams or generated placeholder illustrations as public pattern media.
+Use one to five public tags. Use real captured media for `primary_media`: JPG, PNG, GIF, WebM, or video. Use `preview_poster` for reduced-motion and loading states. Do not use SVG diagrams or generated placeholder illustrations as public pattern media.
 
 ## Direct Evidence
 

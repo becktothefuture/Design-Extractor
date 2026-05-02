@@ -9,6 +9,7 @@ source_url: https://pacomepertant.com
 source_label: Pacome Pertant portfolio
 capture_status: verified
 primary_media: media/moments/pacomepertant-portfolio/spiral-to-list-switch.gif
+preview_poster: media/stills/pacomepertant-portfolio/list-hover-active-desktop.png
 summary: Frame an expressive portfolio with stable controls and a readable fallback view.
 extract_id: pacomepertant-portfolio
 aliases:
